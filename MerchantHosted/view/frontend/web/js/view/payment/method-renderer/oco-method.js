@@ -21,7 +21,7 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
 
-            placeOrder: function(){
+            testingDoku: function(){
 
                 console.log('placeorder');
 

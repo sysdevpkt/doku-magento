@@ -13,24 +13,26 @@
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
     </div>
     <div class="payment-method-content">
-        <div doku-div='form-payment'>
-            <div class="field">
-                <div class="input-text" id="cc-field">
-                    <label class="label">CC</label>
+        <fieldset class="fieldset address">
+            <div doku-div='form-payment'>
+                <div class="field" data-bind="visible: visible, css: additionalClasses">
+                    <div class="input-text" id="cc-field">
+                        <label class="label"><span>CC</span></label>
+                    </div>
+                    <div class="input-text" id="cvv-field">
+                        <label class="label"><span>CVV</span></label>
+                    </div>
                 </div>
-                <div class="input-text" id="cvv-field">
-                    <label class="label">CVV</label>
+                <div class="field" data-bind="visible: visible, css: additionalClasses">
+                    <div class="input-text" id="name-field">
+                        <label class="label"><span>NAME</span></label>
+                    </div>
+                    <div class="input-text" id="exp-field">
+                        <label class="label"><span>EXP</span></label>
+                    </div>
                 </div>
             </div>
-            <div class="field">
-                <div class="input-text" id="name-field">
-                    <label class="label">NAME</label>
-                </div>
-                <div class="input-text" id="exp-field">
-                    <label class="label">EXP</label>
-                </div>
-            </div>
-        </div>
+        </fieldset>
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->

@@ -16,6 +16,9 @@ define(
         $
     ) {
         'use strict';
+
+        console.log('panggil 1');
+
         rendererList.push(
             {
                 type: 'oco',
@@ -23,6 +26,8 @@ define(
             }
         );
         /** Add view logic here if needed */
+
+        console.log('panggil 2');
 
         $.getScript("https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js", function() {});
         $.getScript("https://staging.doku.com/doku-js/assets/js/doku.js?version="+ new Date().getTime(), function() {});

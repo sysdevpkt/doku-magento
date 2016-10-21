@@ -69,9 +69,24 @@ define(
 
             initObservable: function() {
                 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js", function() {});
-                $.getScript("https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css", function() {});
                 $.getScript("https://staging.doku.com/doku-js/assets/js/doku.js?version="+ new Date().getTime(), function() {});
-                $.getScript("https://staging.doku.com/doku-js/assets/css/doku.css", function() {});
+
+                $("head").append("<link>");
+                var css = $("head").children(":last");
+                css.attr({
+                    rel:  "stylesheet",
+                    type: "text/css",
+                    href: "https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+                });
+
+                $("head").append("<link>");
+                var css2 = $("head").children(":last");
+                css2.attr({
+                    rel:  "stylesheet",
+                    type: "text/css",
+                    href: "https://staging.doku.com/doku-js/assets/css/doku.css"
+                });
+
                 return this;
             },
 

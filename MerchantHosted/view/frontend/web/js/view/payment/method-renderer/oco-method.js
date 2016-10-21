@@ -9,7 +9,7 @@ define(
     function (Component, $) {
         'use strict';
 
-        Component.extend({
+        return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco'
             },
@@ -42,7 +42,9 @@ define(
             },
 
             initDoku: function(){
-                DokuToken(getToken);
+                // DokuToken(getToken);
+                $("#cc-field").prepend(("#tesisi").val());
+                console.log($("#cc-field").html());
             },
 
             getToken: function(response){
@@ -51,7 +53,5 @@ define(
 
            
         });
-
-        console.log('tes');
     }
 );

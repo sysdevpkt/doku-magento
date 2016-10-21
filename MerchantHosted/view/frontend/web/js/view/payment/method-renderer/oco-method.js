@@ -13,7 +13,7 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Doku_Merchanthosted/payment/oco'
+                template: 'Doku_MerchantHosted/payment/oco'
             },
 
             /** Returns send check to info */

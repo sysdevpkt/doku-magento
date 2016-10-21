@@ -17,18 +17,18 @@
             <div doku-div='form-payment'>
             <li>
                 <div id="cc-field">
-                    <label>CC</label>
+                    <label id="cc-label">CC</label>
                 </div>
                 <div id="cvv-field">
-                    <label>CVV</label>
+                    <label id="cvv-label">CVV</label>
                 </div>
             </li>
             <li>
                 <div id="name-field">
-                    <label>NAME</label>
+                    <label id="name-label">NAME</label>
                 </div>
                 <div id="exp-field">
-                    <label>EXP</label>
+                    <label id="exp-label">EXP</label>
                 </div>
             </li>
             </div>
@@ -51,7 +51,7 @@
                 <button class="action primary checkout"
                         type="submit"
                         data-bind="
-                        click: initDoku,
+                        click: callDoku,
                         attr: {title: $t('Place Order')},
                         css: {disabled: !isPlaceOrderActionAllowed()},
                         enable: (getCode() == isChecked())

@@ -13,6 +13,26 @@
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
     </div>
     <div class="payment-method-content">
+        <div doku-div='form-payment'>
+            <li>
+                <div class="input-text" id="cc-field">
+                    <label>CC</label>
+                </div>
+                <div class="input-text" id="cvv-field">
+                    <label>CVV</label>
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="input-text" id="name-field">
+                    <label>NAME</label>
+                </div>
+                <div class="input-text" id="exp-field">
+                    <label>EXP</label>
+                </div>
+                <div class="clear"></div>
+            </li>
+        </div>
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->

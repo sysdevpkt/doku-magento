@@ -14,24 +14,26 @@
     </div>
     <div class="payment-method-content">
         <fieldset class="fieldset address">
+            <ul>
             <div doku-div='form-payment'>
-                <div class="field">
+                <li class="field">
                     <div class="input-text" id="cc-field">
                         <label class="label"><span>CC</span></label>
                     </div>
                     <div class="input-text" id="cvv-field">
                         <label class="label"><span>CVV</span></label>
                     </div>
-                </div>
-                <div class="field">
+                </li>
+                <li class="field">
                     <div class="input-text" id="name-field">
                         <label class="label"><span>NAME</span></label>
                     </div>
                     <div class="input-text" id="exp-field">
                         <label class="label"><span>EXP</span></label>
                     </div>
-                </div>
+                </li>
             </div>
+            </ul>
         </fieldset>
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->

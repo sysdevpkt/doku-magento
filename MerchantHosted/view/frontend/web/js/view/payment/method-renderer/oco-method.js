@@ -8,6 +8,7 @@ define(
     ],
     function (Component, $) {
         'use strict';
+        $ = jQuery.noConflict();
 
         return Component.extend({
             defaults: {

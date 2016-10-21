@@ -9,7 +9,7 @@ define(
     function (Component, $) {
         'use strict';
 
-        return Component.extend({
+        Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco'
             },
@@ -20,9 +20,6 @@ define(
             },
 
             initObservable: function() {
-
-                $("[doku-div='form-payment']").prepend('<div id="testaziz">asd</div>');
-                console.log($("#testaziz").html());
 
                 var data = new Object();
 
@@ -54,5 +51,7 @@ define(
 
            
         });
+
+        console.log(tes);
     }
 );

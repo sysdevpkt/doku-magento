@@ -43,7 +43,7 @@ define(
 
             initDoku: function(){
                 // DokuToken(getToken);
-                $("#cc-field").prepend(("#tesisi").val());
+                $("#cc-field").prepend($("#tesisi").val());
                 console.log($("#cc-field").html());
             },
 

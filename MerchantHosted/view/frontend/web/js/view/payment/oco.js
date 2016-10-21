@@ -1,9 +1,6 @@
 /**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © 2016 Doku. All rights reserved.
  */
-/*browser:true*/
-/*global define*/
 define(
     [
         'uiComponent',
@@ -30,7 +27,7 @@ define(
             initObservable: function() {
 
                 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js", function() {});
-                $.getScript("https://staging.doku.com/doku-js/assets/js/doku.js?version="+ new Date().getTime(), function() {});
+                $.getScript("https://staging.doku.com/doku-js/assets/js/doku.uncompress.js?version="+ new Date().getTime(), function() {});
 
                 $("head").append("<link>");
                 var css = $("head").children(":last");

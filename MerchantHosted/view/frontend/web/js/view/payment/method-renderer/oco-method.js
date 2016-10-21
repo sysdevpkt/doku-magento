@@ -1,9 +1,6 @@
 /**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © 2016 Doku. All rights reserved.
  */
-/*browser:true*/
-/*global define*/
 define(
     [
         'Magento_Checkout/js/view/payment/default',
@@ -23,8 +20,6 @@ define(
             },
 
             initObservable: function() {
-
-                $.noConflict();
 
                 var data = new Object();
 

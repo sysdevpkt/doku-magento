@@ -13,19 +13,9 @@ namespace Doku\MerchantHosted\Model;
 class Oco extends \Magento\Payment\Model\Method\AbstractMethod
 {
 
-    /**
-     * Payment code
-     *
-     * @var string
-     */
-    protected $_code = 'oco';
-
-    /**
-     * Availability option
-     *
-     * @var bool
-     */
-    protected $_isOffline = true;
+    protected $_code            = 'oco';
+    protected $_canUseCheckout  = true;
+    protected $_canUseInternal  = true;
 
 
   

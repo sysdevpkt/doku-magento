@@ -7,6 +7,7 @@ define(
         'jquery'
     ],
     function (Component, $) {
+        'use strict';
 
         return Component.extend({
             defaults: {

@@ -38,11 +38,6 @@ define(
 
                 getForm(data);
 
-                $("cc-label").prependTo("#cc-field");
-                $("cvv-label").prependTo("#cvv-field");
-                $("name-label").prependTo("#name-field");
-                $("exp-label").prependTo("#exp-field");
-
                 return this;
             },
 

@@ -46,7 +46,7 @@ define(
                 return this;
             },
 
-            callDoku: function(){
+            initDoku: function(){
                 DokuToken(getToken);
             },
 

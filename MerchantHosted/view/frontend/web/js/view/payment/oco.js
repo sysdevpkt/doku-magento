@@ -61,7 +61,7 @@ define(
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
-                getForm(data);
+                //getForm(data);
 
                 return this;
             },

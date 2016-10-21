@@ -36,8 +36,6 @@ define(
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
-                console.log($("[doku-div='form-payment']").html());
-
                 getForm(data);
 
                 return this;

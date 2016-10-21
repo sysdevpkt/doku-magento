@@ -36,14 +36,12 @@ define(
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
-                getForm(data);
-
                 return this;
             },
 
             initDoku: function(){
                 // DokuToken(getToken);
-                $("#cc-field").prepend($("#tesisi").val());
+                getForm(data);
                 console.log($("#cc-field").html());
             },
 

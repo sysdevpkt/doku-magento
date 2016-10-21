@@ -12,7 +12,6 @@ define(
         rendererList,
         $
     ) {
-        'use strict';
 
         rendererList.push(
             {

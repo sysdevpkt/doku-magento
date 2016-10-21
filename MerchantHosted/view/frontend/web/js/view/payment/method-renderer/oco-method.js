@@ -21,6 +21,10 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
 
+            testingDoku: function(){
+              console.log('thaaaaaash');
+            },
+
            
         });
     }

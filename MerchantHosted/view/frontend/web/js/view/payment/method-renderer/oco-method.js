@@ -78,15 +78,7 @@ define(
                     type: "text/css",
                     href: "https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
                 });
-
-                $("head").append("<link>");
-                var css2 = $("head").children(":last");
-                css2.attr({
-                    rel:  "stylesheet",
-                    type: "text/css",
-                    href: "https://staging.doku.com/doku-js/assets/css/doku.css"
-                });
-
+                
                 return this;
             },
 

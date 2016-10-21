@@ -12,6 +12,8 @@ define(
     function (Component, $) {
         'use strict';
 
+        console.log('panggil 4');
+
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco'
@@ -20,6 +22,12 @@ define(
             /** Returns send check to info */
             getMailingAddress: function() {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
+            },
+
+            initObservable: function() {
+
+                console.log('panggil 5');
+                return this;
             },
 
             initDoku: function(){

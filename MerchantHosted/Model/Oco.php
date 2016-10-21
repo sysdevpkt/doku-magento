@@ -16,6 +16,7 @@ class Oco extends \Magento\Payment\Model\Method\AbstractMethod
     protected $_code            = 'oco';
     protected $_canUseCheckout  = true;
     protected $_canUseInternal  = true;
+    protected $_isGateway       = true;
 
 
   

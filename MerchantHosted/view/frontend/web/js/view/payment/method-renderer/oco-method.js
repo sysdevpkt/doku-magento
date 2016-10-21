@@ -52,6 +52,6 @@ define(
            
         });
 
-        console.log(tes);
+        console.log('tes');
     }
 );

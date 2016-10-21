@@ -14,8 +14,6 @@ define(
     ) {
         'use strict';
 
-        var $ = jQuery.noConflict();
-
         rendererList.push(
             {
                 type: 'oco',

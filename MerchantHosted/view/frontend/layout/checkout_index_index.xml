@@ -20,18 +20,16 @@
                                                 <item name="payment" xsi:type="array">
                                                     <item name="children" xsi:type="array">
                                                         <item name="renders" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
                                                             <!-- merge payment method renders here -->
-                                                                <item name="merchanthosted-oco" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Doku_MerchantHosted/js/view/payment/oco</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="payment-payments" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Doku_Merchanthosted/js/view/payment/oco</item>
                                                                     <item name="methods" xsi:type="array">
-                                                                  
-																		 <item name="oco" xsi:type="array">
+                                                                        <item name="oco" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                     </item>
                                                                 </item>
-                                                            <!-- item-renderer -->
                                                             </item>
                                                         </item>
                                                     </item>

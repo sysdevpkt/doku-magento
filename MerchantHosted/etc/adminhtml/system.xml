@@ -9,7 +9,8 @@
     <system>
         <section id="payment">
             <group id="oco" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>MerchantHosted</label>
+                <label>Doku Merchanthosted
+                </label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -19,9 +20,8 @@
                 </field>
                 <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>New Order Status</label>
-                    <source_model>Doku\MerchantHosted\Model\Config\Source\Order\Status\Pendingpayment</source_model>
+                    <source_model>Cedcommerce\Payment\Model\Config\Source\Order\Status\Pendingpayment</source_model>
                 </field>
-              
                 <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Payment from Applicable Countries</label>
                     <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>

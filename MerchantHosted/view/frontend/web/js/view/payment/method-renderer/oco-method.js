@@ -13,19 +13,18 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Doku_MerchantHosted/payment/oco'
+                template: 'Doku_Merchanthosted/payment/oco'
             },
 
             /** Returns send check to info */
             getMailingAddress: function() {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
-
             testingDoku: function(){
 
                 console.log('placeorder');
 
-            }
+            },
 
         });
     }

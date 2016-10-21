@@ -21,6 +21,9 @@ define(
 
             initObservable: function() {
 
+                $("[doku-div='form-payment']").prepend('<div id="testaziz">asd</div>');
+                console.log($("#testaziz").html());
+
                 var data = new Object();
 
                 data.req_merchant_code = '2074'; //mall id or merchant id

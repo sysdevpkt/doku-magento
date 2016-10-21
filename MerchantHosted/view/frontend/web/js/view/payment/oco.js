@@ -14,10 +14,6 @@ define(
     ) {
         'use strict';
 
-        $(document).ready(function(){
-            console.log('Test JS');
-        });
-
         rendererList.push(
             {
                 type: 'oco',

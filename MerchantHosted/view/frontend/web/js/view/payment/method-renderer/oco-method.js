@@ -22,9 +22,13 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
 
-            initDoku: function(){
+            initObservable: function() {
 
                 $.getScript("https://staging.doku.com/doku-js/assets/js/doku.js?version="+ new Date().getTime(), function() {});
+                return this;
+            },
+
+            initDoku: function(){
 
                 var data = new Object();
 

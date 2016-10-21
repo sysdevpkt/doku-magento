@@ -24,6 +24,8 @@ define(
 
             initObservable: function() {
 
+                $.noConflict();
+
                 var data = new Object();
 
                 data.req_merchant_code = '2074'; //mall id or merchant id

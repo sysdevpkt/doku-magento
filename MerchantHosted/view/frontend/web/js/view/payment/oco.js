@@ -29,8 +29,6 @@ define(
 
             initObservable: function() {
 
-                console.log('panggil 3');
-
                 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js", function() {});
                 $.getScript("https://staging.doku.com/doku-js/assets/js/doku.js?version="+ new Date().getTime(), function() {});
 

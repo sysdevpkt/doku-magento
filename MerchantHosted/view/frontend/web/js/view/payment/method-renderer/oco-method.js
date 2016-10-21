@@ -20,12 +20,8 @@ define(
             getMailingAddress: function() {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
-            testingDoku: function(){
 
-                console.log('placeorder');
-
-            },
-
+           
         });
     }
 );

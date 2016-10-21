@@ -38,6 +38,8 @@ define(
 
                 getForm(data);
 
+                console.log(data.res_form_payment);
+
                 return this;
             },
 

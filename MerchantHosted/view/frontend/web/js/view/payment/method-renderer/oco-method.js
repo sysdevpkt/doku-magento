@@ -40,7 +40,7 @@ define(
             },
 
             initDoku: function(){
-                DokuToken(getToken);
+                DokuToken(this.getToken);
             },
 
             getToken: function(response){

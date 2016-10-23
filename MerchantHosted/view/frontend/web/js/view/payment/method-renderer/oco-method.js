@@ -12,7 +12,7 @@ define(
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
-                getToken: this.getToken
+                dokuResponse: ''
             },
 
             /** Returns send check to info */
@@ -39,7 +39,7 @@ define(
             },
 
             initDoku: function(){
-                DokuToken(getToken);
+                DokuToken(getToken(dokuResponse));
             },
 
             getToken: function(response){

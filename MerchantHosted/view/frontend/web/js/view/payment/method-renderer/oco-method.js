@@ -41,6 +41,22 @@ define(
 
             initDoku: function(){
                 // DokuToken(getToken);
+                console.log('init');
+                
+
+                $('#cc-field').bind('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(event) {
+                    console.log('isi');
+                    console.log($("#doku-cc-number").val());
+                });
+
+            },
+
+            getToken: function(response){
+                console.log('getToken');
+            },
+
+            getDokuForm: function(){
+
                 var data = new Object();
 
                 data.req_merchant_code = '2074'; //mall id or merchant id
@@ -56,19 +72,11 @@ define(
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
-                getForm(data)
+                getForm(data);
 
-                $('#cc-field').bind('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(event) {
-                    console.log('isi');
-                    console.log($("#doku-cc-number").val());
-                });
+                return true;
 
-            },
-
-            getToken: function(response){
-                console.log('getToken');
-            },
-
+            }
            
         });
     }

@@ -13,9 +13,8 @@
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
     </div>
     <div class="payment-method-content">
-        <input id="tesisi" value="asd">
-        <ul>
-            <div doku-div='form-payment' style="display: none;">
+        <ul data-bind="visible: getDokuForm()">
+            <div doku-div='form-payment'>
             <li>
                 <div id="cc-field">
                     <label id="cc-label">CC</label>

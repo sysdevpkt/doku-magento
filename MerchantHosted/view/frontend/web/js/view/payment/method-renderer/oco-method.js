@@ -39,7 +39,7 @@ define(
             },
 
             initDoku: function(){
-                DokuToken(this.getToken(dokuResponse));
+                DokuToken(this.getToken(this.dokuResponse));
             },
 
             getToken: function(response){

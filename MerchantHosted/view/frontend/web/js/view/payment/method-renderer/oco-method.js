@@ -9,10 +9,14 @@ define(
     function (Component, $) {
         'use strict';
 
+        function getToken(response){
+            console.log('masuk getToken');
+            console.log(response);
+        }
+
         return Component.extend({
             defaults: {
-                template: 'Doku_MerchantHosted/payment/oco',
-                dokuResponse: ''
+                template: 'Doku_MerchantHosted/payment/oco'
             },
 
             /** Returns send check to info */
@@ -39,12 +43,7 @@ define(
             },
 
             initDoku: function(){
-                DokuToken(this.getToken(this.dokuResponse));
-            },
-
-            getToken: function(response){
-                console.log('getToken');
-                console.log(response);
+                DokuToken(getToken);
             },
 
             getDokuForm: function(){

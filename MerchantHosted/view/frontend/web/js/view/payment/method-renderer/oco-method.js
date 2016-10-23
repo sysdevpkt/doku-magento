@@ -56,7 +56,7 @@ define(
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
-                $.when( { getForm(data) } ).done(function() {
+                $.when(getForm(data)).done(function() {
                     console.log('when');
                     console.log($("#doku-cc-number").val());
                 });

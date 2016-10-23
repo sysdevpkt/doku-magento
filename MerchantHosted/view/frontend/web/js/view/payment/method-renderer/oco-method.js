@@ -40,15 +40,7 @@ define(
             },
 
             initDoku: function(){
-                // DokuToken(getToken);
-                console.log('init');
-                
-
-                $('#cc-field').bind('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(event) {
-                    console.log('isi');
-                    console.log($("#doku-cc-number").val());
-                });
-
+                DokuToken(getToken);
             },
 
             getToken: function(response){
@@ -56,8 +48,6 @@ define(
             },
 
             getDokuForm: function(){
-
-                console.log('masuk doku form');
 
                 var data = new Object();
 

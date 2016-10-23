@@ -14,6 +14,7 @@
     </div>
     <div class="payment-method-content">
         <fieldset class="fieldset address" data-bind="visible: getDokuForm()" style="margin: 0 0 10px;">
+        <div class="field field-select-billing">
             <div id="cc-field" class="field _required">
                 <label for="doku-cc-number" class="label" id="cc-label">
                     <span>CC</span>
@@ -26,35 +27,16 @@
             </div>
             <div id="name-field" class="field _required">
                 <label for="doku-name-cc" class="label" id="name-label">
-                    <span>CC</span>
+                    <span>NAME</span>
                 </label>
             </div>
             <div id="exp-field" class="field _required">
                 <label for="doku-cc-exp" class="label" id="exp-label">
-                    <span>CVV</span>
+                    <span>EXP</span>
                 </label>
             </div>
+        </div>
         </fieldset>
-        <!-- <ul data-bind="visible: getDokuForm()">
-            <div doku-div='form-payment'>
-            <li>
-                <div id="cc-field">
-                    <label id="cc-label">CC</label>
-                </div>
-                <div id="cvv-field">
-                    <label id="cvv-label">CVV</label>
-                </div>
-            </li>
-            <li>
-                <div id="name-field">
-                    <label id="name-label">NAME</label>
-                </div>
-                <div id="exp-field">
-                    <label id="exp-label">EXP</label>
-                </div>
-            </li>
-            </div>
-        </ul> -->
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->

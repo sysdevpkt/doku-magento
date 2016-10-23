@@ -13,7 +13,29 @@
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
     </div>
     <div class="payment-method-content">
-        <ul data-bind="visible: getDokuForm()">
+        <fieldset class="fieldset address" data-bind="visible: getDokuForm()" style="margin: 0 0 10px;">
+            <div id="cc-field" class="field _required" data-bind="css: additionalClasses">
+                <label for="doku-cc-number" class="label" id="cc-label">
+                    <span>CC</span>
+                </label>
+            </div>
+            <div id="cvv-field" class="field _required" data-bind="css: additionalClasses">
+                <label for="doku-cvc" class="label" id="cvv-label">
+                    <span>CVV</span>
+                </label>
+            </div>
+            <div id="name-field" class="field _required" data-bind="css: additionalClasses">
+                <label for="doku-name-cc" class="label" id="name-label">
+                    <span>CC</span>
+                </label>
+            </div>
+            <div id="exp-field" class="field _required" data-bind="css: additionalClasses">
+                <label for="doku-cc-exp" class="label" id="exp-label">
+                    <span>CVV</span>
+                </label>
+            </div>
+        </fieldset>
+        <!-- <ul data-bind="visible: getDokuForm()">
             <div doku-div='form-payment'>
             <li>
                 <div id="cc-field">
@@ -32,7 +54,7 @@
                 </div>
             </li>
             </div>
-        </ul>
+        </ul> -->
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->

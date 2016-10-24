@@ -14,6 +14,7 @@ define(
 
             console.log(response != undefined);
             console.log(response != 'undefined');
+            console.log(response != undefined && response != 'undefined');
 
             console.log('response');
             console.log(response);

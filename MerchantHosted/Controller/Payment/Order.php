@@ -34,6 +34,8 @@ class Order extends \Magento\Framework\App\Action\Action{
             'data_address' => 'bojong gede #1 08/01'
         );
 
+        $this->_logger->info('$data : '. json_encode($postData['res_token_id'], JSON_PRETTY_PRINT));
+
         $data = array(
             'req_token_id' => $postData['res_token_id'],
             'req_pairing_code' => $postData['res_pairing_code'],
@@ -43,6 +45,7 @@ class Order extends \Magento\Framework\App\Action\Action{
             'req_words' => $words
         );
 
+        $this->_logger->info('$data : '. json_encode($data, JSON_PRETTY_PRINT));
         $this->_logger->info('execute json');
 
         $ch = curl_init( 'https://staging.doku.com/api/payment/PrePayment' );

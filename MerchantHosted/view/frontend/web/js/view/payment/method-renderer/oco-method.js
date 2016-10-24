@@ -12,42 +12,36 @@ define(
 
         function getToken(response){
 
-            console.log(response != undefined);
-            console.log(response != 'undefined');
-            console.log(response != undefined && response != 'undefined');
+            if (response != undefined && response != 'undefined') {
 
-            console.log('response');
-            console.log(response);
+                $.ajax({
+                    type: 'POST',
+                    url: url.build('doku/payment/order'),
+                    data: {dataResponse: JSON.stringify(response)},
 
-            $.ajax({
-                type: 'POST',
-                url: url.build('doku/payment/order'),
-                data: {dataResponse : JSON.stringify(response)} ,
+                    /**
+                     * Success callback
+                     * @param {Object} response
+                     */
+                    success: function (response) {
+                        console.log('success');
+                        console.log(response);
+                    },
 
-                /**
-                 * Success callback
-                 * @param {Object} response
-                 */
-                success: function (response) {
-                    console.log('success');
-                    console.log(response);
-                },
-
-                /**
-                 * Error callback
-                 * @param {*} response
-                 */
-                error: function (response) {
-                    console.log('error');
-                    console.log(response);
-                }
-            });
+                    /**
+                     * Error callback
+                     * @param {*} response
+                     */
+                    error: function (response) {
+                        console.log('error');
+                        console.log(response);
+                    }
+                });
+            }
         }
 
         window.getToken = function (response) {
-            if (response != undefined && response != 'undefined') {
-                getToken(response);
-            }
+            getToken(response);
         };
 
         return Component.extend({

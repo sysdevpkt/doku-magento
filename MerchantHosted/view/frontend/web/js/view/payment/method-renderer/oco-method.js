@@ -14,9 +14,9 @@ define(
             console.log(response);
         }
 
-        window.getToken(function(response){
+        window.getToken = function(response){
             getToken(response);
-        });
+        };
 
         return Component.extend({
             defaults: {

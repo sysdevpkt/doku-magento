@@ -9,11 +9,6 @@ define(
     function (Component, $) {
         'use strict';
 
-        function getToken(response){
-            console.log('getToken');
-            console.log(response);
-        }
-
         window.getToken = function(response){
             getToken(response);
         };
@@ -48,6 +43,11 @@ define(
 
             dokuToken: function(){
                 DokuToken(getToken());
+            },
+
+            getToken: function(response){
+                console.log('getToken');
+                console.log(response);
             },
 
             getDokuForm: function(){

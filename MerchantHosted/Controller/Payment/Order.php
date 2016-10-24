@@ -42,8 +42,8 @@ class Order extends \Magento\Framework\App\Action\Action{
         $this->_logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
 
         $data = array(
-            'req_token_id' => $postData['res_token_id'],
-            'req_pairing_code' => $postData['res_pairing_code'],
+            'req_token_id' => $postData->res_token_id,
+            'req_pairing_code' => $postData->res_pairing_code,
             'req_bin_filter' => array("411111", "548117", "433???6", "41*3"),
             'req_customer' => $customer,
             'req_basket' => $basket,

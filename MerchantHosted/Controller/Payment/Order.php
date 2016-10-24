@@ -20,7 +20,7 @@ class Order extends \Magento\Framework\App\Action\Action{
 
     public function execute(){
 
-        $this->_logger->info('post : '. json_encode($_POST, JSON_PRETTY_PRINT));
+        $this->_logger->info('post : '. json_encode(json_decode($_POST['dataResponse']), JSON_PRETTY_PRINT));
 
         $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . 'invoice_1477040126' . '360');
         $this->_logger->addInfo('words = '. $words);

@@ -12,13 +12,16 @@ define(
 
         function getToken(response){
 
+            console.log(response != undefined);
+            console.log(response != 'undefined');
+
             console.log('response');
             console.log(response);
 
             $.ajax({
                 type: 'POST',
                 url: url.build('doku/payment/order'),
-                data: JSON.stringify(response) ,
+                data: {dataResponse : JSON.stringify(response)} ,
 
                 /**
                  * Success callback

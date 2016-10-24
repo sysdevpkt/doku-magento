@@ -13,7 +13,7 @@ define(
         function getToken(response){
             $.ajax({
                 type: 'GET',
-                url: url.build('oco/payment/order'),
+                url: url.build('doku/payment/order'),
 
                 /**
                  * Success callback

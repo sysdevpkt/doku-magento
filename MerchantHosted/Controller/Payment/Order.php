@@ -39,7 +39,7 @@ class Order extends \Magento\Framework\App\Action\Action{
             'data_address' => 'bojong gede #1 08/01'
         );
 
-        $this->_logger->info('$data : '. json_encode($postData['res_token_id'], JSON_PRETTY_PRINT));
+        $this->_logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
 
         $data = array(
             'req_token_id' => $postData['res_token_id'],

@@ -26,7 +26,11 @@ class Order extends \Magento\Framework\App\Action\Action{
 
         $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . 'invoice_1477040126' . '360');
 
+        $this->_logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
+
         $basket = "adidas, 10000.00, 1, 10000.00;";
+
+        $this->_logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
 
         $customer = array(
             'name' => 'TEST NAME',

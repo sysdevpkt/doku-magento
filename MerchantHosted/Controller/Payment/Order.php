@@ -1,6 +1,6 @@
 <?php
 
-namespace Razorpay\Magento\Controller\Payment;
+namespace Doku\MerchantHosted\Controller\Payment;
 
 use Doku\MerchantHosted\Model\Oco;
 

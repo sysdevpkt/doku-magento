@@ -109,17 +109,17 @@ class Order extends \Magento\Framework\App\Action\Action{
 
             if($responsePayment->res_response_code == '0000'){
 
-                return json_encode(array('err' => false, 'res_response_msg' => 'Payment Success', 'res_response_code' => $responsePayment->res_response_code));
+                echo json_encode(array('err' => false, 'res_response_msg' => 'Payment Success', 'res_response_code' => $responsePayment->res_response_code));
 
             }else{
 
-                return json_encode(array('err' => true, 'res_response_msg' => 'Payment Failed', 'res_response_code' => $responsePayment->res_response_code));
+                echo json_encode(array('err' => true, 'res_response_msg' => 'Payment Failed', 'res_response_code' => $responsePayment->res_response_code));
 
             }
 
 
         }else{
-            return json_encode(array('err' => true, 'res_response_msg' => 'Prepayment Failed', 'res_response_code' => $responsePrePayment->res_response_code));
+            echo json_encode(array('err' => true, 'res_response_msg' => 'Prepayment Failed', 'res_response_code' => $responsePrePayment->res_response_code));
         }
 
     }

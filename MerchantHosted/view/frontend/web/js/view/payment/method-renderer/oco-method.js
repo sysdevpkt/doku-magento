@@ -10,7 +10,9 @@ define(
         'use strict';
 
         window.getToken = function(response){
-            getToken(response);
+            if(response != undefined){
+                getToken(response);
+            }
         };
 
         return Component.extend({

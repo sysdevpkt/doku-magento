@@ -82,11 +82,11 @@ define(
                 data.req_payment_channel = '15'; //payment channel
                 data.req_basket = '';
                 data.req_server_url = 'http://crm.doku.com/doku-library-staging/example-payment/merchant-example.php'; //merchant payment url to receive pairing code & token
-                data.req_transaction_id = 'invoice_1477309977'; //invoice no
+                data.req_transaction_id = 'invoice_1477315453'; //invoice no
                 data.req_amount = '10000.00';
                 data.req_currency = '360'; //360 for IDR
-                data.req_words = 'b957ad7ee7dce8720f1a597e188f35c6f0751ddf'; //your merchant unique key
-                data.req_session_id = '1477309979469'; //your server timestamp
+                data.req_words = '1978b2bbb9a66a70fbe0c39711867b28e8fd19a0'; //your merchant unique key
+                data.req_session_id = '1477315462015'; //your server timestamp
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 

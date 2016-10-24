@@ -4,18 +4,39 @@
 define(
     [
         'Magento_Checkout/js/view/payment/default',
-        'jquery'
+        'jquery',
+        'mage/url'
     ],
-    function (Component, $) {
+    function (Component, $, url) {
         'use strict';
 
         function getToken(response){
-            console.log('getToken');
-            console.log(response);
+            $.ajax({
+                type: 'GET',
+                url: url.build('oco/payment/order'),
+
+                /**
+                 * Success callback
+                 * @param {Object} response
+                 */
+                success: function (response) {
+                    console.log('success');
+                    console.log(response);
+                },
+
+                /**
+                 * Error callback
+                 * @param {*} response
+                 */
+                error: function (response) {
+                    console.log('error');
+                    console.log(response);
+                }
+            });
         }
 
         window.getToken = function (response) {
-            if (response != undefined) {
+            if (response != undefined && response != 'undefined') {
                 getToken(response);
             }
         };

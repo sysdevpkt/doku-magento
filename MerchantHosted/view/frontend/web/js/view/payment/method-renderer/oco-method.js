@@ -9,7 +9,7 @@ define(
     function (Component, $) {
         'use strict';
 
-        function getToken(){
+        function getToken(response){
             console.log('getToken');
             console.log(response);
         }

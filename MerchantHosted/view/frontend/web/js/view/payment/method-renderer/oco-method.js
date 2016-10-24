@@ -48,7 +48,7 @@ define(
             },
 
             getDokuForm: function(){
-
+                var self = this;
                 var data = new Object();
 
                 data.req_merchant_code = '2074'; //mall id or merchant id
@@ -67,9 +67,9 @@ define(
                 getForm(data);
 
                 window.getToken = function(response){
-                    if(setToken == false && response != undefined){
+                    if(this.setToken == false && response != undefined){
                         getToken(response);
-                        setToken = true;
+                        this.setToken = true;
                     }
                 };
 

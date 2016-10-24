@@ -11,9 +11,14 @@ define(
         'use strict';
 
         function getToken(response){
+
+            console.log('response');
+            console.log(response);
+
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: url.build('doku/payment/order'),
+                data: JSON.stringify(response) ,
 
                 /**
                  * Success callback

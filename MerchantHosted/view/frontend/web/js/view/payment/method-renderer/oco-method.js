@@ -26,51 +26,7 @@ define(
             },
 
             dokuToken: function(){
-                DokuToken(getToken());
-
-                window.getToken = function (response){
-
-                    if (response != undefined && response != 'undefined') {
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url.build('doku/payment/order'),
-                            data: {dataResponse: JSON.stringify(response)},
-
-                            /**
-                             * Success callback
-                             * @param {Object} response
-                             */
-                            success: function (response) {
-                                console.log('success');
-                                console.log(response);
-
-                                var obj = $.parseJSON(response);
-
-                                if(obj.err == false){
-
-                                    console.log('process success');
-                                    this.placeOrder();
-
-                                }else{
-                                    console.log('process failed');
-                                    console.log(response);
-                                }
-
-                            },
-
-                            /**
-                             * Error callback
-                             * @param {*} response
-                             */
-                            error: function (response) {
-                                console.log('error');
-                                console.log(response);
-                            }
-                        });
-                    }
-
-                }
+                DokuToken(getToken);
 
                 //function getToken(response){
                 //
@@ -133,6 +89,50 @@ define(
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
                 getForm(data);
+
+                window.getToken = function (response){
+
+                    if (response != undefined && response != 'undefined') {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url.build('doku/payment/order'),
+                            data: {dataResponse: JSON.stringify(response)},
+
+                            /**
+                             * Success callback
+                             * @param {Object} response
+                             */
+                            success: function (response) {
+                                console.log('success');
+                                console.log(response);
+
+                                var obj = $.parseJSON(response);
+
+                                if(obj.err == false){
+
+                                    console.log('process success');
+                                    this.placeOrder();
+
+                                }else{
+                                    console.log('process failed');
+                                    console.log(response);
+                                }
+
+                            },
+
+                            /**
+                             * Error callback
+                             * @param {*} response
+                             */
+                            error: function (response) {
+                                console.log('error');
+                                console.log(response);
+                            }
+                        });
+                    }
+
+                }
 
                 return true;
 

@@ -66,7 +66,7 @@ define(
 
                 getForm(data);
 
-                window.getToken = function(response){
+                window.getToken = function(response, self){
                     if(this.setToken == false && response != undefined){
                         getToken(response);
                         this.setToken = true;

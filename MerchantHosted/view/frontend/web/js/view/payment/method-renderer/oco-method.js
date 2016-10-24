@@ -9,12 +9,6 @@ define(
     function (Component, $) {
         'use strict';
 
-        window.getToken = function(response){
-            if(response != undefined){
-                getToken(response);
-            }
-        };
-
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco'
@@ -70,6 +64,12 @@ define(
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
                 getForm(data);
+
+                window.getToken = function(response){
+                    if(response != undefined){
+                        this.getToken(response);
+                    }
+                };
 
                 return true;
 

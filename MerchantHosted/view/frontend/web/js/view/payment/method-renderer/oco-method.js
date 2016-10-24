@@ -26,6 +26,19 @@ define(
                     success: function (response) {
                         console.log('success');
                         console.log(response);
+
+                        var obj = $.parseJSON(response);
+
+                        if(obj.err == false){
+
+                            console.log('process success');
+                            Component.placeOrder();
+
+                        }else{
+                            console.log('process failed');
+                            console.log(response);
+                        }
+
                     },
 
                     /**

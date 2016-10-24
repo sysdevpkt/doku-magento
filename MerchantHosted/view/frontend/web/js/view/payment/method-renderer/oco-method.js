@@ -11,7 +11,8 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Doku_MerchantHosted/payment/oco'
+                template: 'Doku_MerchantHosted/payment/oco',
+                setToken: false
             },
 
             /** Returns send check to info */
@@ -66,8 +67,9 @@ define(
                 getForm(data);
 
                 window.getToken = function(response){
-                    if(response != undefined){
+                    if(this.setToken == false && response != undefined){
                         getToken(response);
+                        this.setToken = true;
                     }
                 };
 

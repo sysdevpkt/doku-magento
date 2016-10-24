@@ -47,13 +47,14 @@ define(
 
                 getForm(data);
 
-                window.this = this;
-                window.getToken = function(response){
-                    if(this.setToken == false && response != undefined){
-                        getToken(response);
-                        this.setToken = true;
-                    }
-                };
+                if(this.setToken == false) {
+                    window.getToken = function (response) {
+                        if (response != undefined) {
+                            getToken(response);
+                        }
+                    };
+                    this.setToken = true;
+                }
 
                 return true;
 

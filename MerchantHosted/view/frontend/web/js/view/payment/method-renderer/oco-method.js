@@ -67,7 +67,7 @@ define(
 
                 window.getToken = function(response){
                     if(response != undefined){
-                        this.getToken(response);
+                        getToken(response);
                     }
                 };
 

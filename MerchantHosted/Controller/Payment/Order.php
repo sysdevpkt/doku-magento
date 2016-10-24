@@ -24,7 +24,7 @@ class Order extends \Magento\Framework\App\Action\Action{
 
         $this->_logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
 
-        $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . 'invoice_1477040126' . '360');
+        $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . $postData->res_invoice_no . '360' . $postData->res_token_id . $postData->res_pairing_code);
 
         $this->_logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
 
@@ -50,9 +50,6 @@ class Order extends \Magento\Framework\App\Action\Action{
             'req_words' => $words
         );
 
-        $this->_logger->info('$data : '. json_encode($data, JSON_PRETTY_PRINT));
-        $this->_logger->info('execute json');
-
         $ch = curl_init( 'https://staging.doku.com/api/payment/PrePayment' );
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
@@ -60,41 +57,60 @@ class Order extends \Magento\Framework\App\Action\Action{
         curl_setopt( $ch, CURLOPT_HEADER, 0);
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 
-        $this->_logger->info('before exec');
         $responseJson = curl_exec( $ch );
-        $this->_logger->info('after exec');
 
         curl_close($ch);
 
-        $this->_logger->info('response json = '. json_encode($responseJson, JSON_PRETTY_PRINT));
+        $responsePrePayment = json_decode($responseJson);
 
-//        $responsePrePayment = json_decode($responseJson);
-//
-//        if($responsePrePayment->res_response_code == '0000'){
-//
-//            $dataPayment = array(
-//                'req_mall_id' => 2074,
-//                'req_chain_merchant' => "NA",
-//                'req_amount' => '10000.00',
-//                'req_words' => $words,
-//                'req_purchase_amount' => '10000.00',
-//                'req_trans_id_merchant' => 'invoice_1477040126',
-//                'req_request_date_time' => date('YmdHis'),
-//                'req_currency' => '360',
-//                'req_purchase_currency' => '360',
-//                'req_session_id' => sha1(date('YmdHis')),
-//                'req_name' => $customer['name'],
-//                'req_payment_channel' => 15,
-//                'req_basket' => $basket,
-//                'req_email' => $customer['data_email'],
-//                'req_token_id' => $_POST['doku-token'],
-//                'req_mobile_phone' => $customer['data_phone'],
-//                'req_address' => $customer['data_address']
-//            );
-//
-//        }else{
-//            return 'prepayment failed';
-//        }
+        $this->_logger->info('response prepayment = '. json_encode($responsePrePayment, JSON_PRETTY_PRINT));
+
+        if($responsePrePayment->res_response_code == '0000'){
+
+            $dataPayment = array(
+                'req_mall_id' => 2074,
+                'req_chain_merchant' => "NA",
+                'req_amount' => '10000.00',
+                'req_words' => $words,
+                'req_purchase_amount' => '10000.00',
+                'req_trans_id_merchant' => $postData->res_invoice_no,
+                'req_request_date_time' => date('YmdHis'),
+                'req_currency' => '360',
+                'req_purchase_currency' => '360',
+                'req_session_id' => sha1(date('YmdHis')),
+                'req_name' => $customer['name'],
+                'req_payment_channel' => 15,
+                'req_basket' => $basket,
+                'req_email' => $customer['data_email'],
+                'req_token_id' => $postData->res_token_id,
+                'req_mobile_phone' => $customer['data_phone'],
+                'req_address' => $customer['data_address']
+            );
+
+
+            $ch = curl_init( "https://staging.doku.com/api/payment/paymentMip" );
+            curl_setopt( $ch, CURLOPT_POST, 1);
+            curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($dataPayment));
+            curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt( $ch, CURLOPT_HEADER, 0);
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+            $responseJsonPayment = curl_exec( $ch );
+
+            curl_close($ch);
+
+            if(is_string($responseJsonPayment)){
+                $responsePayment = json_decode($responseJsonPayment);
+            }else{
+                $responsePayment = $responseJsonPayment;
+            }
+
+            $this->_logger->info('response payment = '. json_encode($responsePayment, JSON_PRETTY_PRINT));
+
+
+        }else{
+            return json_encode(array('res_response_msg' => 'Prepayment Failed', 'res_response_code' => $responsePrePayment->res_response_code));
+        }
 
     }
 

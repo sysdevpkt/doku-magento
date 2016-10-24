@@ -10,52 +10,9 @@ define(
     function (Component, $, url) {
         'use strict';
 
-        function getToken(response){
-
-            if (response != undefined && response != 'undefined') {
-
-                $.ajax({
-                    type: 'POST',
-                    url: url.build('doku/payment/order'),
-                    data: {dataResponse: JSON.stringify(response)},
-
-                    /**
-                     * Success callback
-                     * @param {Object} response
-                     */
-                    success: function (response) {
-                        console.log('success');
-                        console.log(response);
-
-                        var obj = $.parseJSON(response);
-
-                        if(obj.err == false){
-
-                            console.log('process success');
-                            Component.placeOrder();
-
-                        }else{
-                            console.log('process failed');
-                            console.log(response);
-                        }
-
-                    },
-
-                    /**
-                     * Error callback
-                     * @param {*} response
-                     */
-                    error: function (response) {
-                        console.log('error');
-                        console.log(response);
-                    }
-                });
-            }
-        }
-
-        window.getToken = function (response) {
-            getToken(response);
-        };
+        //window.getToken = function (response) {
+        //    getToken(response);
+        //};
 
         return Component.extend({
             defaults: {
@@ -70,6 +27,49 @@ define(
 
             dokuToken: function(){
                 DokuToken(getToken());
+
+                function getToken(response){
+
+                    if (response != undefined && response != 'undefined') {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url.build('doku/payment/order'),
+                            data: {dataResponse: JSON.stringify(response)},
+
+                            /**
+                             * Success callback
+                             * @param {Object} response
+                             */
+                            success: function (response) {
+                                console.log('success');
+                                console.log(response);
+
+                                var obj = $.parseJSON(response);
+
+                                if(obj.err == false){
+
+                                    console.log('process success');
+                                    this.placeOrder();
+
+                                }else{
+                                    console.log('process failed');
+                                    console.log(response);
+                                }
+
+                            },
+
+                            /**
+                             * Error callback
+                             * @param {*} response
+                             */
+                            error: function (response) {
+                                console.log('error');
+                                console.log(response);
+                            }
+                        });
+                    }
+                }
             },
 
             getDokuForm: function(){

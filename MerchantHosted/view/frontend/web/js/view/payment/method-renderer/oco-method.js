@@ -67,9 +67,9 @@ define(
                 getForm(data);
 
                 window.getToken = function(response){
-                    if(this.setToken == false && response != undefined){
+                    if(setToken == false && response != undefined){
                         getToken(response);
-                        this.setToken = true;
+                        setToken = true;
                     }
                 };
 

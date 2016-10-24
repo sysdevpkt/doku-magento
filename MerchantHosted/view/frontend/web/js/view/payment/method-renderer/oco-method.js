@@ -9,10 +9,21 @@ define(
     function (Component, $) {
         'use strict';
 
+        function getToken(){
+            console.log('getToken');
+            console.log(response);
+        }
+
+        window.getToken = function (response) {
+            if (response != undefined) {
+                getToken(response);
+            }
+        };
+
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
-                setToken: false
+                setToken: false,
             },
 
             /** Returns send check to info */
@@ -22,11 +33,6 @@ define(
 
             dokuToken: function(){
                 DokuToken(getToken());
-            },
-
-            getToken: function(response){
-                console.log('getToken');
-                console.log(response);
             },
 
             getDokuForm: function(){
@@ -46,15 +52,6 @@ define(
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
                 getForm(data);
-
-                if(this.setToken == false) {
-                    window.getToken = function (response) {
-                        if (response != undefined) {
-                            getToken(response);
-                        }
-                    };
-                    this.setToken = true;
-                }
 
                 return true;
 

@@ -73,6 +73,8 @@ define(
             },
 
             getDokuForm: function(){
+                var self = this,
+                    placeOrder;
                 var data = new Object();
 
                 data.req_merchant_code = '2074'; //mall id or merchant id
@@ -112,7 +114,7 @@ define(
                                 if(obj.err == false){
 
                                     console.log('process success');
-                                    this.placeOrder();
+                                    self.placeOrder();
 
                                 }else{
                                     console.log('process failed');

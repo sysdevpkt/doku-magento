@@ -8,7 +8,7 @@ class DokuConfigProvider implements ConfigProviderInterface
 {
 
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ){
         $this->_scopeConfig = $scopeConfig;
     }

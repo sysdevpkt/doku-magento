@@ -10,9 +10,6 @@ define(
     function (Component, $, url) {
         'use strict';
 
-        //window.getToken = function (response) {
-        //    getToken(response);
-        //};
 
         return Component.extend({
             defaults: {
@@ -20,7 +17,14 @@ define(
                 setToken: false,
             },
 
-            /** Returns send check to info */
+            getMallId: function(){
+                return window.checkoutConfig.payment.oco.mall_id
+            },
+
+            getSharedKey: function(){
+                return window.checkoutConfig.payment.oco.shared_key
+            },
+
             getMailingAddress: function() {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
@@ -136,11 +140,14 @@ define(
                 temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
                 return temp.toLowerCase();
             },
-            
+
             getDokuForm: function(){
                 var self = this,
                     placeOrder;
                 var data = new Object();
+
+                console.log(this.getMallId);
+                console.log(this.getSharedKey);
 
                 data.req_merchant_code = '2074'; //mall id or merchant id
                 data.req_chain_merchant = 'NA'; //chain merchant id
@@ -155,7 +162,7 @@ define(
                 data.req_form_type = 'inline';
                 data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
-                getForm(data);
+                // getForm(data);
 
                 window.getToken = function (response){
 

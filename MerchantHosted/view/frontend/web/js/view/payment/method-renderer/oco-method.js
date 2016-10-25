@@ -25,6 +25,10 @@ define(
                 return window.checkoutConfig.payment.oco.shared_key
             },
 
+            getCurrency: function(){
+                return window.checkoutConfig.payment.oco.currency
+            },
+
             getMailingAddress: function() {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
@@ -148,6 +152,7 @@ define(
 
                 console.log(this.getMallId());
                 console.log(this.getSharedKey());
+                console.log(this.getCurrency());
 
                 data.req_merchant_code = '2074'; //mall id or merchant id
                 data.req_chain_merchant = 'NA'; //chain merchant id

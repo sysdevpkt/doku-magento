@@ -146,8 +146,8 @@ define(
                     placeOrder;
                 var data = new Object();
 
-                console.log(this.getMallId);
-                console.log(this.getSharedKey);
+                console.log(this.getMallId());
+                console.log(this.getSharedKey());
 
                 data.req_merchant_code = '2074'; //mall id or merchant id
                 data.req_chain_merchant = 'NA'; //chain merchant id

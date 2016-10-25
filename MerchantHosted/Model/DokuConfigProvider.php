@@ -18,7 +18,8 @@ class DokuConfigProvider implements ConfigProviderInterface
         $config = [
             'payment' => [
                 'oco' => [
-                    'mall_id' => $this->_scopeConfig->getValue('payment/oco/mall_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE),
+                    // 'mall_id' => $this->_scopeConfig->getValue('payment/oco/mall_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE),
+                    'mall_id' => 'tes mall id',
                     'shared_key' =>'tes shared key'
                 ]
             ]

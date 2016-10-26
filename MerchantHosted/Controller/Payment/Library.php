@@ -6,7 +6,8 @@ use Doku\MerchantHosted\Model\Oco;
 
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
-	protected $_logger;
+    protected $_logger;
+    protected $_scopeConfig;
     protected $prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
     protected $paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';
     protected $directPaymentUrl = 'https://staging.doku.com/api/payment/PaymentMIPDirect';

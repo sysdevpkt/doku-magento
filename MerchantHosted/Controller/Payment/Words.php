@@ -2,6 +2,9 @@
 namespace Doku\MerchantHosted\Controller\Payment;
 
 use Magento\Checkout\Model\Session;
+use \Psr\Log\LoggerInterface;
+use \Magento\Framework\App\Action\Context;
+use Doku\MerchantHosted\Model\DokuConfigProvider;
 
 class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 {
@@ -9,18 +12,16 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
     protected $_session;
 
     public function __construct(
-        \Psr\Log\LoggerInterface $logger, //log injection
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        LoggerInterface $logger, //log injection
+        Context $context,
+        DokuConfigProvider $config,
         Session $session
     )
     {
         parent::__construct(
             $logger,
             $context,
-            $scopeConfig,
-            $resultPageFactory
+            $config
         );
 
 //        $this->resultPageFactory = $resultPageFactory;

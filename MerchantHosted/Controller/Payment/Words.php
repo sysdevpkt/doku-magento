@@ -45,7 +45,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 //            'currency' => $postData->currency
 //        );
 
-        $this->_logger->info('===== Words Controller ===== End');
+        $this->logger->info('===== Words Controller ===== End');
 
         echo true;
 

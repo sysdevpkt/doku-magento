@@ -6,9 +6,6 @@ use Magento\Checkout\Model\Session;
 
 class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 {
-
-    protected $_logger;
-
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,

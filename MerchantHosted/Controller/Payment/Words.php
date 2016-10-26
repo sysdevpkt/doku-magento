@@ -13,15 +13,15 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        Session $session,
-        Library $library
+        Session $session
     )
     {
-        $logger;
-        $context;
-        $resultPageFactory;
-        $session;
-        $this->_library = $library;
+        parent::__construct(
+            $logger,
+            $context,
+            $resultPageFactory,
+            $session
+        );
     }
 
     public function execute()

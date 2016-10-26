@@ -21,7 +21,7 @@ class DokuConfigProvider implements ConfigProviderInterface
             'payment' => [
                 'oco' => [
                     'mall_id' => $this->config->getMallId(),
-                    'shared_key' => $this->_scopeConfig->getValue('payment/oco/shared_key', \Magento\Store\Model\ScopeInterface::SCOPE_STORE),
+                    'shared_key' => $this->config->getSharedKey(),
                 ]
             ]
         ];

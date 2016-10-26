@@ -11,15 +11,16 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-//        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory
 //        Session $session
     )
     {
         parent::__construct(
             $logger,
             $context,
-            $scopeConfig
+            $scopeConfig,
+            $resultPageFactory
         );
 
 //        $this->resultPageFactory = $resultPageFactory;

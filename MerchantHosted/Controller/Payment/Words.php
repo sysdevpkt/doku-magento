@@ -31,6 +31,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
     {
 
         $this->logger->info('===== Words Controller ===== Start');
+        $this->logger->info('post : '. json_encode($_POST, JSON_PRETTY_PRINT));
 
         $params = array(
             'amount' => number_format($this->_session->getQuote()->getBaseGrandTotal(), 2),

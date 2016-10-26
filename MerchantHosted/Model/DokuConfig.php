@@ -1,6 +1,6 @@
 <?php
 
-namespace Razorpay\Magento\Model;
+namespace Doku\MerchantHosted\Model;
 
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 

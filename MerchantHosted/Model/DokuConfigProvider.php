@@ -10,12 +10,8 @@ class DokuConfigProvider implements ConfigProviderInterface
     protected $config;
 
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Doku\MerchantHosted\Model\DokuConfig $config
     ){
-        $this->_scopeConfig = $scopeConfig;
-        $this->_storeManager = $storeManager;
         $this->config = $config;
     }
 

@@ -17,10 +17,11 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
         Library $library
     )
     {
-        $this->_logger = $logger;
-        parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
-        $this->_session = $session;
+        $logger;
+        $context;
+        $resultPageFactory;
+        $session;
+        $this->_library = $library;
     }
 
     public function execute()

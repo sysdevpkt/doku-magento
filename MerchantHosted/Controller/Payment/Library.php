@@ -3,7 +3,6 @@
 namespace Doku\MerchantHosted\Controller\Payment;
 
 use Doku\MerchantHosted\Model\Oco;
-use \Magento\Framework\App\Config\ScopeConfigInterface;
 
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
@@ -19,34 +18,34 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
-        ScopeConfigInterface $scopeConfig
+        \Doku\MerchantHosted\Model\DokuConfigProvider $config
 
     ) {
         $this->logger = $logger;
         parent::__construct($context);
-        $this->config = $scopeConfig;
+        $this->config = $config;
     }
 
-    protected function getMallId(){
-        return $this->config->getValue('payment/oco/mall_id' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-    }
+//    protected function getMallId(){
+//        return $this->config->getValue('payment/oco/mall_id' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+//    }
+//
+//    protected function getSharedKey(){
+//        return $this->config->getValue('payment/oco/shared_key' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+//    }
 
-    protected function getSharedKey(){
-        return $this->config->getValue('payment/oco/shared_key' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-    }
-
-    protected function doCreateWords($data){
-        if(!empty($data['device_id']))
-            if(!empty($data['pairing_code']))
-                return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency'] . $data['token'] . $data['pairing_code'] . $data['device_id']);
-            else
-                return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency'] . $data['device_id']);
-        else if(!empty($data['pairing_code']))
-            return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency'] . $data['token'] . $data['pairing_code']);
-        else if(!empty($data['currency']))
-            return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency']);
-        else
-            return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice']);
-    }
+//    protected function doCreateWords($data){
+//        if(!empty($data['device_id']))
+//            if(!empty($data['pairing_code']))
+//                return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency'] . $data['token'] . $data['pairing_code'] . $data['device_id']);
+//            else
+//                return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency'] . $data['device_id']);
+//        else if(!empty($data['pairing_code']))
+//            return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency'] . $data['token'] . $data['pairing_code']);
+//        else if(!empty($data['currency']))
+//            return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice'] . $data['currency']);
+//        else
+//            return sha1($data['amount'] . $this->getMallId() . $this->getSharedKey() . $data['invoice']);
+//    }
     
 }

@@ -5,7 +5,7 @@ namespace Doku\MerchantHosted\Controller\Payment;
 use Doku\MerchantHosted\Model\Oco;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 
-abstract class Library extends \Magento\Framework\App\Action\Action{
+abstract class Library extends \Magento\Framework\App\Action\Action implements ScopeConfigInterface{
 
     protected $_logger;
     protected $_scopeConfig;

@@ -5,26 +5,31 @@ use Magento\Checkout\Model\Session;
 use \Psr\Log\LoggerInterface;
 use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
+use Magento\Checkout\Model\Cart;
 
 class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 {
 
     protected $session;
+    protected $cart;
 
     public function __construct(
         LoggerInterface $logger, //log injection
         Context $context,
         DokuConfigProvider $config,
-        Session $session
+        Session $session,
+        Cart $cart
     )
     {
         parent::__construct(
             $logger,
             $context,
             $config
+
         );
 
         $this->session = $session;
+        $this->cart = $cart;
     }
 
     public function execute()
@@ -44,11 +49,12 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             );
 
             $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('basket : '. json_encode($this->session->getQuote()->getAllItems(), JSON_PRETTY_PRINT));
-            $this->logger->info('basket2 : '. json_encode($this->session->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
-            $this->logger->info('basket3 : '. json_encode($this->session->getQuote()->getItems(), JSON_PRETTY_PRINT));
-            $this->logger->info('basket4 : '. json_encode($this->session->getQuote()->getItemsCollection(), JSON_PRETTY_PRINT));
-            $this->logger->info('basket5 : '. json_encode($this->session->getQuote()->item, JSON_PRETTY_PRINT));
+            $this->logger->info('session : '. json_encode($this->session->getQuote()->getAllItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('session2 : '. json_encode($this->session->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('checkout session : '. json_encode($this->cart->getCheckoutSession()->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('checkout session2 : '. json_encode($this->cart->getCheckoutSession()->getQuote()->getAllItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('quote : '. json_encode($this->cart->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('quote2 : '. json_encode($this->cart->getQuote()->getAllItems(), JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);
             $arr = array(

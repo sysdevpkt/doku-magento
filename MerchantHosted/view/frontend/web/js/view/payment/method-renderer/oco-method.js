@@ -62,7 +62,7 @@ define(
                         }else{
                             alert({
                                 title: 'Create words error!',
-                                content: obj.msg,
+                                content: obj.msg + '<br>Please refresh this page if you want to use payment with Doku Payment Gateway',
                                 actions: {
                                     always: function(){}
                                 }
@@ -73,7 +73,7 @@ define(
                     error: function (xhr, status, error) {
                         alert({
                             title: 'Create words error!',
-                            content: xhr.responseText,
+                            content: 'Please refresh this page if you want to use payment with Doku Payment Gateway',
                             actions: {
                                 always: function(){}
                             }

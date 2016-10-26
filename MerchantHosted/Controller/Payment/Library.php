@@ -21,7 +21,7 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     ) {
         $this->logger = $logger;
         parent::__construct($context);
-        $this->config = $config;
+        $this->config = new $config;
     }
 
     protected function doCreateWords($data){

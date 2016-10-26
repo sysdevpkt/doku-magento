@@ -9,7 +9,7 @@ use Doku\MerchantHosted\Model\DokuConfigProvider;
 class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 {
 
-    protected $_session;
+    protected $session;
 
     public function __construct(
         LoggerInterface $logger, //log injection
@@ -24,26 +24,46 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             $config
         );
 
-        $this->_session = $session;
+        $this->session = $session;
     }
 
     public function execute()
     {
 
         $this->logger->info('===== Words Controller ===== Start');
-        $this->logger->info('post : '. json_encode($_GET, JSON_PRETTY_PRINT));
 
-        $params = array(
-            'amount' => number_format($this->_session->getQuote()->getBaseGrandTotal(), 2),
-            'invoice' => 'mage2_'. $_GET['_'],
-            'currency' => '360'
-        );
+        try{
 
-        $words = $this->doCreateWords($params);
+            $invoice_no = 'mage2_'. $this->config->getMallId() .'_'. $this->session->getQuoteId() .'_'. $_GET['_'];
+            $amount = number_format($this->session->getQuote()->getBaseGrandTotal(), 2);
+            $currency = '360';
+            $params = array(
+                'amount' => $amount,
+                'invoice' => $invoice_no,
+                'currency' => $currency
+            );
 
-        $this->logger->info('===== Words Controller ===== End');
+            $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
+            $this->logger->info('basket : '. json_encode($this->session->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
 
-        echo $words;
+            $words = $this->doCreateWords($params);
+            $arr = array(
+                'err' => false,
+                'msg' => 'Create words success',
+                'words' => $words,
+                'invoice_no' => $invoice_no,
+                'session_id' => $this->session->getSessionId(),
+                'currency' => $currency,
+                'payment_channel' => '15',
+                'form_type' => 'inline',
+                'chain_merchant' => 'NA'
+            );
+
+        }catch(\Exception $e){
+            $arr = array('err' => true, 'msg' => 'Create words failed : '+ $e->getMessage());
+        }
+
+        echo json_encode($arr);
 
     }
 }

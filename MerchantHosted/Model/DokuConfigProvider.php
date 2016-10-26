@@ -13,11 +13,9 @@ class DokuConfigProvider implements ConfigProviderInterface
     protected $scopeConfig;
 
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ){
         $this->scopeConfig = $scopeConfig;
-        $this->storeManager = $storeManager;
     }
 
     public function getMallId()
@@ -36,8 +34,7 @@ class DokuConfigProvider implements ConfigProviderInterface
             'payment' => [
                 'oco' => [
                     'mall_id' => $this->getMallId(),
-                    'shared_key' => $this->getSharedKey(),
-                    'currency' => $this->storeManager->getStore()->getCurrentCurrencyCode()
+                    'shared_key' => $this->getSharedKey()
                 ]
             ]
         ];

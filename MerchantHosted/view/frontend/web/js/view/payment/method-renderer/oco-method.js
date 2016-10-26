@@ -5,28 +5,20 @@ define(
     [
         'Magento_Checkout/js/view/payment/default',
         'jquery',
-        'mage/url'
+        'mage/url',
+        'Magento_Ui/js/modal/alert'
     ],
-    function (Component, $, url) {
+    function (Component, $, url, alert) {
         'use strict';
 
 
         return Component.extend({
             defaults: {
-                template: 'Doku_MerchantHosted/payment/oco',
-                setToken: false,
+                template: 'Doku_MerchantHosted/payment/oco'
             },
 
             getMallId: function(){
                 return window.checkoutConfig.payment.oco.mall_id
-            },
-
-            getSharedKey: function(){
-                return window.checkoutConfig.payment.oco.shared_key
-            },
-
-            getCurrency: function(){
-                return window.checkoutConfig.payment.oco.currency
             },
 
             getMailingAddress: function() {
@@ -51,18 +43,41 @@ define(
                      * @param {Object} response
                      */
                     success: function (response) {
-                        console.log('success');
-                        console.log(response);
+                        var obj = $.parseJSON(response);
+                        console.log(obj);
+                        if(obj.err == false){
 
+                            //data.req_merchant_code = self.getMallId(); //mall id or merchant id
+                            //data.req_chain_merchant = obj.chain_merchant; //chain merchant id
+                            //data.req_payment_channel = obj.payment_channel; //payment channel
+                            //data.req_basket = '';
+                            //data.req_transaction_id = 'invoice_1477315453'; //invoice no
+                            //data.req_amount = '10000.00';
+                            //data.req_currency = '360'; //360 for IDR
+                            //data.req_words = '1978b2bbb9a66a70fbe0c39711867b28e8fd19a0'; //your merchant unique key
+                            //data.req_session_id = '1477315462015'; //your server timestamp
+                            //data.req_form_type = 'inline';
+                            //data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+
+                        }else{
+                            alert({
+                                title: 'Create words error!',
+                                content: obj.msg,
+                                actions: {
+                                    always: function(){}
+                                }
+                            });
+                        }
                     },
 
-                    /**
-                     * Error callback
-                     * @param {*} response
-                     */
-                    error: function (response) {
-                        console.log('error');
-                        console.log(response);
+                    error: function (xhr, status, error) {
+                        alert({
+                            title: 'Create words error!',
+                            content: xhr.responseText,
+                            actions: {
+                                always: function(){}
+                            }
+                        });
                     }
                 });
 
@@ -70,7 +85,6 @@ define(
                 data.req_chain_merchant = 'NA'; //chain merchant id
                 data.req_payment_channel = '15'; //payment channel
                 data.req_basket = '';
-                data.req_server_url = 'http://crm.doku.com/doku-library-staging/example-payment/merchant-example.php'; //merchant payment url to receive pairing code & token
                 data.req_transaction_id = 'invoice_1477315453'; //invoice no
                 data.req_amount = '10000.00';
                 data.req_currency = '360'; //360 for IDR

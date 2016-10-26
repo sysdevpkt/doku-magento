@@ -3,6 +3,7 @@
 namespace Doku\MerchantHosted\Controller\Payment;
 
 use Doku\MerchantHosted\Model\Oco;
+use Doku\MerchantHosted\Model\DokuConfig;
 
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
@@ -17,13 +18,12 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
-        \Magento\Framework\App\Action\Context $context,
-        \Doku\MerchantHosted\Model\DokuConfig $config
+        \Magento\Framework\App\Action\Context $context
 
     ) {
         $this->logger = $logger;
         parent::__construct($context);
-        $this->config = $config;
+        $this->config = new DokuConfig;
     }
 
     protected function doCreateWords($data){

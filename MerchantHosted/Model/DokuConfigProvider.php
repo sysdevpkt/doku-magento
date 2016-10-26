@@ -7,12 +7,12 @@ use Magento\Checkout\Model\ConfigProviderInterface;
 class DokuConfigProvider implements ConfigProviderInterface
 {
 
-    protected $config;
-
     public function __construct(
-        \Doku\MerchantHosted\Model\DokuConfig $config
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ){
-        $this->config = $config;
+        $this->_scopeConfig = $scopeConfig;
+        $this->_storeManager = $storeManager;
     }
 
     public function getConfig()
@@ -20,8 +20,9 @@ class DokuConfigProvider implements ConfigProviderInterface
         $config = [
             'payment' => [
                 'oco' => [
-                    'mall_id' => $this->config->getMallId(),
-                    'shared_key' => $this->config->getSharedKey(),
+                    'mall_id' => $this->_scopeConfig->getValue('payment/oco/mall_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE),
+                    'shared_key' => $this->_scopeConfig->getValue('payment/oco/shared_key', \Magento\Store\Model\ScopeInterface::SCOPE_STORE),
+                    'currency' => $this->_storeManager->getStore()->getCurrentCurrencyCode()
                 ]
             ]
         ];

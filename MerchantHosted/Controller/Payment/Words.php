@@ -13,6 +13,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         Session $session
     )
     {
@@ -20,8 +21,10 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             $logger,
             $context,
             $resultPageFactory,
-            $session
+            $scopeConfig
         );
+
+        $this->_session = $session;
     }
 
     public function execute()

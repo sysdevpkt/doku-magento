@@ -7,6 +7,7 @@ use Doku\MerchantHosted\Model\Oco;
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
     protected $_logger;
+    protected $_scopeConfig;
     protected $prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
     protected $paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';
     protected $directPaymentUrl = 'https://staging.doku.com/api/payment/PaymentMIPDirect';
@@ -17,8 +18,9 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+
     ) {
         $this->_logger = $logger;
         parent::__construct($context);

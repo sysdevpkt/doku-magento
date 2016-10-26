@@ -5,18 +5,20 @@ use Magento\Checkout\Model\Session;
 use \Psr\Log\LoggerInterface;
 use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
+use Magento\Sales\Model\Order;
 
 class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 {
 
     protected $session;
-    protected $cart;
+    protected $order;
 
     public function __construct(
         LoggerInterface $logger, //log injection
         Context $context,
         DokuConfigProvider $config,
-        Session $session
+        Session $session,
+        Order $order
     )
     {
         parent::__construct(
@@ -27,6 +29,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
         );
 
         $this->session = $session;
+        $this->order = $order;
     }
 
     public function execute()
@@ -46,8 +49,8 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             );
 
             $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('session : '. json_encode($this->session->getQuoteId(), JSON_PRETTY_PRINT));
-            $this->logger->info('session2 : '. json_encode($this->session->getQuote($this->session->getQuoteId())->getAllVisibleItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('session : '. json_encode($this->session->getQuote()->getAllItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('order : '. json_encode($this->order->getAllItems(), JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);
             $arr = array(

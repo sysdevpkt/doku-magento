@@ -2,7 +2,8 @@
 
 namespace Doku\MerchantHosted\Controller\Payment;
 
-use \Doku\MerchantHosted\Model\DokuConfigProvider;
+use Doku\MerchantHosted\Model\Oco;
+use Doku\MerchantHosted\Model\DokuConfig;
 
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
@@ -22,7 +23,7 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     ) {
         $this->logger = $logger;
         parent::__construct($context);
-        $this->config = new DokuConfigProvider();
+        $this->config = new DokuConfig;
     }
 
     protected function doCreateWords($data){

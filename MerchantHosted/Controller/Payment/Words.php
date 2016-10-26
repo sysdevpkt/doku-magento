@@ -34,7 +34,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 
         try{
 
-            $invoice_no = 'mage2_'. $this->config->getMallId() .'_'. $this->session->getQuoteId() .'_'. $_GET['_'];
+            $invoice_no = 'mage2_'. $this->config->getMallId() . $this->session->getQuoteId() . $_GET['_'];
             $amount = number_format($this->session->getQuote()->getBaseGrandTotal(), 2);
             $currency = '360';
             $params = array(
@@ -44,7 +44,11 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             );
 
             $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('basket : '. json_encode($this->session->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('basket : '. json_encode($this->session->getQuote()->getAllItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('basket2 : '. json_encode($this->session->getQuote()->getAllVisibleItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('basket3 : '. json_encode($this->session->getQuote()->getItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('basket4 : '. json_encode($this->session->getQuote()->getItemsCollection(), JSON_PRETTY_PRINT));
+            $this->logger->info('basket5 : '. json_encode($this->session->getQuote()->item, JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);
             $arr = array(

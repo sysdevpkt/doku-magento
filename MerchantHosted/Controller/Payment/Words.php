@@ -1,26 +1,28 @@
 <?php
 namespace Doku\MerchantHosted\Controller\Payment;
 
-use Doku\MerchantHosted\Model\Oco;
 use Magento\Checkout\Model\Session;
 
 class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 {
+
+    protected $_session;
+
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         Session $session
     )
     {
         parent::__construct(
             $logger,
             $context,
-            $resultPageFactory,
             $scopeConfig
         );
 
+        $this->resultPageFactory = $resultPageFactory;
         $this->_session = $session;
     }
 

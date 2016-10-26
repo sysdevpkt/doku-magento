@@ -2,8 +2,6 @@
 
 namespace Doku\MerchantHosted\Controller\Payment;
 
-use Doku\MerchantHosted\Model\Oco;
-
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
     protected $_logger;
@@ -18,12 +16,10 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->_logger = $logger;
         parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
         $this->_scopeConfig = $scopeConfig;
     }
 

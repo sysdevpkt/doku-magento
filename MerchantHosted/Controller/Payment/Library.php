@@ -18,21 +18,21 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
-        \Doku\MerchantHosted\Model\DokuConfigProvider $config
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
 
     ) {
         $this->logger = $logger;
         parent::__construct($context);
-        $this->config = $config;
+        $this->config = $scopeConfig;
     }
 
-//    protected function getMallId(){
-//        return $this->config->getValue('payment/oco/mall_id' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-//    }
-//
-//    protected function getSharedKey(){
-//        return $this->config->getValue('payment/oco/shared_key' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-//    }
+    protected function getMallId(){
+        return $this->config->getValue('payment/oco/mall_id' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    protected function getSharedKey(){
+        return $this->config->getValue('payment/oco/shared_key' ,\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
 
 //    protected function doCreateWords($data){
 //        if(!empty($data['device_id']))

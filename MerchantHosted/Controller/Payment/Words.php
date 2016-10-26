@@ -31,11 +31,11 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
     {
 
         $this->logger->info('===== Words Controller ===== Start');
-        $this->logger->info('post : '. json_encode($_POST, JSON_PRETTY_PRINT));
+        $this->logger->info('post : '. json_encode($_GET, JSON_PRETTY_PRINT));
 
         $params = array(
             'amount' => number_format($this->_session->getQuote()->getBaseGrandTotal(), 2),
-            'invoice' => 'mage2_'. $_POST['_'],
+            'invoice' => 'mage2_'. $_GET['_'],
             'currency' => '360'
         );
 

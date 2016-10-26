@@ -4,7 +4,7 @@ namespace Doku\MerchantHosted\Controller\Payment;
 
 use Doku\MerchantHosted\Model\Oco;
 
-class Order extends \Magento\Framework\App\Action\Action{
+abstract class Library extends \Magento\Framework\App\Action\Action{
 
 	protected $_logger;
     protected $prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';

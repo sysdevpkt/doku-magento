@@ -13,7 +13,8 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        Session $session
+        Session $session,
+        Library $library
     )
     {
         $this->_logger = $logger;

@@ -46,9 +46,11 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
         );
 
         $words = $this->doCreateWords($params);
+        $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
+        $shippingAddress = $this->session->getQuote()->getShippingAddress()->getCustomerAddress()->get;
 
-        $this->logger->info('words : '. json_encode($words, JSON_PRETTY_PRINT));
-        $this->logger->info('billing : '. json_encode($this->session->getQuote()->getBillingAddress()->convertToArray(), JSON_PRETTY_PRINT));
+        $this->logger->info('billing : '. json_encode($billingAddress, JSON_PRETTY_PRINT));
+        $this->logger->info('shipping : '. json_encode($shippingAddress, JSON_PRETTY_PRINT));
 
 //        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
 //
@@ -56,12 +58,12 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 //
 //        $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
 //
-//        $customer = array(
-//            'name' => 'TEST NAME',
-//            'data_phone' => '08121111111',
-//            'data_email' => 'test@test.com',
-//            'data_address' => 'bojong gede #1 08/01'
-//        );
+        $customer = array(
+            'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
+            'data_phone' => $billingAddress['telephone'],
+            'data_email' => 'test@test.com',
+            'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
+        );
 //
 //        $this->logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
 //

@@ -34,6 +34,9 @@ define(
                     placeOrder;
                 var data = new Object();
 
+                console.log('window');
+                console.log(window.checkoutConfig);
+
                 $.ajax({
                     type: 'GET',
                     url: url.build('doku/payment/words'),

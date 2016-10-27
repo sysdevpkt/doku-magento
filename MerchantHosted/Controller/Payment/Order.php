@@ -6,33 +6,35 @@ use Doku\MerchantHosted\Model\Oco;
 
 class Order extends \Magento\Framework\App\Action\Action{
 
-    protected $_logger;
+    protected $logger;
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger, //log injection
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
-        $this->_logger = $logger;
+        $this->logger = $logger;
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
 
     public function execute(){
 
+        $this->logger->info('===== Order Controller ===== Start');
+
         $postData = json_decode($_POST['dataResponse']);
         $postObj = json_decode($_POST['dataObj']);
 
-        $this->_logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
-        $this->_logger->info('postobj : '. json_encode($postObj, JSON_PRETTY_PRINT));
+        $this->logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
+        $this->logger->info('postobj : '. json_encode($postObj, JSON_PRETTY_PRINT));
 
         $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . $postData->res_invoice_no . '360' . $postData->res_token_id . $postData->res_pairing_code);
 
-        $this->_logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
+        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
 
         $basket = "adidas, 10000.00, 1, 10000.00;";
 
-        $this->_logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
+        $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
 
         $customer = array(
             'name' => 'TEST NAME',

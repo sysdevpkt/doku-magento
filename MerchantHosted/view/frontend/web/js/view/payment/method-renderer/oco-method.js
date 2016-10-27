@@ -44,6 +44,8 @@ define(
                      */
                     success: function (response) {
                         var obj = $.parseJSON(response);
+                        console.log('success');
+                        console.log(obj);
                         if(obj.err == false){
 
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id
@@ -75,6 +77,8 @@ define(
                                          */
                                         success: function (response) {
                                             var obj = $.parseJSON(response);
+                                            console.log('success');
+                                            console.log(obj);
 
                                             if(obj.err == false){
                                                 self.placeOrder();

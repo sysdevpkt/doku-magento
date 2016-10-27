@@ -74,6 +74,8 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             $arr = array('err' => true, 'msg' => 'Create words failed : '+ $e->getMessage());
         }
 
+        $this->logger->info('===== Words Controller ===== End');
+
         echo json_encode($arr);
 
     }

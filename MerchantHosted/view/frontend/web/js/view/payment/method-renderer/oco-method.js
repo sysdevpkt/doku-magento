@@ -69,7 +69,7 @@ define(
                                     $.ajax({
                                         type: 'POST',
                                         url: url.build('doku/payment/order'),
-                                        data: {dataResponse: JSON.stringify(response), dataObj: obj},
+                                        data: {dataResponse: JSON.stringify(response), dataObj: JSON.stringify(obj)},
 
                                         /**
                                          * Success callback

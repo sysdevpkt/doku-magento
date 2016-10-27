@@ -47,8 +47,8 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
         $words = $this->doCreateWords($params);
 
-        $this->logger('words : '. json_encode($words, JSON_PRETTY_PRINT));
-        $this->logger('billing : '. json_encode($this->session->getQuote()->getBillingAddress()->convertToArray(), JSON_PRETTY_PRINT));
+        $this->logger->info('words : '. json_encode($words, JSON_PRETTY_PRINT));
+        $this->logger->info('billing : '. json_encode($this->session->getQuote()->getBillingAddress()->convertToArray(), JSON_PRETTY_PRINT));
 
 //        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
 //

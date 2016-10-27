@@ -34,7 +34,6 @@ define(
                     placeOrder;
                 var data = new Object();
 
-                console.log('window');
                 console.log(window.checkoutConfig);
 
                 $.ajax({

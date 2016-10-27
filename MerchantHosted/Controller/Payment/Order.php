@@ -33,7 +33,6 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
         $postData = json_decode($_POST['dataResponse']);
         $postObj = json_decode($_POST['dataObj']);
 
-        $this->logger->info('get : '. json_encode($_GET, JSON_PRETTY_PRINT));
         $this->logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
         $this->logger->info('postobj : '. json_encode($postObj, JSON_PRETTY_PRINT));
 
@@ -47,10 +46,11 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
         $words = $this->doCreateWords($params);
         $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
-        $shippingAddress = $this->session->getQuote()->getShippingAddress()->getCustomerAddress()->get;
+        $shippingAddress = $this->session->getQuote()->getShippingAddress()->convertToArray();
 
         $this->logger->info('billing : '. json_encode($billingAddress, JSON_PRETTY_PRINT));
         $this->logger->info('shipping : '. json_encode($shippingAddress, JSON_PRETTY_PRINT));
+        $this->logger->info('email : '. json_encode($this->session->getQuote()->getCustomerEmail(), JSON_PRETTY_PRINT));
 
 //        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
 //

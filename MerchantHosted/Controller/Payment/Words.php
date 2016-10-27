@@ -39,7 +39,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
         try{
 
             $invoice_no = 'mage2_'. $this->config->getMallId() . $this->session->getQuoteId() . $_GET['_'];
-            $amount = number_format($this->session->getQuote()->getBaseGrandTotal(), 2);
+            $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');
             $currency = '360';
             $params = array(
                 'amount' => $amount,
@@ -47,8 +47,10 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                 'currency' => $currency
             );
 
+            $getItems = $this->cart->getSectionData()['items'];
+
             $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('section : '. json_encode($this->cart->getSectionData(), JSON_PRETTY_PRINT));
+            $this->logger->info('items : '. json_encode($getItems, JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);
             $arr = array(

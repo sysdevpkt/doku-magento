@@ -46,7 +46,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                 'invoice' => $invoice_no,
                 'currency' => $currency
             );
-
+            $words = $this->doCreateWords($params);
             $getItems = $this->cart->getSectionData()['items'];
             $basket = '';
 
@@ -55,7 +55,6 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                     ($getItem['product_price_value'] * $getItem['qty']) .';';
             }
 
-            $words = $this->doCreateWords($params);
             $arr = array(
                 'err' => false,
                 'msg' => 'Create words success',

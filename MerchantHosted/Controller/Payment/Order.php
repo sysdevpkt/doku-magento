@@ -2,20 +2,28 @@
 
 namespace Doku\MerchantHosted\Controller\Payment;
 
-use Doku\MerchantHosted\Model\Oco;
+use \Psr\Log\LoggerInterface;
+use \Magento\Framework\App\Action\Context;
+use Doku\MerchantHosted\Model\DokuConfigProvider;
+use Magento\Checkout\Model\Session;
 
-class Order extends \Magento\Framework\App\Action\Action{
+class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
-    protected $logger;
+    protected $session;
 
     public function __construct(
-        \Psr\Log\LoggerInterface $logger, //log injection
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        LoggerInterface $logger, //log injection
+        Context $context,
+        DokuConfigProvider $config,
+        Session $session
     ) {
-        $this->logger = $logger;
-        parent::__construct($context);
-        $this->resultPageFactory = $resultPageFactory;
+        parent::__construct(
+            $logger,
+            $context,
+            $config
+        );
+
+        $this->session = $session;
     }
 
     public function execute(){
@@ -25,36 +33,47 @@ class Order extends \Magento\Framework\App\Action\Action{
         $postData = json_decode($_POST['dataResponse']);
         $postObj = json_decode($_POST['dataObj']);
 
+        $this->logger->info('get : '. json_encode($_GET, JSON_PRETTY_PRINT));
         $this->logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
         $this->logger->info('postobj : '. json_encode($postObj, JSON_PRETTY_PRINT));
 
-        $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . $postData->res_invoice_no . '360' . $postData->res_token_id . $postData->res_pairing_code);
-
-        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
-
-        $basket = "adidas, 10000.00, 1, 10000.00;";
-
-        $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
-
-        $customer = array(
-            'name' => 'TEST NAME',
-            'data_phone' => '08121111111',
-            'data_email' => 'test@test.com',
-            'data_address' => 'bojong gede #1 08/01'
+        $params = array(
+            'amount' => $postData->res_amount,
+            'invoice' => $postData->res_invoice_no,
+            'currency' => $postData->res_currency,
+            'token' => $postData->res_token_id,
+            'pairing_code' => $postData->res_pairing_code
         );
 
-        $this->_logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
+        $words = $this->doCreateWords($params);
 
-        $data = array(
-            'req_token_id' => $postData->res_token_id,
-            'req_pairing_code' => $postData->res_pairing_code,
-            'req_bin_filter' => array("411111", "548117", "433???6", "41*3"),
-            'req_customer' => $customer,
-            'req_basket' => $basket,
-            'req_words' => $words
-        );
+        $this->logger('billing : '. json_encode($this->session->getQuote()->getBillingAddress()->convertToArray(), JSON_PRETTY_PRINT));
 
-        echo json_encode(array('err' => false, 'msg' => 'Payment Success', 'res_response_code' => '0000'));
+//        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
+//
+//        $basket = "adidas, 10000.00, 1, 10000.00;";
+//
+//        $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
+//
+//        $customer = array(
+//            'name' => 'TEST NAME',
+//            'data_phone' => '08121111111',
+//            'data_email' => 'test@test.com',
+//            'data_address' => 'bojong gede #1 08/01'
+//        );
+//
+//        $this->logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
+//
+//        $data = array(
+//            'req_token_id' => $postData->res_token_id,
+//            'req_pairing_code' => $postData->res_pairing_code,
+//            'req_bin_filter' => array("411111", "548117", "433???6", "41*3"),
+//            'req_customer' => $customer,
+//            'req_basket' => $basket,
+//            'req_words' => $words
+//        );
+
+//        echo json_encode(array('err' => false, 'msg' => 'Payment Success', 'res_response_code' => '0000'));
 
 
 //        $ch = curl_init( 'https://staging.doku.com/api/payment/PrePayment' );
@@ -70,7 +89,7 @@ class Order extends \Magento\Framework\App\Action\Action{
 //
 //        $responsePrePayment = json_decode($responseJson);
 //
-//        $this->_logger->info('response prepayment = '. json_encode($responsePrePayment, JSON_PRETTY_PRINT));
+//        $this->logger->info('response prepayment = '. json_encode($responsePrePayment, JSON_PRETTY_PRINT));
 
 //        if($responsePrePayment->res_response_code == '0000'){
 //
@@ -112,7 +131,7 @@ class Order extends \Magento\Framework\App\Action\Action{
 //                $responsePayment = $responseJsonPayment;
 //            }
 //
-//            $this->_logger->info('response payment = '. json_encode($responsePayment, JSON_PRETTY_PRINT));
+//            $this->logger->info('response payment = '. json_encode($responsePayment, JSON_PRETTY_PRINT));
 //
 //            if($responsePayment->res_response_code == '0000'){
 //

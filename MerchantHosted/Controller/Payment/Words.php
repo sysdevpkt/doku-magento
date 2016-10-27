@@ -48,9 +48,15 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             );
 
             $getItems = $this->cart->getSectionData()['items'];
+            $basket = '';
+
+            foreach ($getItems as $getItem) {
+                $basket .= $getItem['product_name'] .','. $getItem['product_price_value'] .','. $getItem['qty'] .','.
+                    ($getItem['product_price_value'] * $getItem['qty']) .';';
+            }
 
             $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('items : '. json_encode($getItems, JSON_PRETTY_PRINT));
+            $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);
             $arr = array(

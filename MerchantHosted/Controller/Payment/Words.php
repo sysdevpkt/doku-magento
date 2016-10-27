@@ -48,7 +48,6 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             );
 
             $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('session : '. json_encode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
             $this->logger->info('section : '. json_encode($this->cart->getSectionData(), JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);

@@ -31,7 +31,6 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             $logger,
             $context,
             $config
-
         );
 
         $this->session = $session;
@@ -60,10 +59,10 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             $this->logger->info('session : '. json_encode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
             $this->logger->info('cart : '. json_encode($this->cart->getItems(), JSON_PRETTY_PRINT));
             $this->logger->info('cart : '. json_encode($this->cart->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
-            $this->logger->info('total : '. json_encode($this->totals->getItems()), JSON_PRETTY_PRINT));
-            $this->logger->info('total : '. json_encode($this->totals->toArray()), JSON_PRETTY_PRINT));
-            $this->logger->info('carts : '. json_encode($this->carts->getCart()->convertToArray()), JSON_PRETTY_PRINT));
-            $this->logger->info('carts : '. json_encode($this->carts->getQuote()->convertToArray()), JSON_PRETTY_PRINT));
+            $this->logger->info('total : '. json_encode($this->totals->getItems(), JSON_PRETTY_PRINT));
+            $this->logger->info('total : '. json_encode($this->totals->toArray(), JSON_PRETTY_PRINT));
+            $this->logger->info('carts : '. json_encode($this->carts->getCart()->convertToArray(), JSON_PRETTY_PRINT));
+            $this->logger->info('carts : '. json_encode($this->carts->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
 
             $words = $this->doCreateWords($params);
             $arr = array(

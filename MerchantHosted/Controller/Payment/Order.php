@@ -46,11 +46,8 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
         $words = $this->doCreateWords($params);
         $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
-        $shippingAddress = $this->session->getQuote()->getShippingAddress()->convertToArray();
 
         $this->logger->info('billing : '. json_encode($billingAddress, JSON_PRETTY_PRINT));
-        $this->logger->info('shipping : '. json_encode($shippingAddress, JSON_PRETTY_PRINT));
-        $this->logger->info('email : '. json_encode($this->session->getQuote()->getCustomerEmail(), JSON_PRETTY_PRINT));
 
 //        $this->logger->info('$words : '. json_encode($words, JSON_PRETTY_PRINT));
 //
@@ -64,6 +61,8 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
             'data_email' => 'test@test.com',
             'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
         );
+
+        $this->logger->info('customer : '. json_encode($customer, JSON_PRETTY_PRINT));
 //
 //        $this->logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
 //

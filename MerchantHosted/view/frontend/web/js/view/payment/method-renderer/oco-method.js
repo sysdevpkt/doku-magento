@@ -6,9 +6,10 @@ define(
         'Magento_Checkout/js/view/payment/default',
         'jquery',
         'mage/url',
-        'Magento_Ui/js/modal/alert'
+        'Magento_Ui/js/modal/alert',
+        'Magento_Checkout/js/checkout-data'
     ],
-    function (Component, $, url, alert) {
+    function (Component, $, url, alert, checkout) {
         'use strict';
 
 
@@ -35,6 +36,9 @@ define(
                 var data = new Object();
 
                 console.log(window.checkoutConfig);
+                console.log(checkout);
+                console.log(checkout.getValidatedEmailValue());
+                console.log(checkout.getInputFieldEmailValue());
 
                 $.ajax({
                     type: 'GET',

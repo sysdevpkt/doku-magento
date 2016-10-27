@@ -44,20 +44,69 @@ define(
                      */
                     success: function (response) {
                         var obj = $.parseJSON(response);
-                        console.log(obj);
                         if(obj.err == false){
 
-                            //data.req_merchant_code = self.getMallId(); //mall id or merchant id
-                            //data.req_chain_merchant = obj.chain_merchant; //chain merchant id
-                            //data.req_payment_channel = obj.payment_channel; //payment channel
-                            //data.req_basket = '';
-                            //data.req_transaction_id = 'invoice_1477315453'; //invoice no
-                            //data.req_amount = '10000.00';
-                            //data.req_currency = '360'; //360 for IDR
-                            //data.req_words = '1978b2bbb9a66a70fbe0c39711867b28e8fd19a0'; //your merchant unique key
-                            //data.req_session_id = '1477315462015'; //your server timestamp
-                            //data.req_form_type = 'inline';
-                            //data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+                            data.req_merchant_code = self.getMallId(); //mall id or merchant id
+                            data.req_chain_merchant = obj.chain_merchant; //chain merchant id
+                            data.req_payment_channel = obj.payment_channel; //payment channel
+                            data.req_basket = obj.basket;
+                            data.req_transaction_id = obj.invoice_no; //invoice no
+                            data.req_amount = obj.amount;
+                            data.req_currency = obj.currency; //360 for IDR
+                            data.req_words = obj.words; //your merchant unique key
+                            data.req_session_id = obj.session_id; //your server timestamp
+                            data.req_form_type = obj.form_type;
+                            data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+
+                            getForm(data);
+
+                            window.getToken = function (response){
+
+                                if (response != undefined && response != 'undefined') {
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: url.build('doku/payment/order'),
+                                        data: {dataResponse: JSON.stringify(response), dataObj: obj},
+
+                                        /**
+                                         * Success callback
+                                         * @param {Object} response
+                                         */
+                                        success: function (response) {
+                                            var obj = $.parseJSON(response);
+
+                                            if(obj.err == false){
+                                                self.placeOrder();
+                                            }else{
+                                                alert({
+                                                    title: 'Payment error!',
+                                                    content: obj.msg + '<br>Please retry payment',
+                                                    actions: {
+                                                        always: function(){}
+                                                    }
+                                                });
+                                            }
+
+                                        },
+
+                                        /**
+                                         * Error callback
+                                         * @param {*} response
+                                         */
+                                        error: function (xhr, status, error) {
+                                            alert({
+                                                title: 'Payment Error!',
+                                                content: 'Please retry payment',
+                                                actions: {
+                                                    always: function(){}
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+
+                            }
 
                         }else{
                             alert({
@@ -80,57 +129,6 @@ define(
                         });
                     }
                 });
-
-                data.req_merchant_code = '2074'; //mall id or merchant id
-                data.req_chain_merchant = 'NA'; //chain merchant id
-                data.req_payment_channel = '15'; //payment channel
-                data.req_basket = '';
-                data.req_transaction_id = 'invoice_1477315453'; //invoice no
-                data.req_amount = '10000.00';
-                data.req_currency = '360'; //360 for IDR
-                data.req_words = '1978b2bbb9a66a70fbe0c39711867b28e8fd19a0'; //your merchant unique key
-                data.req_session_id = '1477315462015'; //your server timestamp
-                data.req_form_type = 'inline';
-                data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
-
-                // getForm(data);
-
-                window.getToken = function (response){
-
-                    if (response != undefined && response != 'undefined') {
-
-                        $.ajax({
-                            type: 'POST',
-                            url: url.build('doku/payment/order'),
-                            data: {dataResponse: JSON.stringify(response)},
-
-                            /**
-                             * Success callback
-                             * @param {Object} response
-                             */
-                            success: function (response) {
-                                var obj = $.parseJSON(response);
-
-                                if(obj.err == false){
-                                    self.placeOrder();
-                                }else{
-                                    console.log('process failed');
-                                    console.log(response);
-                                }
-
-                            },
-
-                            /**
-                             * Error callback
-                             * @param {*} response
-                             */
-                            error: function (response) {
-                                console.log('error');
-                            }
-                        });
-                    }
-
-                }
 
                 return true;
 

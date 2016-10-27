@@ -21,8 +21,10 @@ class Order extends \Magento\Framework\App\Action\Action{
     public function execute(){
 
         $postData = json_decode($_POST['dataResponse']);
+        $postObj = json_decode($_POST['dataObj']);
 
         $this->_logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
+        $this->_logger->info('postobj : '. json_encode($postObj, JSON_PRETTY_PRINT));
 
         $words = sha1('10000.00' . '2074' . 'D0Ku123m3Rc' . $postData->res_invoice_no . '360' . $postData->res_token_id . $postData->res_pairing_code);
 
@@ -50,22 +52,23 @@ class Order extends \Magento\Framework\App\Action\Action{
             'req_words' => $words
         );
 
-        $ch = curl_init( 'https://staging.doku.com/api/payment/PrePayment' );
-        curl_setopt( $ch, CURLOPT_POST, 1);
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
-        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt( $ch, CURLOPT_HEADER, 0);
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+        echo json_encode(array('err' => false, 'msg' => 'Payment Success', 'res_response_code' => '0000'));
 
-        $responseJson = curl_exec( $ch );
 
-        curl_close($ch);
-
-        $responsePrePayment = json_decode($responseJson);
-
-        $this->_logger->info('response prepayment = '. json_encode($responsePrePayment, JSON_PRETTY_PRINT));
-
-        echo json_encode(array('err' => false, 'res_response_msg' => 'Payment Success', 'res_response_code' => '0000'));
+//        $ch = curl_init( 'https://staging.doku.com/api/payment/PrePayment' );
+//        curl_setopt( $ch, CURLOPT_POST, 1);
+//        curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
+//        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+//        curl_setopt( $ch, CURLOPT_HEADER, 0);
+//        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+//
+//        $responseJson = curl_exec( $ch );
+//
+//        curl_close($ch);
+//
+//        $responsePrePayment = json_decode($responseJson);
+//
+//        $this->_logger->info('response prepayment = '. json_encode($responsePrePayment, JSON_PRETTY_PRINT));
 
 //        if($responsePrePayment->res_response_code == '0000'){
 //

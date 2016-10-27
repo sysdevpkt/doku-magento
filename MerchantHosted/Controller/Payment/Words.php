@@ -55,9 +55,6 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                     ($getItem['product_price_value'] * $getItem['qty']) .';';
             }
 
-            $this->logger->info('params : '. json_encode($params, JSON_PRETTY_PRINT));
-            $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
-
             $words = $this->doCreateWords($params);
             $arr = array(
                 'err' => false,
@@ -68,7 +65,9 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                 'currency' => $currency,
                 'payment_channel' => '15',
                 'form_type' => 'inline',
-                'chain_merchant' => 'NA'
+                'chain_merchant' => 'NA',
+                'basket' => $basket,
+                'amount' => $amount
             );
 
         }catch(\Exception $e){

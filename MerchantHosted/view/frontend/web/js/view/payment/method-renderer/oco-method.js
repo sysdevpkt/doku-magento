@@ -23,7 +23,7 @@ define(
             },
 
             getMailingAddress: function() {
-                return window.isCustomerLoggedIn ? window.customerData.email : checkoutData.getValidatedEmailValue();
+                return window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue();
             },
 
             dokuToken: function(){
@@ -34,12 +34,7 @@ define(
                 var self = this,
                     placeOrder;
                 var data = new Object();
-
-                console.log(window.checkoutConfig);
-                console.log(checkout);
-                console.log(checkout.getValidatedEmailValue());
-                console.log(checkout.getInputFieldEmailValue());
-
+                
                 $.ajax({
                     type: 'GET',
                     url: url.build('doku/payment/words'),

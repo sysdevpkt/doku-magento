@@ -23,7 +23,7 @@ define(
             },
 
             getMailingAddress: function() {
-                return window.checkoutConfig.payment.checkmo.mailingAddress;
+                return window.isCustomerLoggedIn ? window.customerData.email : checkoutData.getValidatedEmailValue();
             },
 
             dokuToken: function(){
@@ -75,7 +75,7 @@ define(
                                     $.ajax({
                                         type: 'POST',
                                         url: url.build('doku/payment/order'),
-                                        data: {dataResponse: JSON.stringify(response), dataObj: JSON.stringify(obj)},
+                                        data: {dataResponse: JSON.stringify(response), dataBasket: obj.basket, dataEmail: self.getMailingAddress()},
 
                                         /**
                                          * Success callback

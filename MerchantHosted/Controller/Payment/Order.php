@@ -34,9 +34,6 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
         $postBasket = json_decode($_POST['dataBasket']);
         $postEmail = $_POST['dataEmail'];
 
-        $this->logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
-        $this->logger->info('postobj : '. json_encode($postBasket, JSON_PRETTY_PRINT));
-
         $params = array(
             'amount' => $postData->res_amount,
             'invoice' => $postData->res_invoice_no,
@@ -47,8 +44,6 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
         $words = $this->doCreateWords($params);
         $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
-
-        $this->logger->info('billing : '. json_encode($billingAddress, JSON_PRETTY_PRINT));
 
         $customer = array(
             'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],

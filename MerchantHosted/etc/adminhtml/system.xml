@@ -17,10 +17,6 @@
                 <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
-                <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>New Order Status</label>
-                    <source_model>Doku\MerchantHosted\Model\Config\Source\Order\Status\Processing</source_model>
-                </field>
                 <field id="mall_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Mall ID / Merchant ID</label>
                     <comment>**Required**</comment>
@@ -30,6 +26,14 @@
                     <label>Shared Key</label>
                     <comment>**Required**</comment>
                     <config_path>payment/oco/shared_key</config_path>
+                </field>
+                <field id="is_token" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use Tokenization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>New Order Status</label>
+                    <source_model>Doku\MerchantHosted\Model\Config\Source\Order\Status\Processing</source_model>
                 </field>
                 <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Payment from Applicable Countries</label>

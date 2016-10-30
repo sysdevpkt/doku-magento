@@ -15,7 +15,15 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Doku_MerchantHosted/payment/oco'
+                template: 'Doku_MerchantHosted/payment/oco',
+                setWindow: false
+            },
+
+            initObservable: function(){
+                if(!this.setWindow){
+                    window.getToken = this.getToken();
+                    this.setWindow = true;
+                }
             },
 
             getMallId: function(){
@@ -63,55 +71,55 @@ define(
 
                             getForm(data);
 
-                            window.getToken = function (response){
+                            // window.getToken = function (response){
 
-                                if (response != undefined && response != 'undefined') {
+                            //     if (response != undefined && response != 'undefined') {
 
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: url.build('doku/payment/order'),
-                                        data: {dataResponse: JSON.stringify(response), dataBasket: obj.basket, dataEmail: self.getMailingAddress()},
+                            //         $.ajax({
+                            //             type: 'POST',
+                            //             url: url.build('doku/payment/order'),
+                            //             data: {dataResponse: JSON.stringify(response), dataBasket: obj.basket, dataEmail: self.getMailingAddress()},
 
-                                        /**
-                                         * Success callback
-                                         * @param {Object} response
-                                         */
-                                        success: function (response) {
-                                            var obj = $.parseJSON(response);
-                                            console.log('success');
-                                            console.log(obj);
+                            //             /**
+                            //              * Success callback
+                            //              * @param {Object} response
+                            //              */
+                            //             success: function (response) {
+                            //                 var obj = $.parseJSON(response);
+                            //                 console.log('success');
+                            //                 console.log(obj);
 
-                                            if(obj.err == false){
-                                                self.placeOrder();
-                                            }else{
-                                                alert({
-                                                    title: 'Payment error!',
-                                                    content: obj.msg + '<br>Please retry payment',
-                                                    actions: {
-                                                        always: function(){}
-                                                    }
-                                                });
-                                            }
+                            //                 if(obj.err == false){
+                            //                     self.placeOrder();
+                            //                 }else{
+                            //                     alert({
+                            //                         title: 'Payment error!',
+                            //                         content: obj.msg + '<br>Please retry payment',
+                            //                         actions: {
+                            //                             always: function(){}
+                            //                         }
+                            //                     });
+                            //                 }
 
-                                        },
+                            //             },
 
-                                        /**
-                                         * Error callback
-                                         * @param {*} response
-                                         */
-                                        error: function (xhr, status, error) {
-                                            alert({
-                                                title: 'Payment Error!',
-                                                content: 'Please retry payment',
-                                                actions: {
-                                                    always: function(){}
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
+                            //             /**
+                            //              * Error callback
+                            //              * @param {*} response
+                            //              */
+                            //             error: function (xhr, status, error) {
+                            //                 alert({
+                            //                     title: 'Payment Error!',
+                            //                     content: 'Please retry payment',
+                            //                     actions: {
+                            //                         always: function(){}
+                            //                     }
+                            //                 });
+                            //             }
+                            //         });
+                            //     }
 
-                            }
+                            // }
 
                         }else{
                             alert({
@@ -137,6 +145,54 @@ define(
 
                 return true;
 
+            },
+
+            getToken: function(response){
+                if (response != undefined && response != 'undefined') {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url.build('doku/payment/order'),
+                        data: {dataResponse: JSON.stringify(response), dataBasket: obj.basket, dataEmail: self.getMailingAddress()},
+
+                        /**
+                         * Success callback
+                         * @param {Object} response
+                         */
+                        success: function (response) {
+                            var obj = $.parseJSON(response);
+                            console.log('success');
+                            console.log(obj);
+
+                            if(obj.err == false){
+                                self.placeOrder();
+                            }else{
+                                alert({
+                                    title: 'Payment error!',
+                                    content: obj.msg + '<br>Please retry payment',
+                                    actions: {
+                                        always: function(){}
+                                    }
+                                });
+                            }
+
+                        },
+
+                        /**
+                         * Error callback
+                         * @param {*} response
+                         */
+                        error: function (xhr, status, error) {
+                            alert({
+                                title: 'Payment Error!',
+                                content: 'Please retry payment',
+                                actions: {
+                                    always: function(){}
+                                }
+                            });
+                        }
+                    });
+                }
             }
            
         });

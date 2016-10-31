@@ -1,10 +1,10 @@
 <?php
-namespace Companyname\Modulename\Model\Config\Source;
+namespace Doku\MerchantHosted\Model\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;
 use Magento\Catalog\Helper\Category;
 
-class Categorylist implements ArrayInterface{
+class PaymentChannel implements ArrayInterface{
 
     protected $categoryHelper;
 

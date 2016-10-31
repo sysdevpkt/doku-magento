@@ -13,10 +13,6 @@ define(
     function (Component, $, url, alert, checkout, ko) {
         'use strict';
 
-        ko.applyBindings({
-            months: [ 'Jan', 'Feb', 'Mar', 'etc' ]
-        });
-
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',

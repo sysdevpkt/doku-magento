@@ -30,7 +30,7 @@ define(
 
                     ko.applyBindings({
                         paymentChannels: window.checkoutConfig.payment.oco.payment_channels
-                    }, $("#select_pcs"));
+                    });
 
                     this.setWindow = true;
                 }

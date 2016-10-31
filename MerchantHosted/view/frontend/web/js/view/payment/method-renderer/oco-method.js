@@ -24,6 +24,8 @@ define(
                     window.getToken = this.getToken();
                     this.setWindow = true;
                 }
+
+                return this;
             },
 
             getMallId: function(){

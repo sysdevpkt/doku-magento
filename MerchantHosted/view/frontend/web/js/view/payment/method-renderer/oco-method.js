@@ -24,6 +24,8 @@ define(
             });
         }
 
+        ko.applyBindings(new ViewModel());
+
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',

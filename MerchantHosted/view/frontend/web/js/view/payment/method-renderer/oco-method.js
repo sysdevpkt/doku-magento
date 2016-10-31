@@ -7,15 +7,10 @@ define(
         'jquery',
         'mage/url',
         'Magento_Ui/js/modal/alert',
-        'Magento_Checkout/js/checkout-data',
-        'ko'
+        'Magento_Checkout/js/checkout-data'
     ],
     function (Component, $, url, alert, checkout, ko) {
         'use strict';
-
-        ko.applyBindings({
-            testingbindingmudepz: window.checkoutConfig.payment.oco.payment_channels
-        });
 
         return Component.extend({
             defaults: {
@@ -47,6 +42,13 @@ define(
 
             getMailingAddress: function() {
                 return window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue();
+            },
+
+            populatePcs: function(){
+                console.log(this.getPaymentChannels());
+                //$.each( obj, function( key, value ) {
+                //    alert( key + ": " + value );
+                //});
             },
 
             dokuToken: function(){

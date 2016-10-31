@@ -3,7 +3,7 @@
 namespace Doku\MerchantHosted\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-use \Magento\Framework\App\Config\ScopeConfigInterface
+use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Psr\Log\LoggerInterface;
 
 class DokuConfigProvider implements ConfigProviderInterface

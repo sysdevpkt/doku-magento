@@ -46,9 +46,11 @@ define(
 
             populatePcs: function(){
                 console.log(this.getPaymentChannels());
-                //$.each( obj, function( key, value ) {
-                //    alert( key + ": " + value );
-                //});
+                $.each( this.getPaymentChannels(), function( key, value ) {
+                    $("#payment_channels").append(
+                        "<option value='"+ value[0] +"'>"+ value[1] +"</option>"
+                    );
+                });
             },
 
             dokuToken: function(){

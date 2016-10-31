@@ -32,6 +32,13 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface{
 				'Customer Id'
 				)
 			->addColumn(
+				'card_no',
+				Table::TYPE_TEXT,
+				50,
+				['nullable' => false],
+				'Card Number'
+			)
+			->addColumn(
 				'token',
 				Table::TYPE_TEXT,
 				255,

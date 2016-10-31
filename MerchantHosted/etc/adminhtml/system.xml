@@ -29,11 +29,16 @@
                 </field>
                 <field id="is_token" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Use Tokenization</label>
+                    <comment>*Credit Card only</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>New Order Status</label>
                     <source_model>Doku\MerchantHosted\Model\Config\Source\Order\Status\Processing</source_model>
+                </field>
+                <field id="payment_channel" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Payment Channel</label>
+                    <source_model>Doku\MerchantHosted\Model\Config\Source\PaymentChannel</source_model>
                 </field>
                 <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Payment from Applicable Countries</label>

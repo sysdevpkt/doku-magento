@@ -12,7 +12,7 @@ define(
     function (Component, $, url, alert, checkout) {
         'use strict';
 
-        console.log($.parseJSON(window.checkoutConfig.payment.oco.payment_channels));
+        console.log(window.checkoutConfig.payment.oco.payment_channels);
 
         return Component.extend({
             defaults: {

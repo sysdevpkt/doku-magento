@@ -31,7 +31,7 @@ class DokuConfigProvider implements ConfigProviderInterface
 
     public function getPaymentChannels()
     {
-        return json_encode($this->scopeConfig->getValue('payment/oco/'. self::payment_channels, \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        return $this->scopeConfig->getValue('payment/oco/'. self::payment_channels, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getConfig()

@@ -16,7 +16,8 @@ define(
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
-                setWindow: false
+                setWindow: false,
+                basket: ''
             },
 
             initObservable: function(){
@@ -45,23 +46,18 @@ define(
             },
 
             getDokuForm: function(){
-                var self = this,
-                    placeOrder;
+                var self = this;
                 var data = new Object();
                 
                 $.ajax({
                     type: 'GET',
                     url: url.build('doku/payment/words'),
 
-                    /**
-                     * Success callback
-                     * @param {Object} response
-                     */
                     success: function (response) {
                         var obj = $.parseJSON(response);
-                        console.log('success');
-                        console.log(obj);
                         if(obj.err == false){
+
+                            self.basket = obj.basket;
 
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id
                             data.req_chain_merchant = obj.chain_merchant; //chain merchant id
@@ -76,56 +72,6 @@ define(
                             data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
 
                             getForm(data);
-
-                            // window.getToken = function (response){
-
-                            //     if (response != undefined && response != 'undefined') {
-
-                            //         $.ajax({
-                            //             type: 'POST',
-                            //             url: url.build('doku/payment/order'),
-                            //             data: {dataResponse: JSON.stringify(response), dataBasket: obj.basket, dataEmail: self.getMailingAddress()},
-
-                            //             /**
-                            //              * Success callback
-                            //              * @param {Object} response
-                            //              */
-                            //             success: function (response) {
-                            //                 var obj = $.parseJSON(response);
-                            //                 console.log('success');
-                            //                 console.log(obj);
-
-                            //                 if(obj.err == false){
-                            //                     self.placeOrder();
-                            //                 }else{
-                            //                     alert({
-                            //                         title: 'Payment error!',
-                            //                         content: obj.msg + '<br>Please retry payment',
-                            //                         actions: {
-                            //                             always: function(){}
-                            //                         }
-                            //                     });
-                            //                 }
-
-                            //             },
-
-                            //             /**
-                            //              * Error callback
-                            //              * @param {*} response
-                            //              */
-                            //             error: function (xhr, status, error) {
-                            //                 alert({
-                            //                     title: 'Payment Error!',
-                            //                     content: 'Please retry payment',
-                            //                     actions: {
-                            //                         always: function(){}
-                            //                     }
-                            //                 });
-                            //             }
-                            //         });
-                            //     }
-
-                            // }
 
                         }else{
                             alert({
@@ -155,20 +101,15 @@ define(
 
             getToken: function(response){
                 if (response != undefined && response != 'undefined') {
+                    var self = this;
 
                     $.ajax({
                         type: 'POST',
                         url: url.build('doku/payment/order'),
-                        data: {dataResponse: JSON.stringify(response), dataBasket: obj.basket, dataEmail: self.getMailingAddress()},
+                        data: {dataResponse: JSON.stringify(response), dataBasket: self.basket, dataEmail: self.getMailingAddress()},
 
-                        /**
-                         * Success callback
-                         * @param {Object} response
-                         */
                         success: function (response) {
                             var obj = $.parseJSON(response);
-                            console.log('success');
-                            console.log(obj);
 
                             if(obj.err == false){
                                 self.placeOrder();
@@ -183,11 +124,6 @@ define(
                             }
 
                         },
-
-                        /**
-                         * Error callback
-                         * @param {*} response
-                         */
                         error: function (xhr, status, error) {
                             alert({
                                 title: 'Payment Error!',

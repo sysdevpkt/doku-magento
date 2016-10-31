@@ -20,8 +20,10 @@ define(
             },
 
             initObservable: function(){
+                var self = this;
+
                 if(!this.setWindow){
-                    window.getToken = this.getToken();
+                    window.getToken = self.getToken();
                     this.setWindow = true;
                 }
 

@@ -28,10 +28,6 @@ define(
                         self.getToken(response);
                     };
 
-                    ko.applyBindings({
-                        paymentChannels: window.checkoutConfig.payment.oco.payment_channels
-                    });
-
                     this.setWindow = true;
                 }
 

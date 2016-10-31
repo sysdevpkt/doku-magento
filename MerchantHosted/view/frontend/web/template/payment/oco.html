@@ -18,16 +18,9 @@
                 <label for="payment_channels" class="label" id="cc-label"><span>Please select payment channel</span></label>
                 <select class="select" id="payment_channels">
                     <option value="">&nbsp;</option>
-
                 </select>
             </div>
         </fieldset>
-        <ul data-bind="foreach: months">
-            <li>
-                The current item is: <b data-bind="text: $data"></b>
-            </li>
-        </ul>
-
         <div doku-div="form-payment">
             <fieldset class="fieldset address" data-bind="visible: getDokuForm()" style="margin: 0 0 10px; max-width: 500px; display: none;">
                 <div id="cc-field" class="field _required">
@@ -82,9 +75,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    ko.applyBindings({
-        months: [ 'Jan', 'Feb', 'Mar', 'etc' ]
-    });
-</script>
-        

@@ -13,6 +13,14 @@ define(
     function (Component, $, url, alert, checkout, ko) {
         'use strict';
 
+        ko.bindingHandlers.customBinding = {
+            init: function (element, valueAccesor) {
+                console.log('I am a custom binding.');
+                console.log(element);
+                console.log(valueAccesor);
+            }
+        };
+
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',

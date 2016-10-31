@@ -8,7 +8,7 @@
                 <mall_id>Mall ID</mall_id>
                 <shared_key>Shared Key</shared_key>
                 <is_token>0</is_token>
-                <payment_channels>Shared Key</payment_channels>
+                <payment_channels>0</payment_channels>
                 <order_status>processing</order_status>
                 <instructions>Instruction</instructions>
                 <payment_action>true</payment_action>

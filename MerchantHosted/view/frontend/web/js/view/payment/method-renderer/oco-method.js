@@ -20,10 +20,11 @@ define(
             },
 
             initObservable: function(){
+                var self = this;
 
                 if(!this.setWindow){
                     window.getToken = function (response){
-                        this.getToken(response);
+                        self.getToken(response);
                     };
                     this.setWindow = true;
                 }

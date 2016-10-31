@@ -40,7 +40,7 @@ class DokuConfigProvider implements ConfigProviderInterface
                 'oco' => [
                     'mall_id' => $this->getMallId(),
                     'shared_key' => $this->getSharedKey(),
-                    'payment_channel' => $this->getPaymentChannels()
+                    'payment_channels' => $this->getPaymentChannels()
                 ]
             ]
         ];

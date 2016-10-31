@@ -12,6 +12,7 @@ define(
     function (Component, $, url, alert, checkout) {
         'use strict';
 
+        console.log($.parseJSON(window.checkoutConfig.payment.oco.payment_channels));
 
         return Component.extend({
             defaults: {
@@ -35,6 +36,10 @@ define(
 
             getMallId: function(){
                 return window.checkoutConfig.payment.oco.mall_id
+            },
+
+            getPaymentChannels: function(){
+                return $.parseJSON(window.checkoutConfig.payment.oco.payment_channels);
             },
 
             getMailingAddress: function() {

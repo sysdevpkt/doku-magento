@@ -13,13 +13,9 @@ define(
     function (Component, $, url, alert, checkout, ko) {
         'use strict';
 
-        ko.bindingHandlers.customBinding = {
-            init: function (element, valueAccesor) {
-                console.log('I am a custom binding.');
-                console.log(element);
-                console.log(valueAccesor);
-            }
-        };
+        ko.applyBindings({
+            testingbindingmudepz: window.checkoutConfig.payment.oco.payment_channels
+        });
 
         return Component.extend({
             defaults: {

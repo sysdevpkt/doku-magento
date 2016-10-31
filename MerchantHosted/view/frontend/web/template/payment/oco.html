@@ -18,6 +18,9 @@
                 <label for="payment_channels" class="label" id="cc-label"><span>CC</span></label>
                 <select class="select">
                     <option value="">&nbsp;</option>
+                    <!-- ko foreach: paymentChannels -->
+                    <option data-bind="value: $data[0], text: $data[1]">&nbsp;</option>
+                    <!-- /ko -->
                 </select>
             </div>
         </fieldset>

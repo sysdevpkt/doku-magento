@@ -7,8 +7,9 @@ use Magento\Checkout\Model\ConfigProviderInterface;
 class DokuConfigProvider implements ConfigProviderInterface
 {
 
-    private $mall_id = 'mall_id';
-    private $shared_key = 'shared_key';
+    const mall_id = 'mall_id';
+    const shared_key = 'shared_key';
+    const payment_channels = 'payment_channels';
 
     protected $scopeConfig;
 
@@ -20,17 +21,17 @@ class DokuConfigProvider implements ConfigProviderInterface
 
     public function getMallId()
     {
-        return $this->scopeConfig->getValue('payment/oco/'. $this->mall_id, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/oco/'. self::mall_id, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getSharedKey()
     {
-        return $this->scopeConfig->getValue('payment/oco/'. $this->shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/oco/'. self::shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getPaymentChannels()
     {
-        return json_encode($this->scopeConfig->getValue('payment/oco/'. $this->shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        return json_encode($this->scopeConfig->getValue('payment/oco/'. self::payment_channels, \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
     }
 
     public function getConfig()

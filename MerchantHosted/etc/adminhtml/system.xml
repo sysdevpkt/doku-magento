@@ -36,7 +36,7 @@
                     <label>New Order Status</label>
                     <source_model>Doku\MerchantHosted\Model\Config\Source\Order\Status\Processing</source_model>
                 </field>
-                <field id="payment_channel" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="payment_channels" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select Payment Channel</label>
                     <source_model>Doku\MerchantHosted\Model\Config\Source\PaymentChannel</source_model>
                 </field>

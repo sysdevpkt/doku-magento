@@ -7,12 +7,16 @@ define(
         'jquery',
         'mage/url',
         'Magento_Ui/js/modal/alert',
-        'Magento_Checkout/js/checkout-data'
+        'Magento_Checkout/js/checkout-data',
+        'ko'
     ],
-    function (Component, $, url, alert, checkout) {
+    function (Component, $, url, alert, checkout, ko) {
         'use strict';
 
         console.log(window.checkoutConfig.payment.oco.payment_channels);
+        //ko.applyBindings({
+        //    paymentChannels: window.checkoutConfig.payment.oco.payment_channels.split(',');
+        //});
 
         return Component.extend({
             defaults: {

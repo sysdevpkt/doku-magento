@@ -19,6 +19,18 @@ define(
                 setWindow: false
             },
 
+            initObservable: function(){
+
+                if(!this.setWindow){
+                    window.getToken = function (response){
+                        this.getToken(response);
+                    };
+                    this.setWindow = true;
+                }
+
+                return this;
+            },
+
             getMallId: function(){
                 return window.checkoutConfig.payment.oco.mall_id
             },
@@ -32,12 +44,6 @@ define(
             },
 
             getDokuForm: function(){
-
-                if(!this.setWindow){
-                    window.getToken = this.getToken();
-                    this.setWindow = true;
-                }
-
                 var self = this,
                     placeOrder;
                 var data = new Object();

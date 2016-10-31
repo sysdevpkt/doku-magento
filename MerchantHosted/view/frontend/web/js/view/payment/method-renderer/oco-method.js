@@ -13,6 +13,10 @@ define(
     function (Component, $, url, alert, checkout, ko) {
         'use strict';
 
+        ko.applyBindings({
+            paymentChannels: window.checkoutConfig.payment.oco.payment_channels
+        });
+
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
@@ -27,13 +31,6 @@ define(
                     window.getToken = function (response){
                         self.getToken(response);
                     };
-
-                    console.log(!!ko.dataFor(document.getElementById('paymentChannels')));
-
-                    ko.applyBindings({
-                        paymentChannels: window.checkoutConfig.payment.oco.payment_channels
-                    });
-
                     this.setWindow = true;
                 }
 

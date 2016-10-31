@@ -15,8 +15,8 @@
     <div class="payment-method-content">
         <fieldset class="fieldset address" style="margin: 0 0 10px; max-width: 500px;">
             <div class="field">
-                <label for="payment_channels" class="label" id="cc-label"><span>CC</span></label>
-                <select class="select" id="select_pcs">
+                <label for="payment_channels" class="label" id="cc-label"><span>Please select payment channel</span></label>
+                <select class="select" id="payment_channels">
                     <option value="">&nbsp;</option>
                     <!-- ko foreach: paymentChannels -->
                     <option data-bind="value: $data[0], text: $data[1]">&nbsp;</option>

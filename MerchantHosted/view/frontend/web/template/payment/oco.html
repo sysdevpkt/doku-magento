@@ -18,12 +18,15 @@
                 <label for="payment_channels" class="label" id="cc-label"><span>Please select payment channel</span></label>
                 <select class="select" id="payment_channels">
                     <option value="">&nbsp;</option>
-                    <!-- ko foreach: paymentChannels -->
-                    <option data-bind="value: $data[0]">&nbsp;</option>
-                    <!-- /ko -->
+
                 </select>
             </div>
         </fieldset>
+        <ul data-bind="foreach: months">
+            <li>
+                The current item is: <b data-bind="text: $data"></b>
+            </li>
+        </ul>
 
         <div doku-div="form-payment">
             <fieldset class="fieldset address" data-bind="visible: getDokuForm()" style="margin: 0 0 10px; max-width: 500px; display: none;">

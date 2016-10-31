@@ -14,7 +14,7 @@ define(
         'use strict';
 
         ko.applyBindings({
-            paymentChannels: window.checkoutConfig.payment.oco.payment_channels
+            months: [ 'Jan', 'Feb', 'Mar', 'etc' ]
         });
 
         return Component.extend({

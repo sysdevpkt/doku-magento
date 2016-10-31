@@ -28,6 +28,8 @@ define(
                         self.getToken(response);
                     };
 
+                    console.log(!!ko.dataFor(document.getElementById('paymentChannels')));
+
                     ko.applyBindings({
                         paymentChannels: window.checkoutConfig.payment.oco.payment_channels
                     });

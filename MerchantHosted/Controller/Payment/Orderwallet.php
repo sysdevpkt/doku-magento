@@ -48,7 +48,7 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
             $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
             $customer = array(
                 'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
-                'data_phone' => $billingAddress['telephone'],
+                'data_phone' => substr($billingAddress['telephone'], 0, 12),
                 'data_email' => $postData->req_email,
                 'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
             );

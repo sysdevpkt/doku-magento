@@ -48,7 +48,7 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-                loader.show;
+                loader.processStart;
                 $("fieldset[id^='form-']").hide();
 
                 if(event.target.value != '') {
@@ -60,8 +60,10 @@ define(
                     }else if(this.paymentChannel == '15'){
                         this.customForm = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                     }
+
+                    this.getDokuForm();
                 }
-                loader.hide;
+                loader.processStop;
             },
 
             dokuToken: function(){

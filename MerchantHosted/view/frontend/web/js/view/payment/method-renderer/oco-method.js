@@ -8,10 +8,7 @@ define(
         'mage/url',
         'Magento_Ui/js/modal/alert',
         'Magento_Checkout/js/checkout-data',
-        'mage/loader',
-        'mage/template',
-        'jquery/ui',
-        'mage/translate'
+        'mage/loader'
     ],
     function (Component, $, url, alert, checkout, loader) {
         'use strict';

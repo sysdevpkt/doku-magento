@@ -9,9 +9,10 @@ define(
         'Magento_Ui/js/modal/alert',
         'Magento_Checkout/js/checkout-data',
         'mage/loader',
-        'Magento_Checkout/js/action/place-order'
+        'Magento_Checkout/js/action/place-order',
+        'Magento_Checkout/js/action/redirect-on-success'
     ],
-    function (Component, $, url, alert, checkout, loader, placeOrderAction) {
+    function (Component, $, url, alert, checkout, loader, placeOrderAction, redirectOnSuccessAction) {
         'use strict';
 
         return Component.extend({
@@ -183,8 +184,9 @@ define(
                     console.log(placeOrder.responseJSON.message);
                     self.isPlaceOrderActionAllowed(true);
                 }).done(function(){
-                    self.afterPlaceOrder.bind(self)
-                    return true;
+                    console.log('success');
+                    self.afterPlaceOrder.bind(self);
+                    redirectOnSuccessAction.execute();
                 });
             }
            

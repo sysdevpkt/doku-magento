@@ -47,14 +47,14 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-                loader.show();
+                loader.processStart;
                 $("fieldset[id^='form-']").hide();
 
                 if(event.target.value != '') {
                     this.paymentChannel = event.target.value;
                     $("#form-" + this.paymentChannel).show();
                 }
-                loader.hide();
+                loader.processStop;
             },
 
             dokuToken: function(){

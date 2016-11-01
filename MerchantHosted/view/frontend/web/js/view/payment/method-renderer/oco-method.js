@@ -8,7 +8,10 @@ define(
         'mage/url',
         'Magento_Ui/js/modal/alert',
         'Magento_Checkout/js/checkout-data',
-        'mage/loader'
+        'mage/loader',
+        'mage/template',
+        'jquery/ui',
+        'mage/translate'
     ],
     function (Component, $, url, alert, checkout, loader) {
         'use strict';
@@ -48,8 +51,9 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-                loader.processStart;
+                loader.show;
                 $("fieldset[id^='form-']").hide();
+                $("[doku-div='form-payment'] :input").remove();
 
                 if(event.target.value != '') {
                     this.paymentChannel = event.target.value;
@@ -63,7 +67,7 @@ define(
 
                     this.getDokuForm();
                 }
-                loader.processStop;
+                loader.hide;
             },
 
             dokuToken: function(){

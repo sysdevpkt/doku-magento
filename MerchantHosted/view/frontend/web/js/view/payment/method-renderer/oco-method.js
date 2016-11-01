@@ -17,10 +17,7 @@ define(
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
                 setWindow: false,
-                wordsObj: new Object(),
-                paymentChannel: '',
-                customForm: [],
-                urlPayment: ''
+                dokuObj: new Object()
             },
 
             initObservable: function(){
@@ -44,25 +41,23 @@ define(
                 return $.parseJSON(window.checkoutConfig.payment.oco.payment_channels);
             },
 
-            getMailingAddress: function() {
-                return window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue();
-            },
-
             doPaymentChannel: function(data, event){
                 loader.show;
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();
 
                 if(event.target.value != '') {
-                    this.paymentChannel = event.target.value;
-                    $("#form-" + this.paymentChannel).show();
+                    this.dokuObj.req_payment_channel = event.target.value;
+                    this.dokuObj.req_email = (window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue());
 
-                    if(this.paymentChannel == '04'){
-                        this.customForm = ['username-field', 'password-field'];
-                        this.urlPayment = 'orderwallet';
-                    }else if(this.paymentChannel == '15'){
-                        this.customForm = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
-                        this.urlPayment = 'ordercc';
+                    $("#form-" + event.target.value).show();
+
+                    if(event.target.value == '04'){
+                        this.dokuObj.req_custom_form = ['username-field', 'password-field'];
+                        this.dokuObj.req_url_payment = 'orderwallet';
+                    }else if(event.target.value == '15'){
+                        this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+                        this.dokuObj.req_url_payment = 'ordercc';
                     }
 
                     this.getDokuForm();
@@ -86,12 +81,12 @@ define(
                         var obj = $.parseJSON(response);
                         if(obj.err == false){
 
-                            self.wordsObj = obj;
+                            self.dokuObj = $.extend(self.dokuObj, response);
 
                             var data = new Object();
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id
                             data.req_chain_merchant = obj.req_chain_merchant; //chain merchant id
-                            data.req_payment_channel = self.paymentChannel; //payment channel
+                            data.req_payment_channel = self.dokuObj.req_payment_channel; //payment channel
                             data.req_basket = obj.req_basket;
                             data.req_transaction_id = obj.req_invoice_no; //invoice no
                             data.req_amount = obj.req_amount;
@@ -99,7 +94,7 @@ define(
                             data.req_words = obj.req_words; //your merchant unique key
                             data.req_session_id = obj.req_session_id; //your server timestamp
                             data.req_form_type = obj.req_form_type;
-                            data.req_custom_form = self.customForm;
+                            data.req_custom_form = self.dokuObj.req_custom_form;
                             data.req_mage = true;
 
                             getForm(data);
@@ -133,12 +128,12 @@ define(
             getToken: function(response){
                 if (response != undefined && response != 'undefined') {
                     var self = this;
-                    var dataResponse = $.extend(self.wordsObj, response);
+                    this.dokuObj = $.extend(this.dokuObj, response);
 
                     $.ajax({
                         type: 'POST',
-                        url: url.build('doku/payment/'+ self.urlPayment),
-                        data: {dataResponse: JSON.stringify(dataResponse), dataEmail: self.getMailingAddress()},
+                        url: url.build('doku/payment/'+ self.dokuObj.req_url_payment),
+                        data: {dataResponse: JSON.stringify(self.dokuObj)},
                         showLoader: true,
 
                         success: function (response) {

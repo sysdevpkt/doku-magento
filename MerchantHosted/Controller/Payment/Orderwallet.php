@@ -31,7 +31,6 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
         $this->logger->info('===== Order Controller ===== Start');
 
         $postData = json_decode($_POST['dataResponse']);
-        $postEmail = $_POST['dataEmail'];
 
         $this->logger->info('$postData : '. json_encode($postData, JSON_PRETTY_PRINT));
 
@@ -48,7 +47,7 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
         $customer = array(
             'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
             'data_phone' => $billingAddress['telephone'],
-            'data_email' => $postEmail,
+            'data_email' => $postData['req_email'],
             'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
         );
 

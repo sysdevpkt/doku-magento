@@ -16,7 +16,8 @@ define(
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
                 setWindow: false,
-                basket: ''
+                basket: '',
+                paymentChannel: ''
             },
 
             initObservable: function(){
@@ -45,9 +46,12 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-                console.log('dodododood');
-                console.log(data);
-                console.log(event);
+                if(event.target.value != '') {
+                    this.paymentChannel = event.target.value;
+                    $("#form-" + this.paymentChannel).show();
+                }else{
+                    $("fieldset[id^='form-']").hide();
+                }
             },
 
             dokuToken: function(){

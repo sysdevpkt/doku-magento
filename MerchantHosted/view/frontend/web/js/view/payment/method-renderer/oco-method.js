@@ -48,7 +48,7 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-                loader.processStart();
+                loader.show;
                 $("fieldset[id^='form-']").hide();
 
                 if(event.target.value != '') {
@@ -61,7 +61,7 @@ define(
                         this.customForm = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                     }
                 }
-                loader.processStop();
+                loader.hide;
             },
 
             dokuToken: function(){

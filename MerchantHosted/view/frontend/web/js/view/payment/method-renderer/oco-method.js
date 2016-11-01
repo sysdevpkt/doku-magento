@@ -81,6 +81,7 @@ define(
                 $.ajax({
                     type: 'GET',
                     url: url.build('doku/payment/words'),
+                    showLoader: true,
 
                     success: function (response) {
                         var obj = $.parseJSON(response);
@@ -136,6 +137,7 @@ define(
                         type: 'POST',
                         url: url.build('doku/payment/order'),
                         data: {dataResponse: JSON.stringify(response), dataBasket: self.basket, dataEmail: self.getMailingAddress()},
+                        showLoader: true,
 
                         success: function (response) {
                             var obj = $.parseJSON(response);

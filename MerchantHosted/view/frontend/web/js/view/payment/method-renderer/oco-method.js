@@ -47,14 +47,12 @@ define(
 
             doPaymentChannel: function(data, event){
 
-                $("[doku-div='form-payment']").trigger('show.loader');
                 $("fieldset[id^='form-']").hide();
 
                 if(event.target.value != '') {
                     this.paymentChannel = event.target.value;
                     $("#form-" + this.paymentChannel).show();
                 }
-                $("[doku-div='form-payment']").trigger('hide.loader');
 
             },
 

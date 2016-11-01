@@ -55,6 +55,8 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                     ($getItem['product_price_value'] * $getItem['qty']) .';';
             }
 
+            $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
+
             $arr = array(
                 'err' => false,
                 'msg' => 'Create words success',

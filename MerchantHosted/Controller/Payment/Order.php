@@ -31,7 +31,7 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
         $this->logger->info('===== Order Controller ===== Start');
 
         $postData = json_decode($_POST['dataResponse']);
-        $postBasket = json_decode($_POST['dataBasket']);
+        $postBasket = $_POST['dataBasket'];
         $postEmail = $_POST['dataEmail'];
 
         $params = array(

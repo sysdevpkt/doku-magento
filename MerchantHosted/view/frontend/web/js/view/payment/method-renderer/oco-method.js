@@ -82,6 +82,8 @@ define(
 
                     success: function (response) {
                         var obj = $.parseJSON(response);
+                        console.log('getDokuForm');
+                        console.log(obj);
                         if(obj.err == false){
 
                             self.basket = obj.basket;

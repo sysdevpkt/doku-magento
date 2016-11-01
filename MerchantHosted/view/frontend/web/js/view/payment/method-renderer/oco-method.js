@@ -46,12 +46,16 @@ define(
             },
 
             doPaymentChannel: function(data, event){
+
+                $("[doku-div='form-payment']").trigger('show.loader');
+                $("fieldset[id^='form-']").hide();
+
                 if(event.target.value != '') {
                     this.paymentChannel = event.target.value;
                     $("#form-" + this.paymentChannel).show();
-                }else{
-                    $("fieldset[id^='form-']").hide();
                 }
+                $("[doku-div='form-payment']").trigger('hide.loader');
+
             },
 
             dokuToken: function(){

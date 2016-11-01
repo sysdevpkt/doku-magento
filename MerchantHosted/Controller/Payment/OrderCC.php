@@ -31,13 +31,11 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
         $this->logger->info('===== Order Controller ===== Start');
 
         $postData = json_decode($_POST['dataResponse']);
-        $postBasket = $_POST['dataBasket'];
-        $postEmail = $_POST['dataEmail'];
 
         $params = array(
-            'amount' => $postData->res_amount,
-            'invoice' => $postData->res_invoice_no,
-            'currency' => $postData->res_currency,
+            'amount' => $postData->req_amount,
+            'invoice' => $postData->req_invoice_no,
+            'currency' => $postData->req_currency,
             'token' => $postData->res_token_id,
             'pairing_code' => $postData->res_pairing_code
         );
@@ -48,7 +46,7 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
         $customer = array(
             'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
             'data_phone' => $billingAddress['telephone'],
-            'data_email' => $postEmail,
+            'data_email' => $postData->req_email,
             'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
         );
         $data = array(
@@ -56,7 +54,7 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
             'req_pairing_code' => $postData->res_pairing_code,
             'req_bin_filter' => array("411111", "548117", "433???6", "41*3"),
             'req_customer' => $customer,
-            'req_basket' => $postBasket,
+            'req_basket' => $postData->req_basket,
             'req_words' => $words
         );
 
@@ -69,16 +67,16 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
             $dataPayment = array(
                 'req_mall_id' => $this->config->getMallId(),
                 'req_chain_merchant' => "NA",
-                'req_amount' => $postData->res_amount,
+                'req_amount' => $postData->req_amount,
                 'req_words' => $words,
-                'req_purchase_amount' => $postData->res_amount,
-                'req_trans_id_merchant' => $postData->res_invoice_no,
+                'req_purchase_amount' => $postData->req_amount,
+                'req_trans_id_merchant' => $postData->req_invoice_no,
                 'req_request_date_time' => date('YmdHis'),
-                'req_currency' => $postData->res_currency,
-                'req_purchase_currency' => $postData->res_currency,
-                'req_session_id' => $postData->res_session_id,
+                'req_currency' => $postData->req_currency,
+                'req_purchase_currency' => $postData->req_currency,
+                'req_session_id' => $this->session->getSessionId(),
                 'req_name' => $customer['name'],
-                'req_payment_channel' => $postData->res_payment_channel,
+                'req_payment_channel' => $postData->req_payment_channel,
                 'req_basket' => $data['req_basket'],
                 'req_email' => $customer['data_email'],
                 'req_token_id' => $postData->res_token_id,

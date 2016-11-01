@@ -8,11 +8,9 @@ define(
         'mage/url',
         'Magento_Ui/js/modal/alert',
         'Magento_Checkout/js/checkout-data',
-        'mage/loader',
-        'Magento_Checkout/js/action/place-order',
-        'Magento_Checkout/js/action/redirect-on-success'
+        'mage/loader'
     ],
-    function (Component, $, url, alert, checkout, loader, placeOrderAction, redirectOnSuccessAction) {
+    function (Component, $, url, alert, checkout, loader) {
         'use strict';
 
         return Component.extend({
@@ -142,8 +140,7 @@ define(
                             var obj = $.parseJSON(response);
 
                             if(obj.err == false){
-                                console.log('placeorder');
-                                console.log(self.placeOrder());
+                                self.placeOrder()
                             }else{
                                 alert({
                                     title: 'Payment error!',
@@ -167,31 +164,6 @@ define(
                     });
                 }
             },
-
-            placeOrder: function (data, event) {
-                if (event) {
-                    event.preventDefault();
-                }
-
-                var self = this,
-                    placeOrder;
-
-                this.isPlaceOrderActionAllowed(false);
-                placeOrder = placeOrderAction(this.getData(), false, this.messageContainer);
-
-                $.when(placeOrder).fail(function () {
-                    console.log('fail');
-                    console.log(placeOrder.responseJSON.message);
-                    self.isPlaceOrderActionAllowed(true);
-                    return false;
-                }).done(function(){
-                    console.log('success');
-                    self.afterPlaceOrder.bind(self);
-                    redirectOnSuccessAction.execute();
-                    return true;
-                });
-            }
-           
         });
     }
 );

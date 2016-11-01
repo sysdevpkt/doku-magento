@@ -44,8 +44,10 @@ define(
                 return window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue();
             },
 
-            doPaymentChannel: function(){
+            doPaymentChannel: function(data, event){
                 console.log('dodododood');
+                console.log(data);
+                console.log(event);
             },
 
             dokuToken: function(){

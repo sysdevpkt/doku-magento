@@ -7,9 +7,10 @@ define(
         'jquery',
         'mage/url',
         'Magento_Ui/js/modal/alert',
-        'Magento_Checkout/js/checkout-data'
+        'Magento_Checkout/js/checkout-data',
+        'mage/loader'
     ],
-    function (Component, $, url, alert, checkout) {
+    function (Component, $, url, alert, checkout, loader) {
         'use strict';
 
         return Component.extend({
@@ -46,14 +47,14 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-
+                loader.show();
                 $("fieldset[id^='form-']").hide();
 
                 if(event.target.value != '') {
                     this.paymentChannel = event.target.value;
                     $("#form-" + this.paymentChannel).show();
                 }
-
+                loader.hide();
             },
 
             dokuToken: function(){

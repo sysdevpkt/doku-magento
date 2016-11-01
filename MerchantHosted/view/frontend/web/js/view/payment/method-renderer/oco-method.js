@@ -18,7 +18,8 @@ define(
                 template: 'Doku_MerchantHosted/payment/oco',
                 setWindow: false,
                 basket: '',
-                paymentChannel: ''
+                paymentChannel: '',
+                customForm: []
             },
 
             initObservable: function(){
@@ -47,14 +48,20 @@ define(
             },
 
             doPaymentChannel: function(data, event){
-                loader.processStart;
+                loader.processStart();
                 $("fieldset[id^='form-']").hide();
 
                 if(event.target.value != '') {
                     this.paymentChannel = event.target.value;
                     $("#form-" + this.paymentChannel).show();
+
+                    if(this.paymentChannel == '04'){
+                        this.customForm = ['username-field', 'password-field'];
+                    }else if(this.paymentChannel == '15'){
+                        this.customForm = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+                    }
                 }
-                loader.processStop;
+                loader.processStop();
             },
 
             dokuToken: function(){
@@ -77,7 +84,7 @@ define(
 
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id
                             data.req_chain_merchant = obj.chain_merchant; //chain merchant id
-                            data.req_payment_channel = obj.payment_channel; //payment channel
+                            data.req_payment_channel = self.paymentChannel; //payment channel
                             data.req_basket = obj.basket;
                             data.req_transaction_id = obj.invoice_no; //invoice no
                             data.req_amount = obj.amount;
@@ -85,7 +92,7 @@ define(
                             data.req_words = obj.words; //your merchant unique key
                             data.req_session_id = obj.session_id; //your server timestamp
                             data.req_form_type = obj.form_type;
-                            data.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+                            data.req_custom_form = self.customForm;
 
                             getForm(data);
 

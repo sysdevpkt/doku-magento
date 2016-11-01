@@ -62,7 +62,6 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
                 'invoice_no' => $invoice_no,
                 'session_id' => $this->session->getSessionId(),
                 'currency' => $currency,
-                'payment_channel' => '15',
                 'form_type' => 'inline',
                 'chain_merchant' => 'NA',
                 'basket' => $basket,

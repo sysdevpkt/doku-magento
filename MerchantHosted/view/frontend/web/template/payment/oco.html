@@ -16,7 +16,7 @@
         <fieldset class="fieldset address" style="margin: 0 0 10px; max-width: 500px;">
             <div class="field">
                 <label for="payment_channels" class="label" id="cc-label"><span>Please select payment channel</span></label>
-                <select class="select" id="payment_channels" data-bind="event: {change : function(data, event){doPaymentChannel(data, event)}}">
+                <select class="select" id="payment_channels" data-bind="event: {change : doPaymentChannel}">
                     <option value="">&nbsp;</option>
                     <!-- ko foreach: getPaymentChannels() -->
                     <option data-bind="value: $data[0], text: $data[1]"></option>

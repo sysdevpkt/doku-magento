@@ -57,15 +57,15 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 
             $arr = array(
                 'err' => false,
-                'msg' => 'Create words success',
-                'words' => $words,
-                'invoice_no' => $invoice_no,
-                'session_id' => $this->session->getSessionId(),
-                'currency' => $currency,
-                'form_type' => 'inline',
-                'chain_merchant' => 'NA',
-                'basket' => $basket,
-                'amount' => $amount
+                'req_response_msg' => 'Create words success',
+                'req_words' => $words,
+                'req_invoice_no' => $invoice_no,
+                'req_session_id' => $this->session->getSessionId(),
+                'req_currency' => $currency,
+                'req_form_type' => 'inline',
+                'req_chain_merchant' => 'NA',
+                'req_basket' => $basket,
+                'req_amount' => $amount
             );
 
         }catch(\Exception $e){

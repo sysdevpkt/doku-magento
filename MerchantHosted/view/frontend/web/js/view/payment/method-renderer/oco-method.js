@@ -17,7 +17,7 @@ define(
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
                 setWindow: false,
-                basket: '',
+                wordsObj: new Object(),
                 paymentChannel: '',
                 customForm: [],
                 urlPayment: ''
@@ -76,8 +76,7 @@ define(
 
             getDokuForm: function(){
                 var self = this;
-                var data = new Object();
-                
+
                 $.ajax({
                     type: 'GET',
                     url: url.build('doku/payment/words'),
@@ -87,18 +86,19 @@ define(
                         var obj = $.parseJSON(response);
                         if(obj.err == false){
 
-                            self.basket = obj.basket;
+                            self.wordsObj = obj;
 
+                            var data = new Object();
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id
-                            data.req_chain_merchant = obj.chain_merchant; //chain merchant id
+                            data.req_chain_merchant = obj.req_chain_merchant; //chain merchant id
                             data.req_payment_channel = self.paymentChannel; //payment channel
-                            data.req_basket = obj.basket;
-                            data.req_transaction_id = obj.invoice_no; //invoice no
-                            data.req_amount = obj.amount;
-                            data.req_currency = obj.currency; //360 for IDR
-                            data.req_words = obj.words; //your merchant unique key
-                            data.req_session_id = obj.session_id; //your server timestamp
-                            data.req_form_type = obj.form_type;
+                            data.req_basket = obj.req_basket;
+                            data.req_transaction_id = obj.req_invoice_no; //invoice no
+                            data.req_amount = obj.req_amount;
+                            data.req_currency = obj.req_currency; //360 for IDR
+                            data.req_words = obj.req_words; //your merchant unique key
+                            data.req_session_id = obj.req_session_id; //your server timestamp
+                            data.req_form_type = obj.req_form_type;
                             data.req_custom_form = self.customForm;
                             data.req_mage = true;
 
@@ -107,7 +107,7 @@ define(
                         }else{
                             alert({
                                 title: 'Create words error!',
-                                content: obj.msg + '<br>Please refresh this page if you want to use payment with Doku Payment Gateway',
+                                content: obj.req_response_msg + '<br>Please refresh this page if you want to use payment with Doku Payment Gateway',
                                 actions: {
                                     always: function(){}
                                 }
@@ -133,11 +133,12 @@ define(
             getToken: function(response){
                 if (response != undefined && response != 'undefined') {
                     var self = this;
+                    var dataResponse = $.extend(self.wordsObj, response);
 
                     $.ajax({
                         type: 'POST',
                         url: url.build('doku/payment/'+ self.urlPayment),
-                        data: {dataResponse: JSON.stringify(response), dataBasket: self.basket, dataEmail: self.getMailingAddress()},
+                        data: {dataResponse: JSON.stringify(dataResponse), dataEmail: self.getMailingAddress()},
                         showLoader: true,
 
                         success: function (response) {

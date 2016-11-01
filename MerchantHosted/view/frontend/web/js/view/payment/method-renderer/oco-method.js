@@ -70,7 +70,7 @@ define(
             },
 
             dokuToken: function(){
-                if(this.dokuObj.req_payment_channel != '') {
+                if(this.dokuObj.req_payment_channel != undefined && this.dokuObj.req_payment_channel != '') {
                     DokuToken(getToken);
                 }else{
                     alert({

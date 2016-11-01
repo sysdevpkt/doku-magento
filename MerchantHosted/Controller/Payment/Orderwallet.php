@@ -45,7 +45,12 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
         $this->logger->info('params words : '. json_encode($params, JSON_PRETTY_PRINT));
 
         $words = $this->doCreateWords($params);
+
+        $this->logger->info('words : '. json_encode($words, JSON_PRETTY_PRINT));
+
         $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
+
+        $this->logger->info('$billingAddress : '. json_encode($billingAddress, JSON_PRETTY_PRINT));
 
         $customer = array(
             'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
@@ -53,6 +58,8 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
             'data_email' => $postEmail,
             'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
         );
+
+        $this->logger->info('data $customer = '. json_encode($customer, JSON_PRETTY_PRINT));
 
         $dataPayment = array(
             'req_mall_id' => $this->config->getMallId(),
@@ -74,6 +81,7 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
             'req_address' => $customer['data_address']
         );
 
+        $this->logger->info('data payment = '. json_encode($dataPayment, JSON_PRETTY_PRINT));
 
         $result = $this->doPayment($dataPayment);
 

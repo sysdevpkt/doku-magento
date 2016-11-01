@@ -33,9 +33,6 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
         try{
 
             $postData = json_decode($_POST['dataResponse']);
-
-            $this->logger->info('$postData : '. json_encode($postData, JSON_PRETTY_PRINT));
-
             $params = array(
                 'amount' => $postData->req_amount,
                 'invoice' => $postData->req_invoice_no,
@@ -73,14 +70,9 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
                     'req_address' => $customer['data_address']
                 );
 
-
-
-            $this->logger->info('data payment = '. json_encode($dataPayment, JSON_PRETTY_PRINT));
-
             $result = $this->doPayment($dataPayment);
 
             $this->logger->info('response payment = '. json_encode($result, JSON_PRETTY_PRINT));
-
             $this->logger->info('===== Orderwallet Controller ===== End');
 
             if($result->res_response_code == '0000'){

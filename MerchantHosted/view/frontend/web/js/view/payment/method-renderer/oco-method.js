@@ -183,10 +183,12 @@ define(
                     console.log('fail');
                     console.log(placeOrder.responseJSON.message);
                     self.isPlaceOrderActionAllowed(true);
+                    return false;
                 }).done(function(){
                     console.log('success');
                     self.afterPlaceOrder.bind(self);
                     redirectOnSuccessAction.execute();
+                    return true;
                 });
             }
            

@@ -81,7 +81,7 @@ define(
                         var obj = $.parseJSON(response);
                         if(obj.err == false){
 
-                            self.dokuObj = $.extend(self.dokuObj, response);
+                            self.dokuObj = $.extend(self.dokuObj, obj);
 
                             var data = new Object();
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id

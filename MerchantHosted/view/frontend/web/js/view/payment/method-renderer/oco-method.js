@@ -13,19 +13,6 @@ define(
     function (Component, $, url, alert, checkout, ko) {
         'use strict';
 
-        var ViewModel = function() {
-            var self = this;
-            self.availableOptions = [1, 2];
-            self.myfield = ko.observable();
-
-            self.myfield.subscribe(function(newValue) {
-                // Handle a change here, e.g. update something on the server with Ajax.
-                console.log('myfield changed to ' + newValue);
-            });
-        }
-
-        ko.applyBindings(new ViewModel());
-
         return Component.extend({
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',

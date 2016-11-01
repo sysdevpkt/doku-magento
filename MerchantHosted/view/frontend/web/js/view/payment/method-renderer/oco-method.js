@@ -140,7 +140,8 @@ define(
                             var obj = $.parseJSON(response);
 
                             if(obj.err == false){
-                                self.placeOrder();
+                                console.log('placeorder');
+                                console.log(self.placeOrder());
                             }else{
                                 alert({
                                     title: 'Payment error!',

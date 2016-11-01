@@ -42,16 +42,8 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
             'pairing_code' => $postData->res_pairing_code
         );
 
-        $this->logger->info('params words : '. json_encode($params, JSON_PRETTY_PRINT));
-
         $words = $this->doCreateWords($params);
-
-        $this->logger->info('words : '. json_encode($words, JSON_PRETTY_PRINT));
-
         $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
-
-        $this->logger->info('$billingAddress : '. json_encode($billingAddress, JSON_PRETTY_PRINT));
-
         $customer = array(
             'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
             'data_phone' => $billingAddress['telephone'],
@@ -59,27 +51,31 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
             'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
         );
 
-        $this->logger->info('data $customer = '. json_encode($customer, JSON_PRETTY_PRINT));
+        try{
 
-        $dataPayment = array(
-            'req_mall_id' => $this->config->getMallId(),
-            'req_chain_merchant' => "NA",
-            'req_amount' => $postData->res_amount,
-            'req_words' => $words,
-            'req_purchase_amount' => $postData->res_amount,
-            'req_trans_id_merchant' => $postData->res_invoice_no,
-            'req_request_date_time' => date('YmdHis'),
-            'req_currency' => $postData->res_currency,
-            'req_purchase_currency' => $postData->res_currency,
-            'req_session_id' => $postData->res_session_id,
-            'req_name' => $customer['name'],
-            'req_payment_channel' => $postData->res_payment_channel,
-            'req_basket' => $postBasket,
-            'req_email' => $customer['data_email'],
-            'req_token_id' => $postData->res_token_id,
-            'req_mobile_phone' => $customer['data_phone'],
-            'req_address' => $customer['data_address']
-        );
+            $dataPayment = array(
+                'req_mall_id' => $this->config->getMallId(),
+                'req_chain_merchant' => "NA",
+                'req_amount' => $postData->res_amount,
+                'req_words' => $words,
+                'req_purchase_amount' => $postData->res_amount,
+                'req_trans_id_merchant' => $postData->res_invoice_no,
+                'req_request_date_time' => date('YmdHis'),
+                'req_currency' => $postData->res_currency,
+                'req_purchase_currency' => $postData->res_currency,
+                'req_session_id' => $postData->res_session_id,
+                'req_name' => $customer['name'],
+                'req_payment_channel' => $postData->res_payment_channel,
+                'req_basket' => $postBasket,
+                'req_email' => $customer['data_email'],
+                'req_token_id' => $postData->res_token_id,
+                'req_mobile_phone' => $customer['data_phone'],
+                'req_address' => $customer['data_address']
+            );
+
+        }catch(\Exception $e){
+            $this->logger->info('data payment error = '. $e->getMessage());
+        }
 
         $this->logger->info('data payment = '. json_encode($dataPayment, JSON_PRETTY_PRINT));
 

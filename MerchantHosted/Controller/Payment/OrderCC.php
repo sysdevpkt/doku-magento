@@ -42,8 +42,6 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
             'pairing_code' => $postData->res_pairing_code
         );
 
-        $this->logger->info('params words : '. json_encode($params, JSON_PRETTY_PRINT));
-
         $words = $this->doCreateWords($params);
         $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
 

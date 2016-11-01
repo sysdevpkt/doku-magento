@@ -11,6 +11,7 @@ class DokuConfigProvider implements ConfigProviderInterface
     const mall_id = 'mall_id';
     const shared_key = 'shared_key';
     const payment_channels = 'payment_channels';
+    const payment_title = 'title';
 
     protected $scopeConfig;
     protected $logger;
@@ -43,6 +44,11 @@ class DokuConfigProvider implements ConfigProviderInterface
         return json_encode($payment_channels);
     }
 
+    public function getPaymentTitle()
+    {
+        return $this->scopeConfig->getValue('payment/oco/'. self::payment_title, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
     public function getConfig()
     {
         $config = [
@@ -50,7 +56,8 @@ class DokuConfigProvider implements ConfigProviderInterface
                 'oco' => [
                     'mall_id' => $this->getMallId(),
                     'shared_key' => $this->getSharedKey(),
-                    'payment_channels' => $this->getPaymentChannels()
+                    'payment_channels' => $this->getPaymentChannels(),
+                    'payment_title' => $this->getPaymentTitle()
                 ]
             ]
         ];

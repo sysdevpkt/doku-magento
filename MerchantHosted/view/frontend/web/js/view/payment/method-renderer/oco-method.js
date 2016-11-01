@@ -17,7 +17,7 @@ define(
             defaults: {
                 template: 'Doku_MerchantHosted/payment/oco',
                 setWindow: false,
-                dokuObj: new Object()
+                dokuObj: new Object(),
             },
 
             initObservable: function(){
@@ -37,6 +37,10 @@ define(
                 return window.checkoutConfig.payment.oco.mall_id
             },
 
+            getPaymentTitle: function(){
+                return window.checkoutConfig.payment.oco.payment_title
+            },
+
             getPaymentChannels: function(){
                 return $.parseJSON(window.checkoutConfig.payment.oco.payment_channels);
             },
@@ -45,9 +49,9 @@ define(
                 loader.show;
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();
+                this.dokuObj.req_payment_channel = event.target.value;
 
                 if(event.target.value != '') {
-                    this.dokuObj.req_payment_channel = event.target.value;
                     this.dokuObj.req_email = (window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue());
 
                     $("#form-" + event.target.value).show();
@@ -66,7 +70,17 @@ define(
             },
 
             dokuToken: function(){
-                DokuToken(getToken);
+                if(this.dokuObj.req_payment_channel != '') {
+                    DokuToken(getToken);
+                }else{
+                    alert({
+                        title: 'Payment Channel',
+                        content: 'Please choose payment channel',
+                        actions: {
+                            always: function(){}
+                        }
+                    });
+                }
             },
 
             getDokuForm: function(){
@@ -102,7 +116,7 @@ define(
                         }else{
                             alert({
                                 title: 'Create words error!',
-                                content: obj.req_response_msg + '<br>Please refresh this page if you want to use payment with Doku Payment Gateway',
+                                content: obj.req_response_msg + '<br>Please refresh this page if you want to use '+ self.getPaymentTitle(),
                                 actions: {
                                     always: function(){}
                                 }
@@ -113,7 +127,7 @@ define(
                     error: function (xhr, status, error) {
                         alert({
                             title: 'Create words error!',
-                            content: 'Please refresh this page if you want to use payment with Doku Payment Gateway',
+                            content: 'Please refresh this page if you want to use '+ self.getPaymentTitle(),
                             actions: {
                                 always: function(){}
                             }

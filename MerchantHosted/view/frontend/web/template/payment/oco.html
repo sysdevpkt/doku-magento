@@ -13,6 +13,9 @@
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
     </div>
     <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
         <fieldset class="fieldset address" style="margin: 0 0 10px; max-width: 500px;">
             <div class="field">
                 <label for="payment_channels" class="label" id="cc-label"><span>Please select payment channel</span></label>
@@ -61,9 +64,7 @@
                 </div>
             </fieldset>
         </div>
-        <!-- ko foreach: getRegion('messages') -->
-        <!-- ko template: getTemplate() --><!-- /ko -->
-        <!--/ko-->
+        <br>
         <div class="payment-method-billing-address">
             <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
             <!-- ko template: getTemplate() --><!-- /ko -->

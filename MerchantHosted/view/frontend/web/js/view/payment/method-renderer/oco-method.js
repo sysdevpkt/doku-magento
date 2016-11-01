@@ -7,10 +7,9 @@ define(
         'jquery',
         'mage/url',
         'Magento_Ui/js/modal/alert',
-        'Magento_Checkout/js/checkout-data',
-        'ko'
+        'Magento_Checkout/js/checkout-data'
     ],
-    function (Component, $, url, alert, checkout, ko) {
+    function (Component, $, url, alert, checkout) {
         'use strict';
 
         return Component.extend({
@@ -45,14 +44,8 @@ define(
                 return window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue();
             },
 
-            populatePcs: function(){
-                $.each( this.getPaymentChannels(), function(key, value) {
-                    $("#payment_channels").append(
-                        "<option value='"+ value[0] +"'>"+ value[1] +"</option>"
-                    );
-                });
-
-                return true;
+            doPaymentChannel: function(){
+                console.log('dodododood');
             },
 
             dokuToken: function(){

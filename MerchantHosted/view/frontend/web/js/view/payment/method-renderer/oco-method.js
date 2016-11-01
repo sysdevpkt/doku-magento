@@ -19,7 +19,8 @@ define(
                 setWindow: false,
                 basket: '',
                 paymentChannel: '',
-                customForm: []
+                customForm: [],
+                urlPayment: ''
             },
 
             initObservable: function(){
@@ -58,8 +59,10 @@ define(
 
                     if(this.paymentChannel == '04'){
                         this.customForm = ['username-field', 'password-field'];
+                        this.urlPayment = 'orderwallet';
                     }else if(this.paymentChannel == '15'){
                         this.customForm = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+                        this.urlPayment = 'ordercc';
                     }
 
                     this.getDokuForm();
@@ -99,6 +102,7 @@ define(
                             data.req_session_id = obj.session_id; //your server timestamp
                             data.req_form_type = obj.form_type;
                             data.req_custom_form = self.customForm;
+                            data.req_mage = true;
 
                             getForm(data);
 
@@ -134,7 +138,7 @@ define(
 
                     $.ajax({
                         type: 'POST',
-                        url: url.build('doku/payment/order'),
+                        url: url.build('doku/payment/'+ self.urlPayment),
                         data: {dataResponse: JSON.stringify(response), dataBasket: self.basket, dataEmail: self.getMailingAddress()},
                         showLoader: true,
 

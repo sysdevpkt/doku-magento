@@ -7,7 +7,7 @@ use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Checkout\Model\Session;
 
-class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
+class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
 
     protected $session;
 

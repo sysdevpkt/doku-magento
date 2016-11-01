@@ -147,7 +147,7 @@ define(
                             }else{
                                 alert({
                                     title: 'Payment error!',
-                                    content: 'Error code : '+ res_response_code + '<br>Please retry payment',
+                                    content: 'Error code : '+ obj.res_response_code + '<br>Please retry payment',
                                     actions: {
                                         always: function(){}
                                     }

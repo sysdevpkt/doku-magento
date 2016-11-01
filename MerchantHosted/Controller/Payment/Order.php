@@ -62,6 +62,7 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
         $responsePrePayment = $this->doPrePayment($data);
 
+        $this->logger->info('send to prepayment = '. json_encode($data, JSON_PRETTY_PRINT));
         $this->logger->info('response prepayment = '. json_encode($responsePrePayment, JSON_PRETTY_PRINT));
 
         if($responsePrePayment->res_response_code == '0000'){
@@ -89,6 +90,7 @@ class Order extends \Doku\MerchantHosted\Controller\Payment\Library{
 
             $result = $this->doPayment($dataPayment);
 
+            $this->logger->info('send to payment = '. json_encode($dataPayment, JSON_PRETTY_PRINT));
             $this->logger->info('response payment = '. json_encode($result, JSON_PRETTY_PRINT));
 
             if($result->res_response_code == '0000'){

@@ -8,9 +8,10 @@ define(
         'mage/url',
         'Magento_Ui/js/modal/alert',
         'Magento_Checkout/js/checkout-data',
-        'mage/loader'
+        'mage/loader',
+        'Magento_Checkout/js/action/place-order'
     ],
-    function (Component, $, url, alert, checkout, loader) {
+    function (Component, $, url, alert, checkout, loader, placeOrderAction) {
         'use strict';
 
         return Component.extend({
@@ -164,6 +165,27 @@ define(
                         }
                     });
                 }
+            },
+
+            placeOrder: function (data, event) {
+                if (event) {
+                    event.preventDefault();
+                }
+
+                var self = this,
+                    placeOrder;
+
+                this.isPlaceOrderActionAllowed(false);
+                placeOrder = placeOrderAction(this.getData(), false, this.messageContainer);
+
+                $.when(placeOrder).fail(function () {
+                    console.log('fail');
+                    console.log(placeOrder.responseJSON.message);
+                    self.isPlaceOrderActionAllowed(true);
+                }).done(function(){
+                    self.afterPlaceOrder.bind(self)
+                    return true;
+                });
             }
            
         });

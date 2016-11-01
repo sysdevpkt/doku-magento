@@ -34,6 +34,8 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
         $postBasket = $_POST['dataBasket'];
         $postEmail = $_POST['dataEmail'];
 
+        $this->logger->info('$postData : '. json_encode($postData, JSON_PRETTY_PRINT));
+
         $params = array(
             'amount' => $postData->res_amount,
             'invoice' => $postData->res_invoice_no,
@@ -63,7 +65,7 @@ class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
                 'req_request_date_time' => date('YmdHis'),
                 'req_currency' => $postData->res_currency,
                 'req_purchase_currency' => $postData->res_currency,
-                'req_session_id' => $postData->res_session_id,
+                'req_session_id' => $this->session->getSessionId(),
                 'req_name' => $customer['name'],
                 'req_payment_channel' => $postData->res_payment_channel,
                 'req_basket' => $postBasket,

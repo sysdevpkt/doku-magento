@@ -4,8 +4,9 @@ namespace Doku\MerchantHosted\Setup;
 use \Magento\Framework\Setup\SchemaSetupInterface;
 use \Magento\Framework\Db\Ddl\Table;
 use \Magento\Framework\Setup\ModuleContextInterface;
+use \Magento\Framework\Setup\InstallSchemaInterface;
 
-class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface{
+class InstallSchema implements InstallSchemaInterface{
 
 	public function install(
 		SchemaSetupInterface $setup,

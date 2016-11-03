@@ -7,4 +7,5 @@
             </argument>
         </arguments>
     </type>
+    <preference for="Magento\Checkout\Controller\Onepage\Success" type="Doku\MerchantHosted\Controller\Onepage\Success" />
 </config>

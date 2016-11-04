@@ -11,10 +11,10 @@ use Magento\Sales\Model\Config\Source\Order\Status;
 /**
  * Order Status source model
  */
-class Processing extends Status
+class PendingPayment extends Status
 {
     /**
      * @var string[]
      */
-    protected $_stateStatuses = [Order::STATE_PROCESSING];
+    protected $_stateStatuses = [Order::STATE_PENDING_PAYMENT];
 }

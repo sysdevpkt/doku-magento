@@ -11,7 +11,7 @@ use Magento\Sales\Model\Config\Source\Order\Status;
 /**
  * Order Status source model
  */
-class PendingPayment extends Status
+class Pendingpayment extends Status
 {
     /**
      * @var string[]

@@ -9,7 +9,7 @@
                 <shared_key>Shared Key</shared_key>
                 <is_token>0</is_token>
                 <payment_channels>0</payment_channels>
-                <order_status>Pending Payment</order_status>
+                <order_status>pending_payment</order_status>
                 <instructions>Instruction</instructions>
                 <payment_action>true</payment_action>
                 <model>Doku\MerchantHosted\Model\Oco</model>

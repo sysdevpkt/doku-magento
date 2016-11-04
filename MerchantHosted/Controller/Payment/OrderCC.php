@@ -29,6 +29,8 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
     public function execute(){
 
         $this->logger->info('===== Ordercc Controller ===== Start');
+        $this->logger->info('session quote');
+        $this->logger->info(json_encode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
 
         try {
 

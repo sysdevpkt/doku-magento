@@ -2,32 +2,31 @@
 
 namespace Doku\MerchantHosted\Plugin\Magento\Checkout\Model\Session;
 
-use Magento\Framework\Api\Search\SearchCriteriaFactory;
 use Magento\Sales\Model\Order;
-use Magento\Sales\Model\OrderRepository;
-use Magento\Sales\Model\ResourceModel\Order\Collection;
-use \Psr\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
+use Magento\Checkout\Model\Session;
 
 class SuccessValidator
 {
     protected $session;
-    protected $orderCollectionFactory;
+    protected $order;
     protected $logger;
 
     public function __construct(
-        \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
-        \Magento\Checkout\Model\Session $session,
-        LoggerInterface $logger
+        Session $session,
+        LoggerInterface $logger,
+        Order $order
     ) {
         $this->session = $session;
-        $this->orderCollectionFactory = $orderCollectionFactory;
         $this->logger = $logger;
+        $this->order = $order;
     }
 
     public function afterIsValid(\Magento\Checkout\Model\Session\SuccessValidator $successValidator, $returnValue)
     {
         $this->logger->info('masuk');
         $this->logger->info('session : '. json_encode($this->session->getLastRealOrder()->convertToArray(), JSON_PRETTY_PRINT));
+        $this->logger->info('order : '. json_encode($this->order->convertToArray(), JSON_PRETTY_PRINT));
 
         return $returnValue;
     }

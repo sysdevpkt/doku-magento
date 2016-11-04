@@ -26,7 +26,7 @@ class SuccessValidator
     {
         $this->logger->info('masuk');
         $this->logger->info('session : '. json_encode($this->session->getLastRealOrder()->convertToArray(), JSON_PRETTY_PRINT));
-        $this->logger->info('order : '. json_encode($this->order->convertToArray(), JSON_PRETTY_PRINT));
+        $this->logger->info('order : '. json_encode($this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId())->convertToArray(), JSON_PRETTY_PRINT));
 
         return $returnValue;
     }

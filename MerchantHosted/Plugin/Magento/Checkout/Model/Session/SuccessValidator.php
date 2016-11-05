@@ -33,7 +33,7 @@ class SuccessValidator
 
             $this->logger->info('session : '. json_encode($this->session->getLastRealOrder()->convertToArray(), JSON_PRETTY_PRINT));
             $this->logger->info('order : '. json_encode($this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId())->convertToArray(), JSON_PRETTY_PRINT));
-            $this->logger->info('session quote : '. json_encode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT);
+            $this->logger->info('session quote : '. json_encode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
             $this->logger->info('manual session quote: '. $this->session->getQuote()->getData('payment_channel'));
 
         }catch(\Exception $e){

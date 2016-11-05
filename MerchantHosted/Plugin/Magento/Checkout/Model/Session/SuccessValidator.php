@@ -50,7 +50,7 @@ class SuccessValidator
             $findOrder2 = $this->resourceConnection->getConnection()->fetchAll($getOrder2);
             $this->logger->info('find order db 2: '. json_encode($findOrder2, JSON_PRETTY_PRINT));
 
-            $order->setState(Order::STATE_PENDING_PAYMENT)->save();
+            $order->setStatus(Order::STATE_PENDING_PAYMENT)->save();
 
             $this->logger->info('get order 2 : '. json_encode($this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId())->convertToArray(), JSON_PRETTY_PRINT));
 

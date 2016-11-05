@@ -36,21 +36,21 @@ class SuccessValidator
             $this->logger->info('get order: '. json_encode($order->convertToArray(), JSON_PRETTY_PRINT));
 
             $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
-                ->where('quote_id', $order->getQuoteId())->where('store_id', $order->getStoreId());
+                ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId())->;
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
             $this->logger->info('find order db: '. json_encode($findOrder, JSON_PRETTY_PRINT));
 
             $this->resourceConnection->getConnection()
                 ->update('doku_orders', ['order_id' => $order->getId()],
-                    ["quote_id = ?" => $order->getQuoteId(), "store_id = ?" => $order->getStoreId()]);
+                    ["quote_id=?" => $order->getQuoteId(), "store_id=?" => $order->getStoreId()]);
 
             $getOrder2 = $this->resourceConnection->getConnection()->select()->from('doku_orders')
-                ->where('quote_id', $order->getQuoteId())->where('store_id', $order->getStoreId());
+                ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder2 = $this->resourceConnection->getConnection()->fetchRow($getOrder2);
             $this->logger->info('find order db 2: '. json_encode($findOrder2, JSON_PRETTY_PRINT));
 
-            $order->setStatus(Order::STATE_NEW)->save();
+            $order->setStatus(Order::STATE_PENDING_PAYMENT)->save();
 
             $this->logger->info('get order 2 : '. json_encode($this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId())->convertToArray(), JSON_PRETTY_PRINT));
 

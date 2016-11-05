@@ -185,6 +185,7 @@ define(
             getCode: function(){
 
                 if(this.dokuObj.req_payment_channel != undefined && this.dokuObj.req_payment_channel != '') {
+                    var self = this;
 
                     $.ajax({
                         type: 'POST',

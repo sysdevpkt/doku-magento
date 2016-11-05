@@ -8,7 +8,6 @@ use \Psr\Log\LoggerInterface;
 
 abstract class Library extends \Magento\Framework\App\Action\Action{
 
-    protected $logger;
     protected $config;
     const prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
     const paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';

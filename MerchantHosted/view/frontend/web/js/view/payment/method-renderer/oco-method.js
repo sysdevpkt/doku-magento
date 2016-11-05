@@ -183,39 +183,43 @@ define(
 
             getCode: function(){
 
-                $.ajax({
-                    type: 'POST',
-                    url: url.build('doku/payment/orderva'),
-                    data: {dataResponse: JSON.stringify(self.dokuObj)},
-                    showLoader: true,
+                if(this.dokuObj.req_payment_channel != undefined && this.dokuObj.req_payment_channel != '') {
 
-                    success: function (response) {
-                        var obj = $.parseJSON(response);
+                    $.ajax({
+                        type: 'POST',
+                        url: url.build('doku/payment/orderva'),
+                        data: {dataResponse: JSON.stringify(self.dokuObj)},
+                        showLoader: true,
 
-                        if(obj.err == false){
-                            self.placeOrder()
-                        }else{
+                        success: function (response) {
+                            var obj = $.parseJSON(response);
+
+                            if (obj.err == false) {
+                                self.placeOrder()
+                            } else {
+                                alert({
+                                    title: 'Payment error!',
+                                    content: 'Error code : ' + obj.res_response_code + '<br>Please retry payment',
+                                    actions: {
+                                        always: function () {
+                                        }
+                                    }
+                                });
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
                             alert({
-                                title: 'Payment error!',
-                                content: 'Error code : '+ obj.res_response_code + '<br>Please retry payment',
+                                title: 'Generate Code Error!',
+                                content: 'Please retry payment',
                                 actions: {
-                                    always: function(){}
+                                    always: function () {
+                                    }
                                 }
                             });
                         }
-
-                    },
-                    error: function (xhr, status, error) {
-                        alert({
-                            title: 'Generate Code Error!',
-                            content: 'Please retry payment',
-                            actions: {
-                                always: function(){}
-                            }
-                        });
-                    }
-                });
-
+                    });
+                }
             },
         });
     }

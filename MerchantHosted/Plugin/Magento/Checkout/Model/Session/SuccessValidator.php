@@ -36,7 +36,7 @@ class SuccessValidator
             $this->logger->info('get order: '. json_encode($order->convertToArray(), JSON_PRETTY_PRINT));
 
             $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
-                ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId())->;
+                ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
             $this->logger->info('find order db: '. json_encode($findOrder, JSON_PRETTY_PRINT));

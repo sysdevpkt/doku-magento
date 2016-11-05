@@ -30,9 +30,6 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
 
         $this->logger->info('===== Ordercc Controller ===== Start');
         $this->logger->info('session quote');
-        $this->session->setDokuValue('uhuy');
-        $this->logger->info('isi session : '. json_decode($this->session->getDokuValue(), JSON_PRETTY_PRINT));
-
         try {
 
             $postData = json_decode($_POST['dataResponse']);

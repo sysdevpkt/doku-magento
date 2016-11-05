@@ -35,6 +35,9 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
     {
 
         $this->logger->info('===== Words Controller ===== Start');
+        $this->session->setData('payment_channel', '15');
+        $this->logger->info('isi session : '. json_decode($this->session->getData('payment_channel'), JSON_PRETTY_PRINT));
+
 
         try{
 

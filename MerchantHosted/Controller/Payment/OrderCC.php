@@ -34,8 +34,6 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
 
             $postData = json_decode($_POST['dataResponse']);
             $this->session->setData('payment_channel', $postData->req_payment_channel);
-            $this->session->getQuote()->setData('payment_channel', $postData->req_payment_channel);
-            $this->logger->info('quote : '. $this->session->getQuote()->getData('payment_channel'));
 
             $params = array(
                 'amount' => $postData->req_amount,

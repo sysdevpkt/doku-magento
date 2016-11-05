@@ -77,13 +77,13 @@ class Orderva extends \Doku\MerchantHosted\Controller\Payment\Library{
                 $this->logger->info('===== orderva Controller ===== Saving data...');
 
                 $this->resourceConnection->getConnection()->insert('doku_orders',
-                    array(
+                    [
                         'quote_id' => $this->session->getQuoteId(),
                         'store_id' => $this->session->getQuote()->getStoreId(),
                         'invoice_no' => $invoice_no,
                         'payment_channel_id' => $postData->req_payment_channel,
                         'paycode_no' => $result->res_pay_code
-                    ));
+                    ]);
 
                 $this->logger->info('===== orderva Controller ===== Saving complete');
                 $this->logger->info('===== orderva Controller ===== End');

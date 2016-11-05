@@ -53,15 +53,17 @@ define(
 
                 if(event.target.value != '') {
                     this.dokuObj.req_email = (window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue());
-                    $("#form-" + event.target.value).show();
-                    if(event.target.value == '04'){
-                        this.dokuObj.req_custom_form = ['username-field', 'password-field'];
-                        this.dokuObj.req_url_payment = 'orderwallet';
-                        this.getDokuForm();
-                    }else if(event.target.value == '15'){
-                        this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
-                        this.dokuObj.req_url_payment = 'ordercc';
-                        this.getDokuForm();
+                    if(event.target.value == '04' || event.target.value == '15') {
+                        $("#form-" + event.target.value).show();
+                        if (event.target.value == '04') {
+                            this.dokuObj.req_custom_form = ['username-field', 'password-field'];
+                            this.dokuObj.req_url_payment = 'orderwallet';
+                            this.getDokuForm();
+                        } else if (event.target.value == '15') {
+                            this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
+                            this.dokuObj.req_url_payment = 'ordercc';
+                            this.getDokuForm();
+                        }
                     }
                 }
                 loader.hide;
@@ -125,7 +127,6 @@ define(
                             });
                         }
                     },
-
                     error: function (xhr, status, error) {
                         alert({
                             title: 'Create words error!',

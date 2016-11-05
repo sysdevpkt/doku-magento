@@ -53,25 +53,27 @@ define(
 
                 if(event.target.value != '') {
                     this.dokuObj.req_email = (window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue());
-
                     $("#form-" + event.target.value).show();
-
                     if(event.target.value == '04'){
                         this.dokuObj.req_custom_form = ['username-field', 'password-field'];
                         this.dokuObj.req_url_payment = 'orderwallet';
+                        this.getDokuForm();
                     }else if(event.target.value == '15'){
                         this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                         this.dokuObj.req_url_payment = 'ordercc';
+                        this.getDokuForm();
                     }
-
-                    this.getDokuForm();
                 }
                 loader.hide;
             },
 
             dokuToken: function(){
                 if(this.dokuObj.req_payment_channel != undefined && this.dokuObj.req_payment_channel != '') {
-                    DokuToken(getToken);
+                    if(this.dokuObj.req_payment_channel == '04' || this.dokuObj.req_payment_channel == '15'){
+                        DokuToken(getToken);
+                    }else{
+                        this.getCode();
+                    }
                 }else{
                     alert({
                         title: 'Payment Channel',
@@ -177,6 +179,43 @@ define(
                         }
                     });
                 }
+            },
+
+            getCode: function(){
+
+                $.ajax({
+                    type: 'POST',
+                    url: url.build('doku/payment/orderva'),
+                    data: {dataResponse: JSON.stringify(self.dokuObj)},
+                    showLoader: true,
+
+                    success: function (response) {
+                        var obj = $.parseJSON(response);
+
+                        if(obj.err == false){
+                            self.placeOrder()
+                        }else{
+                            alert({
+                                title: 'Payment error!',
+                                content: 'Error code : '+ obj.res_response_code + '<br>Please retry payment',
+                                actions: {
+                                    always: function(){}
+                                }
+                            });
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert({
+                            title: 'Generate Code Error!',
+                            content: 'Please retry payment',
+                            actions: {
+                                always: function(){}
+                            }
+                        });
+                    }
+                });
+
             },
         });
     }

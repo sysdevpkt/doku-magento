@@ -49,6 +49,46 @@ class InstallSchema implements InstallSchemaInterface{
 			->setComment('Doku Tokenization Table');
 
 		$installer->getConnection()->createTable($table);
+
+		$table = $installer->getConnection()
+			->newTable($installer->getTable('doku_orders'))
+			->addColumn(
+				'id',
+				Table::TYPE_INTEGER,
+				null,
+				['identity' => true, 'nullable' => false, 'primary' => true, 'unsigned' => true],
+				'Id'
+			)
+			->addColumn(
+				'order_id',
+				Table::TYPE_TEXT,
+				10,
+				['nullable' => false],
+				'Order Id'
+			)
+			->addColumn(
+				'invoice_no',
+				Table::TYPE_TEXT,
+				50,
+				['nullable' => false],
+				'Invoice Number'
+			)
+			->addColumn(
+				'payment_channel_id',
+				Table::TYPE_TEXT,
+				2,
+				['nullable' => false],
+				'Payment Channel Id'
+			)->addColumn(
+				'paycode_no',
+				Table::TYPE_TEXT,
+				50,
+				['nullable' => false],
+				'Pay Code Number'
+			)
+			->setComment('Doku Orders Table');
+
+		$installer->getConnection()->createTable($table);
 		$installer->endSetup();
 
 	}

@@ -38,7 +38,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 
         try{
 
-            $invoice_no = 'mage2'. $this->config->getMallId() . str_pad('0', 9, $this->session->getQuoteId());
+            $invoice_no = 'mage2'. $this->config->getMallId() . str_pad($this->session->getQuoteId(), 9, '0', STR_PAD_LEFT);
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');
             $currency = '360';
             $params = array(

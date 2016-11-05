@@ -94,5 +94,26 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
             return $responseJson;
         }
     }
+
+    protected function doGeneratePaycode($data){
+
+        $ch = curl_init( self::generateCodeUrl );
+        curl_setopt( $ch, CURLOPT_POST, 1);
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt( $ch, CURLOPT_HEADER, 0);
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $responseJson = curl_exec( $ch );
+
+        curl_close($ch);
+
+        if(is_string($responseJson)){
+            return json_decode($responseJson);
+        }else{
+            return $responseJson;
+        }
+
+    }
     
 }

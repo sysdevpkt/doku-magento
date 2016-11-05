@@ -60,6 +60,13 @@ class InstallSchema implements InstallSchemaInterface{
 				'Id'
 			)
 			->addColumn(
+				'store_id',
+				Table::TYPE_INTEGER,
+				null,
+				['nullable' => false],
+				'Store Id'
+			)
+			->addColumn(
 				'order_id',
 				Table::TYPE_TEXT,
 				10,

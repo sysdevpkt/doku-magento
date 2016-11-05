@@ -38,7 +38,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 
         try{
 
-            $this->logger->info('isi total : '. json_decode($this->session->getQuote()->getGrandTotal(), JSON_PRETTY_PRINT));
+            $this->logger->info('isi total : '. json_decode($this->session->getQuote()->convertToJson(), JSON_PRETTY_PRINT));
 
             $invoice_no = 'mage2'. $this->config->getMallId() . $this->session->getQuote()->getReservedOrderId();
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');

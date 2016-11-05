@@ -37,7 +37,7 @@ class SuccessValidator
 
             $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
                 ->where('quote_id', $order->getQuoteId())->where('store_id', $order->getStoreId());
-            $findOrder = $this->resourceConnection->getConnection()->fetchAll($getOrder);
+            $findOrder = $this->resourceConnection->getConnection()->fetchOne($getOrder);
 
             $this->logger->info('find order db: '. json_encode($findOrder, JSON_PRETTY_PRINT));
 
@@ -47,10 +47,11 @@ class SuccessValidator
 
             $getOrder2 = $this->resourceConnection->getConnection()->select()->from('doku_orders')
                 ->where('quote_id', $order->getQuoteId())->where('store_id', $order->getStoreId());
-            $findOrder2 = $this->resourceConnection->getConnection()->fetchAll($getOrder2);
+            $findOrder2 = $this->resourceConnection->getConnection()->fetchOne($getOrder2);
             $this->logger->info('find order db 2: '. json_encode($findOrder2, JSON_PRETTY_PRINT));
 
-            $order->setStatus(Order::STATE_PENDING_PAYMENT)->save();
+            $order->setStatus(Order::STATE_NEW)->save();
+            $order->setState(Order::STATE_NEW)->save();
 
             $this->logger->info('get order 2 : '. json_encode($this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId())->convertToArray(), JSON_PRETTY_PRINT));
 

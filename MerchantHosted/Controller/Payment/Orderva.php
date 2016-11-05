@@ -75,7 +75,7 @@ class Orderva extends \Doku\MerchantHosted\Controller\Payment\Library{
 
             if($result->res_response_code == '0000'){
 
-
+                $this->logger->info('factor : '. json_encode(get_class($this->ordersFactory), JSON_PRETTY_PRINT));
 
                 echo json_encode(array('err' => false, 'res_response_msg' => 'Generate Code Success',
                     'res_response_code' => $result->res_response_code, 'res_pay_code' => $result->res_pay_code));

@@ -42,7 +42,7 @@ class PaymentChannel implements ArrayInterface{
         $catagoryList['15'] = __('Credit Card');
         $catagoryList['14'] = __('Alfa');
 
-        return asort($catagoryList);
+        return $catagoryList;
     }
 
 }

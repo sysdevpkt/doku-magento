@@ -38,9 +38,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
 
         try{
 
-            $this->logger->info('isi total : '. json_encode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
-
-            $invoice_no = 'mage2'. $this->config->getMallId() . $this->session->getQuote()->getReservedOrderId();
+            $invoice_no = 'mage2'. $this->config->getMallId() . str_pad('0', 9, $this->session->getQuoteId());
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');
             $currency = '360';
             $params = array(

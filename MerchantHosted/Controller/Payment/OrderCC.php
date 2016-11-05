@@ -29,10 +29,11 @@ class Ordercc extends \Doku\MerchantHosted\Controller\Payment\Library{
     public function execute(){
 
         $this->logger->info('===== Ordercc Controller ===== Start');
-        $this->logger->info('session quote');
+
         try {
 
             $postData = json_decode($_POST['dataResponse']);
+            $this->session->setData('payment_channel', $postData->req_payment_channel);
 
             $params = array(
                 'amount' => $postData->req_amount,

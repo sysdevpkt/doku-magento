@@ -87,7 +87,7 @@ define(
                 var self = this;
 
                 $.ajax({
-                    type: 'GET',
+                    type: 'POST',
                     url: url.build('doku/payment/words'),
                     showLoader: true,
 

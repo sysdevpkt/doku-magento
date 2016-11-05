@@ -35,9 +35,10 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
     {
 
         $this->logger->info('===== Words Controller ===== Start');
-        $this->logger->info('isi session : '. json_decode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
 
         try{
+
+            $this->logger->info('isi session : '. json_decode($this->session->getQuote()->convertToArray(), JSON_PRETTY_PRINT));
 
             $invoice_no = 'mage2'. $this->config->getMallId() . $this->session->getQuote()->getReservedOrderId();
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');
@@ -70,6 +71,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             );
 
         }catch(\Exception $e){
+            $this->logger->info('Create words failed : '+ $e->getMessage());
             $arr = array('err' => true, 'msg' => 'Create words failed : '+ $e->getMessage());
         }
 

@@ -40,8 +40,9 @@ class PaymentChannel implements ArrayInterface{
 
         $catagoryList['04'] = __('Doku Wallet');
         $catagoryList['15'] = __('Credit Card');
+        $catagoryList['14'] = __('Alfa');
 
-        return $catagoryList;
+        return asort($catagoryList);
     }
 
 }

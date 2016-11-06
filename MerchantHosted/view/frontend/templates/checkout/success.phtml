@@ -1,4 +1,4 @@
-<?php /** @var $block \Doku\MerchantHosted\Block\Success */ ?>
+<?php /** @var $block \Doku\MerchantHosted\Block\Onepage\Success */ ?>
 <div class="checkout-success">
     <?php if ($block->getOrderId()):?>
         <?php if ($block->getCanViewOrder()) :?>
@@ -8,7 +8,9 @@
         <?php endif; ?>
 
         <!-- BEGIN VENDOR_MODULE CUSTOM -->
-        <p><?php echo __('You ordered %1 items.', (int) $block->getOrder()->getTotalQtyOrdered()) ?></p>
+        <?php if ($block->checkPaymentChannel()) :?>
+        <p><?php echo __('You paycode number is: <span>%1</span>.', $block->getDokuOrder()['paycode_no']) ?></p>
+        <?php endif; ?>
         <!-- END VENDOR_MODULE CUSTOM -->
 
         <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details and tracking info.') ?></p>

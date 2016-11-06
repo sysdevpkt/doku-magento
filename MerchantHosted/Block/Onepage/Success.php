@@ -2,11 +2,76 @@
 namespace Doku\MerchantHosted\Block\Onepage;
 
 use \Magento\Framework\View\Element\Template;
+use Magento\Sales\Model\Order;
+use Psr\Log\LoggerInterface;
+use Magento\Checkout\Model\Session;
+use Magento\Framework\App\ResourceConnection;
 
 class Success extends Template
 {
-    public function getSomething()
+
+    protected $session;
+    protected $order;
+    protected $logger;
+    protected $resourceConnection;
+
+    public function __construct(
+        Session $session,
+        LoggerInterface $logger,
+        Order $order,
+        ResourceConnection $resourceConnection
+    ) {
+        $this->session = $session;
+        $this->logger = $logger;
+        $this->order = $order;
+        $this->resourceConnection = $resourceConnection;
+    }
+
+    protected function getOrder(){
+        $this->logger->info('session :'. json_encode($this->session->getLastRealOrder()->convertToArray(), JSON_PRETTY_PRINT));
+        return $order = $this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId());
+    }
+
+    public function getPaycode()
     {
-        return 'returned something from custom block.';
+        $this->logger->info('===== getPaycode ===== Start');
+
+        try{
+
+            $order = $this->getOrder();
+            $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
+                ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
+            $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
+
+            return $findOrder['paycode_no'];
+
+        }catch(\Exception $e){
+            $this->logger->info('error : '. $e->getMessage());
+        }
+
+        $this->logger->info('===== getPaycode ===== End');
+
+    }
+
+    public function checkPaymentChannel()
+    {
+        $this->logger->info('===== checkPaymentChannel ===== Start');
+
+        try{
+
+            $order = $this->getOrder();
+            $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
+                ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
+            $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
+
+            if($findOrder['payment_channel_info'] != '04' && $findOrder['payment_channel_info'] != '15') return true;
+            else return false;
+
+        }catch(\Exception $e){
+            $this->logger->info('error : '. $e->getMessage());
+        }
+
+        $this->logger->info('===== checkPaymentChannel ===== End');
+
     }
 }

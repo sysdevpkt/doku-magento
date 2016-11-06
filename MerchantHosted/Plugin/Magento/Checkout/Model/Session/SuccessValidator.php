@@ -35,7 +35,6 @@ class SuccessValidator
 
             $order = $this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId());
 
-            $this->logger->info('get order: '. json_encode($order->convertToArray(), JSON_PRETTY_PRINT));
             $this->logger->info('===== afterIsValid ===== Updating order...');
 
             $this->resourceConnection->getConnection()
@@ -61,7 +60,7 @@ class SuccessValidator
             $this->logger->info('error : '. $e->getMessage());
         }
 
-        $this->logger->info('===== afterIsValid ===== Start');
+        $this->logger->info('===== afterIsValid ===== End');
 
         return $returnValue;
     }

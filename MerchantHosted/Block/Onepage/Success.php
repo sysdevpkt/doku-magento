@@ -28,7 +28,7 @@ class Success extends \Magento\Checkout\Block\Onepage\Success {
             $data
         );
 
-        $this->resourceConnection = $resourceConnection
+        $this->resourceConnection = $resourceConnection;
 
     }
 

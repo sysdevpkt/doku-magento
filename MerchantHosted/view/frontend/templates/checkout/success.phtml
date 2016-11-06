@@ -8,9 +8,10 @@
         <?php endif; ?>
 
         <!-- BEGIN VENDOR_MODULE CUSTOM -->
-        <?php if($block->checkPaymentChannel()):?>
-        <p><?php echo __('You paycode number is: %1', $block->getPaycode()) ?></p>
-        <?php endif; ?>
+<!--        --><?php //if($block->checkPaymentChannel()):?>
+<!--        <p>--><?php //echo __('You paycode number is: %1', $block->getPaycode()) ?><!--</p>-->
+<!--        --><?php //endif; ?>
+        <p><?php echo __('You ordered %1 items.', (int) $block->getOrder()->getTotalQtyOrdered()) ?></p>
         <!-- END VENDOR_MODULE CUSTOM -->
 
         <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details and tracking info.') ?></p>

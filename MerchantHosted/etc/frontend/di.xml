@@ -10,5 +10,4 @@
     <type name="Magento\Checkout\Model\Session\SuccessValidator">
         <plugin name="doku_checkout_successvalidator" type="Doku\MerchantHosted\Plugin\Magento\Checkout\Model\Session\SuccessValidator"/>
     </type>
-    <preference for="Magento\Checkout\Block\Onepage\Success" type="Doku\MerchantHosted\Block\Success"/>
 </config>

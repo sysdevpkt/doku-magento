@@ -16,8 +16,8 @@ define(
 
         rendererList.push(
             {
-                type: 'oco',
-                component: 'Doku_MerchantHosted/js/view/payment/method-renderer/oco-method'
+                type: 'core',
+                component: 'Doku_MerchantHosted/js/view/payment/method-renderer/core-method'
             }
         );
 

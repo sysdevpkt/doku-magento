@@ -24,17 +24,17 @@ class DokuConfigProvider implements ConfigProviderInterface
 
     public function getMallId()
     {
-        return $this->scopeConfig->getValue('payment/oco/'. self::mall_id, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/core/'. self::mall_id, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getSharedKey()
     {
-        return $this->scopeConfig->getValue('payment/oco/'. self::shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/core/'. self::shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getPaymentChannels()
     {
-        $pcs = explode(',', $this->scopeConfig->getValue('payment/oco/'. self::payment_channels, \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        $pcs = explode(',', $this->scopeConfig->getValue('payment/core/'. self::payment_channels, \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
         $payment_channels = array();
 
         foreach ($pcs as $pc) {
@@ -46,14 +46,14 @@ class DokuConfigProvider implements ConfigProviderInterface
 
     public function getPaymentTitle()
     {
-        return $this->scopeConfig->getValue('payment/oco/'. self::payment_title, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/core/'. self::payment_title, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getConfig()
     {
         $config = [
             'payment' => [
-                'oco' => [
+                'core' => [
                     'mall_id' => $this->getMallId(),
                     'shared_key' => $this->getSharedKey(),
                     'payment_channels' => $this->getPaymentChannels(),

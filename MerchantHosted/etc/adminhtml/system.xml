@@ -8,45 +8,49 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
     <system>
         <section id="payment">
-            <group id="oco" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="core" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Doku</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="title" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
-                <field id="mall_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="mall_id" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Mall ID / Merchant ID</label>
                     <comment>**Required**</comment>
-                    <config_path>payment/oco/mall_id</config_path>
+                    <config_path>payment/core/mall_id</config_path>
                 </field>
-                <field id="shared_key" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="shared_key" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Shared Key</label>
                     <comment>**Required**</comment>
-                    <config_path>payment/oco/shared_key</config_path>
+                    <config_path>payment/core/shared_key</config_path>
                 </field>
-                <field id="is_token" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Use Tokenization</label>
-                    <comment>*Credit Card only</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="instructions" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="instructions" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Instructions</label>
                 </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sort_order" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Sort Order</label>
                     <frontend_class>validate-number</frontend_class>
                 </field>
-                <field id="payment_channels" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="payment_channels" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select Payment Channel</label>
                     <source_model>Doku\MerchantHosted\Model\Config\Source\PaymentChannel</source_model>
                 </field>
-                <group id="cc" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <group id="alfa" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alfa</label>
+                    <field id="paycode" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Prefix Paycode</label>
+                        <comment>**Required for Alfa Payment Channel**</comment>
+                        <config_path>payment/core/alfa/paycode</config_path>
+                    </field>
+                </group>
+                <group id="cc" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Credit Card</label>
-                    <field id="active_cc" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                        <label>Enabled</label>
+                    <field id="is_token" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Use Tokenization</label>
+                        <comment>*Credit Card only</comment>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                 </group>

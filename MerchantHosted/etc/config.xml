@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <payment>
-            <oco>
+            <core>
                 <active>0</active>
                 <title>Doku Payment Gateway</title>
                 <mall_id>Mall ID</mall_id>
@@ -11,7 +11,10 @@
                 <payment_channels>0</payment_channels>
                 <payment_action>true</payment_action>
                 <model>Doku\MerchantHosted\Model\Oco</model>
-            </oco>
+            </core>
+            <alfa>
+                <paycode>88888</paycode>
+            </alfa>
         </payment>
     </default>
 </config>

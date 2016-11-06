@@ -33,7 +33,7 @@ class Success extends Template
     }
 
     protected function getOrder(){
-        return $order = $this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId());
+oco        return $order = $this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId());
     }
 
     public function getPaycode()

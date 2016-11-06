@@ -15,7 +15,7 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Doku_MerchantHosted/payment/oco',
+                template: 'Doku_MerchantHosted/payment/core',
                 setWindow: false,
                 dokuObj: new Object(),
             },
@@ -34,15 +34,15 @@ define(
             },
 
             getMallId: function(){
-                return window.checkoutConfig.payment.oco.mall_id
+                return window.checkoutConfig.payment.core.mall_id
             },
 
             getPaymentTitle: function(){
-                return window.checkoutConfig.payment.oco.payment_title
+                return window.checkoutConfig.payment.core.payment_title
             },
 
             getPaymentChannels: function(){
-                return $.parseJSON(window.checkoutConfig.payment.oco.payment_channels);
+                return $.parseJSON(window.checkoutConfig.payment.core.payment_channels);
             },
 
             doPaymentChannel: function(data, event){

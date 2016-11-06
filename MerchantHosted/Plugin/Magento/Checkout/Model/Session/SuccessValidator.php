@@ -51,6 +51,8 @@ class SuccessValidator
             if($findOrder['payment_channel_id'] != '15' && $findOrder['payment_channel_id'] != '04'){
                 $order->setStatus(Order::STATE_PENDING_PAYMENT);
                 $order->setState(Order::STATE_PENDING_PAYMENT);
+                $this->session->getLastRealOrder()->setStatus(Order::STATE_PENDING_PAYMENT);
+                $this->session->getLastRealOrder()->setState(Order::STATE_PENDING_PAYMENT);
                 $order->save();
             }
 

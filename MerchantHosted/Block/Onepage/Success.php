@@ -33,7 +33,6 @@ class Success extends Template
     }
 
     protected function getOrder(){
-        $this->logger->info('session :'. json_encode($this->session->getLastRealOrder()->convertToArray(), JSON_PRETTY_PRINT));
         return $order = $this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId());
     }
 
@@ -69,7 +68,7 @@ class Success extends Template
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
-            if($findOrder['payment_channel_info'] != '04' && $findOrder['payment_channel_info'] != '15') return true;
+            if($findOrder['payment_channel_id'] != '04' && $findOrder['payment_channel_id'] != '15') return true;
             else return false;
 
         }catch(\Exception $e){

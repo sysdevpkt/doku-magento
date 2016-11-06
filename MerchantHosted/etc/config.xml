@@ -7,7 +7,6 @@
                 <title>Doku Payment Gateway</title>
                 <mall_id>Mall ID</mall_id>
                 <shared_key>Shared Key</shared_key>
-                <is_token>0</is_token>
                 <payment_channels>0</payment_channels>
                 <payment_action>true</payment_action>
                 <model>Doku\MerchantHosted\Model\Oco</model>
@@ -15,6 +14,9 @@
             <alfa>
                 <paycode>88888</paycode>
             </alfa>
+            <cc>
+                <is_token>0</is_token>
+            </cc>
         </payment>
     </default>
 </config>

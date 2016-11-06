@@ -19,8 +19,13 @@ class Success extends Template
         Session $session,
         LoggerInterface $logger,
         Order $order,
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        Template\Context $context,
+        array $data = []
     ) {
+
+        parent::__construct($context, $data);
+
         $this->session = $session;
         $this->logger = $logger;
         $this->order = $order;

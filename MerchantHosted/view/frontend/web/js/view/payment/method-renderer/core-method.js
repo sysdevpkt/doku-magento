@@ -42,6 +42,7 @@ define(
             },
 
             getPaymentChannels: function(){
+                console.log(window.checkoutConfig.payment.core.payment_channels);
                 return $.parseJSON(window.checkoutConfig.payment.core.payment_channels);
             },
 

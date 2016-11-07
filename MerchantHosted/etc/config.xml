@@ -3,7 +3,7 @@
     <default>
         <payment>
             <core>
-                <active>0</active>
+                <active>1</active>
                 <title>Doku Payment Gateway</title>
                 <mall_id>Mall ID</mall_id>
                 <shared_key>Shared Key</shared_key>

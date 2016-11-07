@@ -9,7 +9,7 @@
                 <shared_key>Shared Key</shared_key>
                 <payment_channels>0</payment_channels>
                 <payment_action>true</payment_action>
-                <model>Doku\MerchantHosted\Model\Oco</model>
+                <model>Doku\MerchantHosted\Model\Core</model>
             </core>
             <alfa>
                 <paycode>88888</paycode>

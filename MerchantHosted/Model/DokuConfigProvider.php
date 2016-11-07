@@ -12,6 +12,7 @@ class DokuConfigProvider implements ConfigProviderInterface
     const shared_key = 'shared_key';
     const payment_channels = 'payment_channels';
     const payment_title = 'title';
+    const paycode = 'paycode';
 
     protected $scopeConfig;
     protected $logger;
@@ -30,6 +31,10 @@ class DokuConfigProvider implements ConfigProviderInterface
     public function getSharedKey()
     {
         return $this->scopeConfig->getValue('payment/core/'. self::shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    public function getPaycode($pc){
+        return $this->scopeConfig->getValue('payment/'. $pc .'/'. self::paycode, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getPaymentChannels()
@@ -58,6 +63,9 @@ class DokuConfigProvider implements ConfigProviderInterface
                     'shared_key' => $this->getSharedKey(),
                     'payment_channels' => $this->getPaymentChannels(),
                     'payment_title' => $this->getPaymentTitle()
+                ],
+                'alfa' => [
+                    'paycode' => $this->getPaycode('alfa')
                 ]
             ]
         ];

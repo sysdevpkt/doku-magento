@@ -82,14 +82,14 @@ class Orderva extends \Doku\MerchantHosted\Controller\Payment\Library{
                         'store_id' => $this->session->getQuote()->getStoreId(),
                         'invoice_no' => $invoice_no,
                         'payment_channel_id' => $postData->req_payment_channel,
-                        'paycode_no' => $result->res_pay_code
+                        'paycode_no' => $this->config->getPaycode($postData->req_payment_channel) . $result->res_pay_code
                     ]);
 
                 $this->logger->info('===== orderva Controller ===== Saving complete');
                 $this->logger->info('===== orderva Controller ===== End');
 
                 echo json_encode(array('err' => false, 'res_response_msg' => 'Generate Code Success',
-                    'res_response_code' => $result->res_response_code, 'res_pay_code' => $result->res_pay_code));
+                    'res_response_code' => $result->res_response_code));
 
             }else{
 

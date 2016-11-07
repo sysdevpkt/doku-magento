@@ -7,8 +7,9 @@ use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\ResourceConnection;
+use Doku\MerchantHosted\Controller\Payment\Library;
 
-class Orderva extends \Doku\MerchantHosted\Controller\Payment\Library{
+class Orderva extends Library{
 
     protected $session;
     protected $resourceConnection;

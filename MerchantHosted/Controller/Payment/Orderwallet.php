@@ -6,8 +6,9 @@ use \Psr\Log\LoggerInterface;
 use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Checkout\Model\Session;
+use \Doku\MerchantHosted\Controller\Payment\Library;
 
-class Orderwallet extends \Doku\MerchantHosted\Controller\Payment\Library{
+class Orderwallet extends Library{
 
     protected $session;
 

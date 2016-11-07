@@ -42,7 +42,6 @@ define(
             },
 
             getPaymentChannels: function(){
-                console.log(window.checkoutConfig.payment.core.payment_channels);
                 return $.parseJSON(window.checkoutConfig.payment.core.payment_channels);
             },
 
@@ -89,6 +88,7 @@ define(
 
             getDokuForm: function(){
                 var self = this;
+                console.log(url.build('doku/payment/words'));
 
                 $.ajax({
                     type: 'POST',

@@ -65,36 +65,36 @@
             </fieldset>
             <fieldset id="form-02" class="fieldset address" style="margin: 0 0 10px; max-width: 500px; display: none;">
                 <div id="cc_number-field" class="field _required">
-                    <input type="text" id="cc_number" name="cc_number" required />
                     <label for="cc_number" class="label" id="cc_number-label">
-                        <span>Username</span>
+                        <span>Mandiri Debit Card Number</span>
                     </label>
+                    <input type="text" id="cc_number" name="cc_number" required />
                 </div>
                 <br>
-                <div id="challenge_code_1-field" class="field _required">
+                <div id="challenge_code_1-field" class="field">
                     <input type="text" id="challenge_code_1" name="challenge_code_1" readonly="true"/>
                     <label for="challenge_code_1" class="label" id="challenge_code_1-label">
                         <span>Challenge Code 1</span>
                     </label>
                 </div>
-                <div id="challenge_code_2-field" class="field _required">
-                    <input type="hidden" id="challenge_code_2" name="challenge_code_2" value="0000100000"/>
+                <div id="challenge_code_2-field" class="field">
                     <label for="challenge_code_2" class="label" id="challenge_code_2-label">
                         <span>0000100000</span>
                     </label>
+                    <input type="hidden" id="challenge_code_2" name="challenge_code_2" value="0000100000"/>
                 </div>
-                <div id="challenge_code_3-field" class="field _required">
-                    <input type="hidden" id="challenge_code_3" name="challenge_code_3" />
+                <div id="challenge_code_3-field" class="field">
                     <label for="challenge_code_3" class="label" id="challenge_code_3-label">
                         <span></span>
                     </label>
+                    <input type="hidden" id="challenge_code_3" name="challenge_code_3" />
                 </div>
                 <br>
                 <div id="response_token-field" class="field _required">
-                    <input type="text" id="response_token" name="response_token"/>
                     <label for="response_token" class="label" id="response_token-label">
                         <span>Response Token</span>
                     </label>
+                    <input type="text" id="response_token" name="response_token"/>
                 </div>
             </fieldset>
         </div>

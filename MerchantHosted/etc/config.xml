@@ -17,6 +17,24 @@
             <cc>
                 <is_token>0</is_token>
             </cc>
+            <mandiri_lite>
+                <paycode></paycode>
+            </mandiri_lite>
+            <mandiri_full>
+                <paycode></paycode>
+            </mandiri_full>
+            <permata_lite>
+                <paycode></paycode>
+            </permata_lite>
+            <permata_full>
+                <paycode></paycode>
+            </permata_full>
+            <sinarmas_lite>
+                <paycode></paycode>
+            </sinarmas_lite>
+            <sinarmas_full>
+                <paycode></paycode>
+            </sinarmas_full>
         </payment>
     </default>
 </config>

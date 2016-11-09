@@ -63,6 +63,19 @@ define(
                             this.dokuObj.req_url_payment = 'ordercc';
                         }
                         this.getDokuForm();
+                    }else if(event.target.value == '02'){
+                        $("#form-" + event.target.value).show();
+                        this.getChallengeCode3();
+                        this.dokuObj.req_url_payment = 'ordermandiriclickpay';
+
+                        var data = new Object();
+
+                        data.req_cc_field = 'cc_number';
+                        data.req_challenge_field = 'challenge_code_1';
+
+                        dokuMandiriInitiate(data);
+                    }else{
+                        this.dokuObj.req_url_payment = 'orderva';
                     }
                 }
                 loader.hide;
@@ -72,6 +85,8 @@ define(
                 if(this.dokuObj.req_payment_channel != undefined && this.dokuObj.req_payment_channel != '') {
                     if(this.dokuObj.req_payment_channel == '04' || this.dokuObj.req_payment_channel == '15'){
                         DokuToken(getToken);
+                    }else if(this.dokuObj.req_payment_channel == '02'){
+                        this.doMandiriClickPay();
                     }else{
                         this.generateCode();
                     }
@@ -185,7 +200,7 @@ define(
                 var self = this;
                 $.ajax({
                     type: 'POST',
-                    url: url.build('doku/payment/orderva'),
+                    url: url.build('doku/payment/'+ self.dokuObj.req_url_payment),
                     data: {dataResponse: JSON.stringify(self.dokuObj)},
                     showLoader: true,
 
@@ -218,6 +233,52 @@ define(
                     }
                 });
             },
+
+            getChallengeCode3: function () {
+                var challenge3 = Math.floor(Math.random() * 999999999);
+                $("#challenge_code_3-label").text("<span>"+ challenge3 +"</span>");
+                $("#challenge_code_3").val(challenge3);
+            },
+
+            doMandiriClickPay: function () {
+
+                var self = this;
+                $.ajax({
+                    type: 'POST',
+                    url: url.build('doku/payment/'+ self.dokuObj.req_url_payment),
+                    data: {dataResponse: JSON.stringify(self.dokuObj)},
+                    showLoader: true,
+
+                    success: function (response) {
+                        var obj = $.parseJSON(response);
+
+                        if (obj.err == false) {
+                            self.placeOrder()
+                        } else {
+                            alert({
+                                title: 'Payment error!',
+                                content: 'Error code : ' + obj.res_response_code + '<br>Please retry payment',
+                                actions: {
+                                    always: function () {
+                                    }
+                                }
+                            });
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert({
+                            title: 'Payment Error!',
+                            content: 'Please retry payment',
+                            actions: {
+                                always: function () {
+                                }
+                            }
+                        });
+                    }
+                });
+
+            }
         });
     }
 );

@@ -13,7 +13,8 @@ class DokuConfigProvider implements ConfigProviderInterface
     const payment_channels = 'payment_channels';
     const payment_title = 'title';
     const paycode = 'paycode';
-    const pc = ['14' => 'alfa'];
+    const pc = ['14' => 'alfa', '08' => 'mandiri_lite', '09' => 'mandiri_full', '05' => 'permata_lite', '07' => 'permata_full',
+        '21' => 'sinarmas_lite', '22' => 'sinarmas_full'];
 
     protected $scopeConfig;
     protected $logger;

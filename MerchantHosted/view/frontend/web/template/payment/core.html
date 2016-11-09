@@ -63,6 +63,32 @@
                 </label>
                 </div>
             </fieldset>
+            <fieldset id="form-02" class="fieldset address" style="margin: 0 0 10px; max-width: 500px; display: none;">
+                <div id="cc_number-field" class="field _required">
+                    <input type="text" id="cc_number" name="cc_number" class="cc-number" required />
+                    <label for="cc_number" class="label" id="cc_number-label">
+                        <span>Username</span>
+                    </label>
+                </div>
+                <div id="challenge_code_1-field" class="field _required">
+                    <input type="text" id="challenge_code_1" name="challenge_code_1" class="cc-number" readonly="true"/>
+                    <label for="challenge_code_1" class="label" id="challenge_code_1-label">
+                        <span>Username</span>
+                    </label>
+                </div>
+                <div id="challenge_code_2-field" class="field _required">
+                    <input type="hidden" id="challenge_code_2" name="challenge_code_2" class="cc-number" value="0000100000"/>
+                    <label for="challenge_code_2" class="label" id="challenge_code_2-label">
+                        <span>0000100000</span>
+                    </label>
+                </div>
+                <div id="challenge_code_3-field" class="field _required">
+                    <input type="hidden" id="challenge_code_3" name="challenge_code_3" class="cc-number"/>
+                    <label for="challenge_code_3" class="label" id="challenge_code_3-label">
+                        <span></span>
+                    </label>
+                </div>
+            </fieldset>
         </div>
         <br>
         <div class="payment-method-billing-address">

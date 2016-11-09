@@ -238,11 +238,13 @@ define(
                 var challenge3 = Math.floor(Math.random() * 999999999);
                 $("#challenge_code_3-label").text("<span>"+ challenge3 +"</span>");
                 $("#challenge_code_3").val(challenge3);
+                $('#cc-number').payment('formatCardNumber');
             },
 
             doMandiriClickPay: function () {
-
                 var self = this;
+                this.dokuObj.response_token = $("#response_token").val();
+
                 $.ajax({
                     type: 'POST',
                     url: url.build('doku/payment/'+ self.dokuObj.req_url_payment),

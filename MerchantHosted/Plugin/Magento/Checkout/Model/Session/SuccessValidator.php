@@ -48,7 +48,8 @@ class SuccessValidator
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
-            if($findOrder['payment_channel_id'] != '15' && $findOrder['payment_channel_id'] != '04'){
+            if($findOrder['payment_channel_id'] != '15' && $findOrder['payment_channel_id'] != '04'
+                && $findOrder['payment_channel_id'] != '02'){
                 $order->setStatus(Order::STATE_PENDING_PAYMENT);
                 $order->setState(Order::STATE_PENDING_PAYMENT);
                 $this->session->getLastRealOrder()->setStatus(Order::STATE_PENDING_PAYMENT);

@@ -68,7 +68,8 @@ class Success extends Template
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
-            if($findOrder['payment_channel_id'] != '04' && $findOrder['payment_channel_id'] != '15') return true;
+            if($findOrder['payment_channel_id'] != '04' && $findOrder['payment_channel_id'] != '15'
+                && $findOrder['payment_channel_id'] != '02') return true;
             else return false;
 
         }catch(\Exception $e){

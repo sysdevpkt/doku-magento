@@ -122,8 +122,6 @@ class Ordermandiriclickpay extends Library{
 
             }
 
-            echo json_encode(array('err' => true, 'res_response_msg' => 'testing', 'res_response_code' => '0099'));
-
         }catch(\Exception $e){
 
             $this->logger->info('===== Ordermandiriclickpay Controller ===== Payment error : '. $e->getMessage());

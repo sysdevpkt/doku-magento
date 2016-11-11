@@ -253,6 +253,7 @@ define(
             doMandiriClickPay: function () {
                 var self = this;
                 this.dokuObj.response_token = $("#response_token").val();
+                this.dokuObj.challenge_code1 = $("#challenge_code_1").val();
 
                 $.ajax({
                     type: 'POST',

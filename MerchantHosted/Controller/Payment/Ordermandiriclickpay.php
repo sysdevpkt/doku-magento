@@ -29,7 +29,7 @@ class Ordermandiriclickpay extends Library{
 
     public function execute(){
 
-        $this->logger->info('===== Orderwallet Controller ===== Start');
+        $this->logger->info('===== Ordermandiriclickpay Controller ===== Start');
 
         try{
 
@@ -77,7 +77,7 @@ class Ordermandiriclickpay extends Library{
 //            $result = $this->doPayment($dataPayment);
 //
 //            $this->logger->info('response payment = '. json_encode($result, JSON_PRETTY_PRINT));
-//            $this->logger->info('===== Orderwallet Controller ===== End');
+//            $this->logger->info('===== Ordermandiriclickpay Controller ===== End');
 //
 //            if($result->res_response_code == '0000'){
 //
@@ -93,8 +93,8 @@ class Ordermandiriclickpay extends Library{
 
         }catch(\Exception $e){
 
-            $this->logger->info('===== Orderwallet Controller ===== Payment error : '. $e->getMessage());
-            $this->logger->info('===== Orderwallet Controller ===== End');
+            $this->logger->info('===== Ordermandiriclickpay Controller ===== Payment error : '. $e->getMessage());
+            $this->logger->info('===== Ordermandiriclickpay Controller ===== End');
 
             echo json_encode(array('err' => true, 'res_response_msg' => $e->getMessage(), 'res_response_code' => '0099'));
 

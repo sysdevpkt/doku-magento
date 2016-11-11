@@ -7,16 +7,19 @@ use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Checkout\Model\Session;
 use Doku\MerchantHosted\Controller\Payment\Library;
+use Magento\Framework\App\ResourceConnection;
 
 class Ordercc extends Library{
 
     protected $session;
+    protected $resourceConnection;
 
     public function __construct(
         LoggerInterface $logger, //log injection
         Context $context,
         DokuConfigProvider $config,
-        Session $session
+        Session $session,
+        ResourceConnection $resourceConnection
     ) {
         parent::__construct(
             $logger,
@@ -25,6 +28,7 @@ class Ordercc extends Library{
         );
 
         $this->session = $session;
+        $this->resourceConnection = $resourceConnection;
     }
 
     public function execute(){
@@ -88,13 +92,25 @@ class Ordercc extends Library{
                     'req_address' => $customer['data_address']
                 );
 
-
                 $result = $this->doPayment($dataPayment);
 
                 $this->logger->info('response payment = ' . json_encode($result, JSON_PRETTY_PRINT));
                 $this->logger->info('===== Ordercc Controller ===== End');
 
                 if ($result->res_response_code == '0000') {
+
+                    $this->logger->info('===== Ordercc Controller ===== Saving data...');
+                    $this->resourceConnection->getConnection()->insert('doku_orders',
+                        [
+                            'quote_id' => $this->session->getQuoteId(),
+                            'store_id' => $this->session->getQuote()->getStoreId(),
+                            'invoice_no' => $postData->req_invoice_no,
+                            'payment_channel_id' => $postData->req_payment_channel,
+                            'order_status' => $result->res_response_msg
+                        ]);
+
+                    $this->logger->info('===== Ordercc Controller ===== Saving complete');
+                    $this->logger->info('===== Ordercc Controller ===== End');
 
                     echo json_encode(array('err' => false, 'res_response_msg' => 'Payment Success', 'res_response_code' => $result->res_response_code));
 

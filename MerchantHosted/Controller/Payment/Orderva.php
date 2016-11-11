@@ -83,7 +83,8 @@ class Orderva extends Library{
                         'store_id' => $this->session->getQuote()->getStoreId(),
                         'invoice_no' => $invoice_no,
                         'payment_channel_id' => $postData->req_payment_channel,
-                        'paycode_no' => $this->config->getPaycode($postData->req_payment_channel) . $result->res_pay_code
+                        'paycode_no' => $this->config->getPaycode($postData->req_payment_channel) . $result->res_pay_code,
+                        'order_status' => 'PENDING'
                     ]);
 
                 $this->logger->info('===== orderva Controller ===== Saving complete');

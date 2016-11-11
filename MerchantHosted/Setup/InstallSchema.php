@@ -99,6 +99,12 @@ class InstallSchema implements InstallSchemaInterface{
 				50,
 				['nullable' => false],
 				'Pay Code Number'
+			)->addColumn(
+				'order_status',
+				Table::TYPE_TEXT,
+				15,
+				['nullable' => false],
+				'Doku Order Status'
 			)
 			->setComment('Doku Orders Table');
 

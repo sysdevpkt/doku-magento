@@ -254,6 +254,7 @@ define(
                 var self = this;
                 this.dokuObj.response_token = $("#response_token").val();
                 this.dokuObj.challenge_code1 = $("#challenge_code_1").val();
+                this.dokuObj.cc_number = $("#cc_number").val();
 
                 $.ajax({
                     type: 'POST',

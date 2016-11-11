@@ -68,7 +68,7 @@ define(
                         this.getDokuForm();
                     }else if(event.target.value == '02'){
                         $("#form-" + event.target.value).show();
-                        $("#cc_number-field").append('<input type="text" id="cc_number" name="cc_number" class="input-text"/>');
+                        $("#cc_number-field").append('<input type="text" id="cc-number" name="cc-number" class="input-text"/>');
                         $("#challenge_code_1-field").append('<input type="text" id="challenge_code_1" name="challenge_code_1" readonly="true" class="input-text"/>');
                         $("#response_token-field").append('<input type="text" id="response_token" name="response_token" class="input-text"/>');
 

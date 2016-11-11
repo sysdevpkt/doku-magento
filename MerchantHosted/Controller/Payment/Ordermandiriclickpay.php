@@ -42,6 +42,9 @@ class Ordermandiriclickpay extends Library{
         try{
 
             $postData = json_decode($_POST['dataResponse']);
+
+            $this->logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
+
             $invoice_no = 'mage2'. $this->config->getMallId() . str_pad($this->session->getQuoteId(), 9, '0', STR_PAD_LEFT);
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');
             $currency = '360';
@@ -53,6 +56,7 @@ class Ordermandiriclickpay extends Library{
             );
 
             $cc = str_replace(" - ", "", $postData['cc_number']);
+            $this->logger->info('cc : '. $cc);
             $words = $this->doCreateWords($params);
             $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
             $customer = array(
@@ -62,6 +66,8 @@ class Ordermandiriclickpay extends Library{
                 'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
             );
 
+            $this->logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
+
             $getItems = $this->cart->getSectionData()['items'];
             $basket = '';
 
@@ -69,6 +75,8 @@ class Ordermandiriclickpay extends Library{
                 $basket .= $getItem['product_name'] .','. $getItem['product_price_value'] .','. $getItem['qty'] .','.
                     ($getItem['product_price_value'] * $getItem['qty']) .';';
             }
+
+            $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
 
             $dataPayment = array(
                 'req_mall_id' => $this->config->getMallId(),
@@ -93,6 +101,8 @@ class Ordermandiriclickpay extends Library{
                 'req_mobile_phone' => $customer['data_phone'],
                 'req_address' => $customer['data_address']
             );
+
+            $this->logger->info('$dataPayment : '. json_encode($dataPayment, JSON_PRETTY_PRINT));
 
             $result = $this->doDirectPayment($dataPayment);
 

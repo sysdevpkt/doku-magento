@@ -49,6 +49,9 @@ define(
                 loader.show;
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();
+                $("#cc_number-field input").remove();
+                $("#challenge_code_1-field input").remove();
+                $("#response_token-field input").remove();
                 this.dokuObj.req_payment_channel = event.target.value;
 
                 if(event.target.value != '') {
@@ -65,6 +68,10 @@ define(
                         this.getDokuForm();
                     }else if(event.target.value == '02'){
                         $("#form-" + event.target.value).show();
+                        $("#cc_number-field").append('<input type="text" id="cc_number" name="cc_number"class="input-text"/>');
+                        $("#challenge_code_1-field").append('<input type="text" id="challenge_code_1" name="challenge_code_1" readonly="true" class="input-text"/>');
+                        $("#response_token-field").append('<input type="text" id="response_token" name="response_token" class="input-text"/>');
+
                         this.getChallengeCode3();
                         this.dokuObj.req_url_payment = 'ordermandiriclickpay';
 
@@ -86,6 +93,7 @@ define(
                     if(this.dokuObj.req_payment_channel == '04' || this.dokuObj.req_payment_channel == '15'){
                         DokuToken(getToken);
                     }else if(this.dokuObj.req_payment_channel == '02'){
+                        this.dokuObj.challenge_code2 = '0000100000';
                         this.doMandiriClickPay();
                     }else{
                         this.generateCode();
@@ -236,9 +244,10 @@ define(
 
             getChallengeCode3: function () {
                 var challenge3 = Math.floor(Math.random() * 999999999);
-                $("#challenge_code_3-label").text("<span>"+ challenge3 +"</span>");
+                $("#challenge_code_3-label").text("Challenge Code 3 : "+ challenge3);
                 $("#challenge_code_3").val(challenge3);
                 $('#cc-number').payment('formatCardNumber');
+                this.dokuObj.challenge_code3 = challenge3;
             },
 
             doMandiriClickPay: function () {

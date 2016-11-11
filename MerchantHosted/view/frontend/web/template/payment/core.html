@@ -68,7 +68,15 @@
                     <label for="cc_number" class="label" id="cc_number-label">
                         <span>Mandiri Debit Card Number</span>
                     </label>
-                    <input type="text" id="cc_number" name="cc_number" required class="input-text" />
+                    <input class="input-text" type="text" data-bind="
+                    value: value,
+                    valueUpdate: 'keyup',
+                    hasFocus: focused,
+                    attr: {
+                        name: cc_number,
+                        placeholder: placeholder,
+                        id: cc_number
+                    }" />
                 </div>
                 <br>
                 <div id="challenge_code_1-field" class="field">

@@ -55,8 +55,12 @@ class Ordermandiriclickpay extends Library{
                 'currency' => $currency
             );
 
+            $this->logger->info('$params : '. json_encode($params, JSON_PRETTY_PRINT));
+
             $cc = str_replace(" - ", "", $postData['cc_number']);
+
             $this->logger->info('cc : '. $cc);
+            
             $words = $this->doCreateWords($params);
             $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
             $customer = array(

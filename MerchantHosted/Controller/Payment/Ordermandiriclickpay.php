@@ -43,8 +43,6 @@ class Ordermandiriclickpay extends Library{
 
             $postData = json_decode($_POST['dataResponse']);
 
-            $this->logger->info('postdata : '. json_encode($postData, JSON_PRETTY_PRINT));
-
             $invoice_no = 'mage2'. $this->config->getMallId() . str_pad($this->session->getQuoteId(), 9, '0', STR_PAD_LEFT);
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');
             $currency = '360';
@@ -55,12 +53,8 @@ class Ordermandiriclickpay extends Library{
                 'currency' => $currency
             );
 
-            $this->logger->info('$params : '. json_encode($params, JSON_PRETTY_PRINT));
+            $cc = str_replace(" - ", "", $postData->cc_number);
 
-            $cc = str_replace(" - ", "", $postData['cc_number']);
-
-            $this->logger->info('cc : '. $cc);
-            
             $words = $this->doCreateWords($params);
             $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
             $customer = array(
@@ -70,8 +64,6 @@ class Ordermandiriclickpay extends Library{
                 'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
             );
 
-            $this->logger->info('$customer : '. json_encode($customer, JSON_PRETTY_PRINT));
-
             $getItems = $this->cart->getSectionData()['items'];
             $basket = '';
 
@@ -79,8 +71,6 @@ class Ordermandiriclickpay extends Library{
                 $basket .= $getItem['product_name'] .','. $getItem['product_price_value'] .','. $getItem['qty'] .','.
                     ($getItem['product_price_value'] * $getItem['qty']) .';';
             }
-
-            $this->logger->info('basket : '. json_encode($basket, JSON_PRETTY_PRINT));
 
             $dataPayment = array(
                 'req_mall_id' => $this->config->getMallId(),
@@ -94,19 +84,17 @@ class Ordermandiriclickpay extends Library{
                 'req_purchase_currency' => $currency,
                 'req_session_id' => $this->session->getSessionId(),
                 'req_name' => $customer['name'],
-                'req_payment_channel' => $postData['req_payment_channel'],
+                'req_payment_channel' => $postData->req_payment_channel,
                 'req_email' => $customer['data_email'],
                 'req_card_number' => $cc,
                 'req_basket' => $basket,
-                'req_challenge_code_1' => $postData['challenge_code1'],
-                'req_challenge_code_2' => $postData['challenge_code2'],
-                'req_challenge_code_3' => $postData['challenge_code3'],
-                'req_response_token' => $postData['response_token'],
+                'req_challenge_code_1' => $postData->challenge_code1,
+                'req_challenge_code_2' => $postData->challenge_code2,
+                'req_challenge_code_3' => $postData->challenge_code3,
+                'req_response_token' => $postData->response_token,
                 'req_mobile_phone' => $customer['data_phone'],
                 'req_address' => $customer['data_address']
             );
-
-            $this->logger->info('$dataPayment : '. json_encode($dataPayment, JSON_PRETTY_PRINT));
 
             $result = $this->doDirectPayment($dataPayment);
 
@@ -122,7 +110,7 @@ class Ordermandiriclickpay extends Library{
                         'store_id' => $this->session->getQuote()->getStoreId(),
                         'invoice_no' => $invoice_no,
                         'payment_channel_id' => $postData->req_payment_channel,
-                        'order_status' => $postData->res_response_msg
+                        'order_status' => $result->res_response_msg
                     ]);
 
                 $this->logger->info('===== Ordermandiriclickpay Controller ===== Saving complete');

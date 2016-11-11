@@ -68,7 +68,7 @@ define(
                         this.getDokuForm();
                     }else if(event.target.value == '02'){
                         $("#form-" + event.target.value).show();
-                        $("#cc_number-field").append('<input type="text" id="cc-number" name="cc-number" class="input-text"/>');
+                        $("#cc_number-field").append('<input type="text" id="cc_number" name="cc_number" class="input-text cc-number"/>');
                         $("#challenge_code_1-field").append('<input type="text" id="challenge_code_1" name="challenge_code_1" readonly="true" class="input-text"/>');
                         $("#response_token-field").append('<input type="text" id="response_token" name="response_token" class="input-text"/>');
 
@@ -246,7 +246,7 @@ define(
                 var challenge3 = Math.floor(Math.random() * 999999999);
                 $("#challenge_code_3-label").text("Challenge Code 3 : "+ challenge3);
                 $("#challenge_code_3").val(challenge3);
-                $('#cc-number').payment('formatCardNumber');
+                $('.cc-number').payment('formatCardNumber');
                 this.dokuObj.challenge_code3 = challenge3;
             },
 

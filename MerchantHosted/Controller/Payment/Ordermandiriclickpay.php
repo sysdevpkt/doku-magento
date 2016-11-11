@@ -41,6 +41,8 @@ class Ordermandiriclickpay extends Library{
 
         try{
 
+            $this->logger->info('post : '. json_encode($_POST, JSON_PRETTY_PRINT));
+
             $postData = json_decode($_POST['dataResponse']);
             $invoice_no = 'mage2'. $this->config->getMallId() . str_pad($this->session->getQuoteId(), 9, '0', STR_PAD_LEFT);
             $amount = number_format($this->session->getQuote()->getGrandTotal(), 2, '.', '');

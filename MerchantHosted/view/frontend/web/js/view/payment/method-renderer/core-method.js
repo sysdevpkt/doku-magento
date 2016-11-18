@@ -46,6 +46,7 @@ define(
             },
 
             doPaymentChannel: function(data, event){
+                console.log(url.build('doku/payment/'));
                 loader.show;
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();

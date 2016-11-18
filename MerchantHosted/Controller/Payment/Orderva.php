@@ -69,6 +69,8 @@ class Orderva extends Library{
                 'req_email' => $customer['data_email'],
             );
 
+            $this->logger->info('trans_data : '. $dataPayment['req_request_date_time']);
+
             $result = $this->doGeneratePaycode($dataPayment);
 
             $this->logger->info('response payment = '. json_encode($result, JSON_PRETTY_PRINT));

@@ -12,7 +12,7 @@ abstract class Library extends \Magento\Framework\App\Action\Action{
     const prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
     const paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';
     const directPaymentUrl = 'https://staging.doku.com/api/payment/PaymentMIPDirect';
-    const generateCodeUrl = 'http://staging.doku.com/api/payment/doGeneratePaymentCode';
+    const generateCodeUrl = 'https://staging.doku.com/api/payment/doGeneratePaymentCode';
     const redirectPaymentUrl = 'https://staging.doku.com/api/payment/doInitiatePayment';
     const captureUrl = 'https://staging.doku.com/api/payment/DoCapture';
 

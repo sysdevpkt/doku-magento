@@ -307,7 +307,7 @@ define(
                         success: function (response) {
                             var obj = $.parseJSON(response);
                             console.log('response token');
-                            console.log(response.res_response_token);
+                            console.log(response);
 
                             if (obj.err == false) {
                                 //self.placeOrder()

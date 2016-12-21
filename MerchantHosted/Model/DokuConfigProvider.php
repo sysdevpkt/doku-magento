@@ -15,6 +15,7 @@ class DokuConfigProvider implements ConfigProviderInterface
     const paycode = 'paycode';
     const pc = ['14' => 'alfa', '08' => 'mandiri_lite', '09' => 'mandiri_full', '05' => 'permata_lite', '07' => 'permata_full',
         '21' => 'sinarmas_lite', '22' => 'sinarmas_full'];
+    const is_token = 'is_token';
 
     protected $scopeConfig;
     protected $logger;
@@ -56,6 +57,11 @@ class DokuConfigProvider implements ConfigProviderInterface
         return $this->scopeConfig->getValue('payment/core/'. self::payment_title, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
+    public function getIsToken()
+    {
+        return $this->scopeConfig->getValue('payment/cc/'. self::is_token, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
     public function getConfig()
     {
         $config = [
@@ -65,6 +71,9 @@ class DokuConfigProvider implements ConfigProviderInterface
                     'shared_key' => $this->getSharedKey(),
                     'payment_channels' => $this->getPaymentChannels(),
                     'payment_title' => $this->getPaymentTitle()
+                ],
+                'cc' => [
+                    'is_token' => $this->getIsToken()
                 ]
             ]
         ];

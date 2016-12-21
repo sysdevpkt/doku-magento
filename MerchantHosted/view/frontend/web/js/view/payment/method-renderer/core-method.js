@@ -41,6 +41,10 @@ define(
                 return window.checkoutConfig.payment.core.payment_title
             },
 
+            getIsToken: function(){
+                return window.checkoutConfig.payment.cc.is_token
+            },
+
             getPaymentChannels: function(){
                 return $.parseJSON(window.checkoutConfig.payment.core.payment_channels);
             },
@@ -64,7 +68,7 @@ define(
                         } else if (event.target.value == '15') {
                             this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                             this.dokuObj.req_url_payment = 'ordercc';
-                            this.checkToken();
+                            if(this.getIsToken()) this.checkToken();
                         }
                         this.getDokuForm();
                     }else if(event.target.value == '02'){
@@ -139,6 +143,9 @@ define(
                             data.req_mage = true;
 
                             getForm(data);
+
+                            console.log('is token : '+ self.getIsToken());
+                            console.log(window);
 
                         }else{
                             alert({
@@ -296,22 +303,19 @@ define(
             checkToken: function(){
                 var self = this;
 
-                console.log('url : '+ url.build('doku/token'));
-
                 if(window.isCustomerLoggedIn){
                     $.ajax({
                         type: 'POST',
                         url: url.build('doku/payment/token'),
-                        data: {dataResponse: JSON.stringify(self.dokuObj)},
                         showLoader: true,
                         success: function (response) {
-                            console.log(response);
                             var obj = $.parseJSON(response);
-                            console.log('response token');
                             console.log(obj);
 
                             if (obj.err == false) {
-                                //self.placeOrder()
+                                if(obj.res_response_token){
+                                    self.dokuObj.res_response_token = obj.res_response_token;
+                                }
                             }
                         }
                     });

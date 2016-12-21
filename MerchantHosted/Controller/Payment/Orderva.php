@@ -64,10 +64,15 @@ class Orderva extends Library{
                 'req_purchase_amount' => $amount,
                 'req_trans_id_merchant' => $invoice_no,
                 'req_request_date_time' => date('YmdHis'),
-                'req_session_id' => $this->session->getSessionId(),
+//                'req_session_id' => $this->session->getSessionId(),
+                'req_payment_channel' => '14',
+                'req_session_id' => sha1(date('YmdHis')),
                 'req_name' => $customer['name'],
                 'req_email' => $customer['data_email'],
+                'req_basket' => 'basket item test,10000.00,1,10000.00;'
             );
+
+            $this->logger->info('trans_data : '. $dataPayment['req_request_date_time']);
 
             $result = $this->doGeneratePaycode($dataPayment);
 

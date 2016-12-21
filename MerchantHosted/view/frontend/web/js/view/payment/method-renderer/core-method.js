@@ -316,7 +316,8 @@ define(
                         success: function (response) {
                             var obj = $.parseJSON(response);
                             console.log(obj);
-
+                            console.log(obj.err == false);
+                            console.log(obj.err == 'false');
                             if (obj.err == false) {
                                 console.log('response token : '+ obj.res_response_token);
                                 if(obj.res_response_token){

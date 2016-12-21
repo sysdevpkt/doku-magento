@@ -65,12 +65,14 @@ define(
                         if (event.target.value == '04') {
                             this.dokuObj.req_custom_form = ['username-field', 'password-field'];
                             this.dokuObj.req_url_payment = 'orderwallet';
+                            this.getDokuForm();
                         } else if (event.target.value == '15') {
                             this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                             this.dokuObj.req_url_payment = 'ordercc';
                             if(this.getIsToken()) this.checkToken();
+                            else this.getDokuForm();
                         }
-                        this.getDokuForm();
+
                     }else if(event.target.value == '02'){
                         $("#form-" + event.target.value).show();
                         $("#cc_number-field").append('<input type="text" id="cc_number" name="cc_number" class="input-text cc-number"/>');
@@ -142,10 +144,12 @@ define(
                             data.req_custom_form = self.dokuObj.req_custom_form;
                             data.req_mage = true;
 
-                            getForm(data);
+                            if(window.isCustomerLoggedIn && self.getIsToken()){
+                                data.req_customer_id = window.customerData.id;
+                                if(self.dokuObj.res_response_token != undefined) data.req_token_payment = self.dokuObj.req_token_payment;
+                            }
 
-                            console.log('is token : '+ self.getIsToken());
-                            console.log(window);
+                            getForm(data);
 
                         }else{
                             alert({
@@ -315,6 +319,8 @@ define(
                             if (obj.err == false) {
                                 if(obj.res_response_token){
                                     self.dokuObj.res_response_token = obj.res_response_token;
+                                }else{
+                                    self.getDokuForm();
                                 }
                             }
                         }

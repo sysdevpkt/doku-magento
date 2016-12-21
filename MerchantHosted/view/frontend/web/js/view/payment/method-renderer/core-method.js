@@ -17,7 +17,7 @@ define(
             defaults: {
                 template: 'Doku_MerchantHosted/payment/core',
                 setWindow: false,
-                dokuObj: new Object(),
+                dokuObj: {},
             },
 
             initObservable: function(){
@@ -64,6 +64,7 @@ define(
                         } else if (event.target.value == '15') {
                             this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                             this.dokuObj.req_url_payment = 'ordercc';
+                            this.checkToken();
                         }
                         this.getDokuForm();
                     }else if(event.target.value == '02'){
@@ -75,7 +76,7 @@ define(
                         this.getChallengeCode3();
                         this.dokuObj.req_url_payment = 'ordermandiriclickpay';
 
-                        var data = new Object();
+                        var data = {};
 
                         data.req_cc_field = 'cc_number';
                         data.req_challenge_field = 'challenge_code_1';
@@ -123,7 +124,7 @@ define(
 
                             self.dokuObj = $.extend(self.dokuObj, obj);
 
-                            var data = new Object();
+                            var data = {};
                             data.req_merchant_code = self.getMallId(); //mall id or merchant id
                             data.req_chain_merchant = obj.req_chain_merchant; //chain merchant id
                             data.req_payment_channel = self.dokuObj.req_payment_channel; //payment channel
@@ -291,6 +292,45 @@ define(
                     }
                 });
 
+            },
+            checkToken: function(){
+                if(window.isCustomerLoggedIn){
+                    $.ajax({
+                        type: 'POST',
+                        url: url.build('doku/token'),
+                        data: {dataResponse: JSON.stringify(self.dokuObj)},
+                        showLoader: true,
+                        success: function (response) {
+                            var obj = $.parseJSON(response);
+
+                            if (obj.err == false) {
+                                self.placeOrder()
+                            } else {
+                                alert({
+                                    title: 'Check Token Error!',
+                                    content: 'Error code : ' + obj.res_response_code + '<br>Please select payment channel again',
+                                    actions: {
+                                        always: function () {
+                                            $("#payment_channels").val("");
+                                        }
+                                    }
+                                });
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            alert({
+                                title: 'Check Token Error!',
+                                content: 'Please select payment channel again',
+                                actions: {
+                                    always: function () {
+                                        $("#payment_channels").val("");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
     }

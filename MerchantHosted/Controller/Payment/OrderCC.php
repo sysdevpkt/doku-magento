@@ -8,18 +8,21 @@ use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Checkout\Model\Session;
 use Doku\MerchantHosted\Controller\Payment\Library;
 use Magento\Framework\App\ResourceConnection;
+use \Magento\Customer\Model\Session as Customer;
 
 class Ordercc extends Library{
 
     protected $session;
     protected $resourceConnection;
+    protected $customer;
 
     public function __construct(
         LoggerInterface $logger, //log injection
         Context $context,
         DokuConfigProvider $config,
         Session $session,
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        Customer $customer
     ) {
         parent::__construct(
             $logger,
@@ -29,6 +32,7 @@ class Ordercc extends Library{
 
         $this->session = $session;
         $this->resourceConnection = $resourceConnection;
+        $this->customer = $customer->getCustomer();
     }
 
     public function execute(){
@@ -110,6 +114,21 @@ class Ordercc extends Library{
                         ]);
 
                     $this->logger->info('===== Ordercc Controller ===== Saving complete');
+
+                    if(isset($result->res_bundle_token)) {
+
+                        $tokenPayment = json_decode($result->res_bundle_token);
+
+                        $this->logger->info('===== Ordercc Controller ===== Saving token...');
+                        $this->resourceConnection->getConnection()->insert('doku_tokenization',
+                            [
+                                'customer_id' => $this->customer->getEntityId(),
+                                'card_no' => $result->res_mcn,
+                                'token' => $tokenPayment->res_token_payment
+                            ]);
+
+                        $this->logger->info('===== Ordercc Controller ===== Saving complete');
+                    }
                     $this->logger->info('===== Ordercc Controller ===== End');
 
                     echo json_encode(array('err' => false, 'res_response_msg' => 'Payment Success', 'res_response_code' => $result->res_response_code));

@@ -1,5 +1,5 @@
 <?php
-namespace Doku\MerchantHosted\Controller;
+namespace Doku\MerchantHosted\Controller\Payment;
 
 use Doku\MerchantHosted\Controller\Payment\Library;
 use \Psr\Log\LoggerInterface;

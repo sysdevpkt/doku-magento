@@ -301,7 +301,7 @@ define(
                 if(window.isCustomerLoggedIn){
                     $.ajax({
                         type: 'POST',
-                        url: url.build('doku/token'),
+                        url: url.build('doku/payment/token'),
                         data: {dataResponse: JSON.stringify(self.dokuObj)},
                         showLoader: true,
                         success: function (response) {
@@ -309,29 +309,7 @@ define(
 
                             if (obj.err == false) {
                                 //self.placeOrder()
-                            } else {
-                                alert({
-                                    title: 'Check Token Error!',
-                                    content: 'Error code : ' + obj.res_response_code + '<br>Please select payment channel again',
-                                    actions: {
-                                        always: function () {
-                                            $("#payment_channels").val("");
-                                        }
-                                    }
-                                });
                             }
-
-                        },
-                        error: function (xhr, status, error) {
-                            alert({
-                                title: 'Check Token Error!',
-                                content: 'Please select payment channel again',
-                                actions: {
-                                    always: function () {
-                                        $("#payment_channels").val("");
-                                    }
-                                }
-                            });
                         }
                     });
                 }

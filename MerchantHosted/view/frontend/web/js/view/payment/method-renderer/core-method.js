@@ -306,6 +306,8 @@ define(
                         showLoader: true,
                         success: function (response) {
                             var obj = $.parseJSON(response);
+                            console.log('response token');
+                            console.log(response.res_response_token);
 
                             if (obj.err == false) {
                                 //self.placeOrder()

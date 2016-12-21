@@ -34,7 +34,6 @@ class Token extends Library{
     public function execute()
     {
         $this->logger->info('===== Token Controller ===== Start');
-        $arr = [];
 
         try{
 
@@ -44,7 +43,8 @@ class Token extends Library{
             $findToken = $this->resourceConnection->getConnection()->fetchRow($getToken);
             $this->logger->info('token : '. json_encode($findToken, JSON_PRETTY_PRINT));
 
-            $arr = ['err' => 'false', 'res_response_code' => '0001', 'res_response_msg' => 'Success'];
+            $arr = ['err' => 'false', 'res_response_code' => '0001', 'res_response_msg' => 'Success'
+                , 'res_response_token' => ($findToken ? $findToken : false)];
 
             $this->logger->info('===== Token Controller ===== End');
 

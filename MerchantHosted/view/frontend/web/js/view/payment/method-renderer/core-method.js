@@ -294,6 +294,10 @@ define(
 
             },
             checkToken: function(){
+                var self = this;
+
+                console.log('url : '+ url.build('doku/token'));
+
                 if(window.isCustomerLoggedIn){
                     $.ajax({
                         type: 'POST',
@@ -304,7 +308,7 @@ define(
                             var obj = $.parseJSON(response);
 
                             if (obj.err == false) {
-                                self.placeOrder()
+                                //self.placeOrder()
                             } else {
                                 alert({
                                     title: 'Check Token Error!',

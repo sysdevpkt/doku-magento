@@ -305,9 +305,10 @@ define(
                         data: {dataResponse: JSON.stringify(self.dokuObj)},
                         showLoader: true,
                         success: function (response) {
+                            console.log(response);
                             var obj = $.parseJSON(response);
                             console.log('response token');
-                            console.log(response);
+                            console.log(obj);
 
                             if (obj.err == false) {
                                 //self.placeOrder()

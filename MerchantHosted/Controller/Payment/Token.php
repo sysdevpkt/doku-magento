@@ -55,6 +55,7 @@ class Token extends Library{
             $this->logger->info('===== Token Controller ===== End');
         }
 
+        $this->logger->info('respone : '. json_encode($arr, JSON_PRETTY_PRINT));
         echo json_encode($arr);
 
     }

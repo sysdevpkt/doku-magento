@@ -117,6 +117,7 @@ define(
             },
 
             getDokuForm: function(){
+                console.log('getDokuForm');
                 var self = this;
 
                 $.ajax({
@@ -317,9 +318,12 @@ define(
                             console.log(obj);
 
                             if (obj.err == false) {
+                                console.log('response token : '+ obj.res_response_token);
                                 if(obj.res_response_token){
+                                    console.log('true');
                                     self.dokuObj.res_response_token = obj.res_response_token;
                                 }else{
+                                    console.log('false');
                                     self.getDokuForm();
                                 }
                             }

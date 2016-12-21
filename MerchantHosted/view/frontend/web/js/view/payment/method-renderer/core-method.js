@@ -117,7 +117,6 @@ define(
             },
 
             getDokuForm: function(){
-                console.log('getDokuForm');
                 var self = this;
 
                 $.ajax({
@@ -315,13 +314,10 @@ define(
                         showLoader: true,
                         success: function (response) {
                             var obj = $.parseJSON(response);
-                            console.log(obj);
                             if (obj.err == false) {
                                 if(obj.res_response_token){
-                                    console.log('true');
                                     self.dokuObj.res_response_token = obj.res_response_token;
                                 }else{
-                                    console.log('false');
                                     self.getDokuForm();
                                 }
                             }

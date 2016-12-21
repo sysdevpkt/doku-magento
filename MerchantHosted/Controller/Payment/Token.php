@@ -28,7 +28,7 @@ class Token extends Library{
         );
 
         $this->resourceConnection = $resourceConnection;
-        $this->customer = $customer;
+        $this->customer = $customer->getCustomer();
     }
 
     public function execute()
@@ -38,7 +38,11 @@ class Token extends Library{
 
         try{
 
-            $this->logger->info('customer : '. json_encode($this->customer->getCustomer()->convertToArray(), JSON_PRETTY_PRINT));
+            $this->logger->info('customer : '. json_encode($this->customer->convertToArray(), JSON_PRETTY_PRINT));
+            $getToken = $this->resourceConnection->getConnection()->select()->from('doku_tokenization')
+                ->where('customer_id=?', $this->customer->getEntityId());
+            $findToken = $this->resourceConnection->getConnection()->fetchRow($getToken);
+            $this->logger->info('token : '. json_encode($findToken, JSON_PRETTY_PRINT));
 
             $arr = ['err' => 'false', 'res_response_code' => '0001', 'res_response_msg' => 'Success'];
 

@@ -68,7 +68,6 @@ define(
                     this.dokuObj.req_email = (window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue());
                     if(event.target.value == '04' || event.target.value == '15') {
                         if (event.target.value == '04') {
-                            $("#form-" + event.target.value).show();
                             this.dokuObj.req_custom_form = ['username-field', 'password-field'];
                             this.dokuObj.req_url_payment = 'orderwallet';
                             this.getDokuForm();
@@ -77,10 +76,7 @@ define(
                             this.dokuObj.req_url_payment = 'ordercc';
 
                             if(this.getIsToken()) this.checkToken();
-                            else {
-                                this.getDokuForm();
-                                $("#form-" + event.target.value).show();
-                            }
+                            else this.getDokuForm();
                         }
 
                     }else if(event.target.value == '02'){
@@ -160,6 +156,7 @@ define(
                             }
 
                             getForm(data);
+                            $("#form-" + self.dokuObj.req_payment_channel).show();
 
                         }else{
                             alert({
@@ -334,7 +331,6 @@ define(
                                     });
                                     $("#existing_card-div").show();
                                     $('[doku-div="form-payment"]').closest('br').remove();
-                                    $("#form-" + self.dokuObj.req_payment_channel).show();
 
                                 }
 
@@ -367,7 +363,6 @@ define(
                 this.dokuObj.req_token_payment = token[0].token;
                 $('[doku-div="form-payment"]').html(this.dokuDiv);
                 $('[doku-div="form-payment"]').show();
-                $("#form-" + this.dokuObj.req_payment_channel).show();
                 this.getDokuForm();
             }
         });

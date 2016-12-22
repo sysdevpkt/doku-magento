@@ -18,6 +18,7 @@ define(
                 template: 'Doku_MerchantHosted/payment/core',
                 setWindow: false,
                 dokuObj: {},
+                dokuDiv: ''
             },
 
             initObservable: function(){
@@ -27,6 +28,7 @@ define(
                     window.getToken = function (response){
                         self.getToken(response);
                     };
+                    this.dokuDiv = $("[doku-div='form-payment']").html();
                     this.setWindow = true;
                 }
 
@@ -327,6 +329,7 @@ define(
                                     });
                                     $("#existing_card-div").after('<br>');
                                     $("#existing_card-div").show();
+                                    $("#existing_card-div").show();
                                     $("#form-" + self.dokuObj.req_payment_channel).show();
 
                                 }
@@ -345,12 +348,12 @@ define(
                     $("#token_cards-div").show();
                     $("#form-" + this.dokuObj.req_payment_channel).hide();
                     $("#doku-save-cc").hide();
-                    $('[doku-div="form-payment"]:contains("Save this credit card?")').hide();
+                    $('[doku-div="form-payment"]').hide();
                 }else{
                     $("#token_cards-div").hide();
                     $("#form-" + this.dokuObj.req_payment_channel).show();
                     $("#doku-save-cc").show();
-                    $('[doku-div="form-payment"]:contains("Save this credit card?")').show();
+                    $('[doku-div="form-payment"]').show();
                 }
             },
             doSelectCard: function(data, event){
@@ -359,8 +362,10 @@ define(
                 });
 
                 this.dokuObj.req_token_payment = token[0].token;
-                this.getDokuForm();
+                $('[doku-div="form-payment"]').html(this.dokuDiv);
                 $('[doku-div="form-payment"]').show();
+                $("#form-" + this.dokuObj.req_payment_channel).show();
+                this.getDokuForm();
             }
         });
     }

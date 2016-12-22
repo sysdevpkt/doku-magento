@@ -39,7 +39,7 @@ class Token extends Library{
 
             $getToken = $this->resourceConnection->getConnection()->select()->from('doku_tokenization')
                 ->where('customer_id=?', $this->customer->getEntityId());
-            $findToken = $this->resourceConnection->getConnection()->fetchRow($getToken);
+            $findToken = $this->resourceConnection->getConnection()->fetchAll($getToken);
             $this->logger->info('token : '. json_encode($findToken, JSON_PRETTY_PRINT));
 
             $arr = ['err' => false, 'res_response_code' => '0001', 'res_response_msg' => 'Success'

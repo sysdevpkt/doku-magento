@@ -346,11 +346,13 @@ define(
                 }
             },
             doSelectCard: function(id){
-                console.log('doSelectCard');
-                console.log(id);
-                $.grep(this.dokuObj.tokens, function (token) {
-                    if(token.id = id) console.log(token);
-                });
+                if(id != undefined) {
+                    console.log('doSelectCard');
+                    console.log(id);
+                    $.grep(this.dokuObj.tokens, function (token) {
+                        if (token.id = id) console.log(token);
+                    });
+                }
             }
         });
     }

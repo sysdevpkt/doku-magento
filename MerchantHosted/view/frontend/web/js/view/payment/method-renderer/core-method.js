@@ -322,6 +322,9 @@ define(
                                 if(obj.res_response_token){
 
                                     self.dokuObj.tokens = obj.res_response_token;
+                                    $.each(this.dokuObj.tokens, function(index, value){
+                                        $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
+                                    });
                                     $("#existing_card-div").after('<br>');
                                     $("#existing_card-div").show();
                                     $("#form-" + self.dokuObj.req_payment_channel).show();
@@ -337,10 +340,6 @@ define(
             },
             selectExisting: function(){
                 if($("#existing_card").prop("checked") == true){
-
-                    $.each(this.dokuObj.tokens, function(index, value){
-                        $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
-                    });
 
                     $("#token_cards-div").show();
                     $("#form-" + this.dokuObj.req_payment_channel).hide();

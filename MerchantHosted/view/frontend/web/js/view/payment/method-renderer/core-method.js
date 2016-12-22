@@ -333,6 +333,7 @@ define(
                                         $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
                                     });
                                     $("#existing_card-div").show();
+                                    $('[doku-div="form-payment"]').closest('br').remove();
                                     $("#form-" + self.dokuObj.req_payment_channel).show();
 
                                 }
@@ -365,7 +366,6 @@ define(
                 });
                 this.dokuObj.req_token_payment = token[0].token;
                 $('[doku-div="form-payment"]').html(this.dokuDiv);
-                $('[doku-div="form-payment"]').closest('br').remove();
                 $('[doku-div="form-payment"]').show();
                 $("#form-" + this.dokuObj.req_payment_channel).show();
                 this.getDokuForm();

@@ -340,8 +340,6 @@ define(
             },
             selectExisting: function(){
 
-                console.log($('[doku-div="form-payment"]:contains("Save this credit card?")'));
-
                 if($("#existing_card").prop("checked") == true){
 
                     $("#token_cards-div").show();
@@ -360,8 +358,8 @@ define(
                     return token.id == event.target.value;
                 });
 
-                self.dokuObj.req_token_payment = token[0].token;
-                self.getDokuForm();
+                this.dokuObj.req_token_payment = token[0].token;
+                this.getDokuForm();
 
             }
         });

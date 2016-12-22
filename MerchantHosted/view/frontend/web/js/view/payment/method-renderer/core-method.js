@@ -332,11 +332,8 @@ define(
             selectExisting: function(){
                 if($("#existing_card").prop("checked") == true){
 
-                    console.log(this.dokuObj.tokens);
-
                     $.each(this.dokuObj.tokens, function(index, value){
-                        console.log('each = '+ index +' - '+ value);
-                        console.log('id : '+ value.id);
+                        $("#token_cards").prepend('<option value="'+ value.id +'">'+ value.card_no +'</option>');
                     });
 
                     $("#token_cards-div").show();

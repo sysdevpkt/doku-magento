@@ -343,15 +343,16 @@ define(
                     });
 
                     $("#token_cards-div").show();
-                    $("#form-" + self.dokuObj.req_payment_channel).hide();
+                    $("#form-" + this.dokuObj.req_payment_channel).hide();
                 }else{
                     $("#token_cards-div").hide();
-                    $("#form-" + self.dokuObj.req_payment_channel).show();
+                    $("#form-" + this.dokuObj.req_payment_channel).show();
                 }
             },
-            doSelectCard: function(id){
+            doSelectCard: function(data, event){
                 console.log('doSelectCard');
-                console.log(id);
+                console.log(data);
+                console.log(event);
                 if(id != undefined) {
                     $.grep(this.dokuObj.tokens, function (token) {
                         if (token.id = id) console.log(token);

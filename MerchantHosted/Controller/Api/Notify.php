@@ -29,16 +29,16 @@ class Notify extends Library{
 
     public function execute()
     {
-        $this->logger->info('===== notify Controller ===== Start');
+        $this->logger->info('===== Notify Controller ===== Start');
 
         try{
 
             $this->logger->info('post : '. json_encode($_POST, JSON_PRETTY_PRINT));
-            $this->logger->info('===== notify Controller ===== End');
+            $this->logger->info('===== Notify Controller ===== End');
 
         }catch(\Exception $e){
-            $this->logger->info('===== orderva Controller ===== Generate code error : '. $e->getMessage());
-            $this->logger->info('===== orderva Controller ===== End');
+            $this->logger->info('===== Notify Controller ===== Generate code error : '. $e->getMessage());
+            $this->logger->info('===== Notify Controller ===== End');
 
             echo 'STOP';
         }

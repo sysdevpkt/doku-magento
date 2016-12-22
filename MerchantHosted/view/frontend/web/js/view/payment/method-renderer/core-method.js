@@ -318,7 +318,7 @@ define(
                                 if(obj.res_response_token){
 
                                     self.dokuObj.tokens = obj.res_response_token;
-                                    $("#existing_card-div").prepend('<input id="existing_card" name="existing_card" type="checkbox" data-bind="click : selectExisting">');
+                                    $("#existing_card-div").prepend('<input id="existing_card" name="existing_card" type="checkbox" data-bind="click : selectExisting()">');
                                     $("#existing_card-div").show();
 
                                 }else{
@@ -330,6 +330,7 @@ define(
                 }
             },
             selectExisting: function(){
+                console.log(selectExisting);
                 if($("#existing_card").attr("checked") == true){
                     var selectCard = '<select class="select" id="payment_channels" data-bind="event: {change : doSelectCard(this.value)}">';
                     selectCard += '<option value="">&nbsp;</option>';

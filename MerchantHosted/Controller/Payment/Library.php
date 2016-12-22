@@ -5,8 +5,9 @@ namespace Doku\MerchantHosted\Controller\Payment;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use \Magento\Framework\App\Action\Context;
 use \Psr\Log\LoggerInterface;
+use \Magento\Framework\App\Action\Action;
 
-abstract class Library extends \Magento\Framework\App\Action\Action{
+abstract class Library extends Action{
 
     protected $config;
     const prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';

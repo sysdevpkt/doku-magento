@@ -37,7 +37,6 @@ class Token extends Library{
 
         try{
 
-            $this->logger->info('customer : '. json_encode($this->customer->convertToArray(), JSON_PRETTY_PRINT));
             $getToken = $this->resourceConnection->getConnection()->select()->from('doku_tokenization')
                 ->where('customer_id=?', $this->customer->getEntityId());
             $findToken = $this->resourceConnection->getConnection()->fetchRow($getToken);
@@ -55,7 +54,6 @@ class Token extends Library{
             $this->logger->info('===== Token Controller ===== End');
         }
 
-        $this->logger->info('respone : '. json_encode($arr, JSON_PRETTY_PRINT));
         echo json_encode($arr);
 
     }

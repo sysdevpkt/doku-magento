@@ -331,6 +331,8 @@ define(
             },
             selectExisting: function(){
                 console.log('selectExisting');
+                console.log($("#existing_card").attr("checked"));
+                console.log($("#existing_card").prop("checked"));
                 if($("#existing_card").attr("checked") == true){
                     var selectCard = '<select class="select" id="payment_channels" data-bind="event: {change : doSelectCard(this.value)}">';
                     selectCard += '<option value="">&nbsp;</option>';

@@ -150,6 +150,7 @@ define(
                             }
 
                             getForm(data);
+                            console.log("#form-" + self.dokuObj.req_payment_channel);
                             $("#form-" + self.dokuObj.req_payment_channel).show();
 
                         }else{

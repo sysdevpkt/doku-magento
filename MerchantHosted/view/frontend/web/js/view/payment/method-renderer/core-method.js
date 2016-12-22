@@ -53,7 +53,10 @@ define(
             doPaymentChannel: function(data, event){
                 loader.show;
                 delete this.dokuObj.req_token_payment;
+                $("#existing_card").prop("checked", false);
                 $("#existing_card-div").hide();
+                $("#token_cards").val("");
+                $("#token_cards-div").hide();
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment']").html(this.dokuDiv);
                 $("#cc_number-field input").remove();

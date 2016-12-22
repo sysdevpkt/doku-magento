@@ -149,9 +149,8 @@ define(
                                 if(self.dokuObj.req_token_payment != undefined) data.req_token_payment = self.dokuObj.req_token_payment;
                             }
 
-                            getForm(data);
-                            console.log("#form-" + self.dokuObj.req_payment_channel);
                             $("#form-" + self.dokuObj.req_payment_channel).show();
+                            getForm(data);
 
                         }else{
                             alert({

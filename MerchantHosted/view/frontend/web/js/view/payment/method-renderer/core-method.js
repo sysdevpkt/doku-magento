@@ -318,7 +318,8 @@ define(
                                 if(obj.res_response_token){
 
                                     self.dokuObj.tokens = obj.res_response_token;
-                                    $("#existing_card-div").prepend('<input id="existing_card" name="existing_card" type="checkbox" data-bind="click : selectExisting()">');
+                                    $("#existing_card-div").prepend('<input id="existing_card" name="existing_card" type="checkbox" data-bind="checked: selectExisting">');
+                                    $("#existing_card-div").after('<br>');
                                     $("#existing_card-div").show();
 
                                 }else{
@@ -340,9 +341,11 @@ define(
                     selectCard += '</select>';
 
                     $("#token_cards-div").prepend(selectCard);
+                    $("#existing_card-div").after('<br>');
                     $("#token_cards-div").show();
                 }else{
                     $("#token_cards-div").hide();
+                    $("#token_cards-div").next('br').remove();
                     $("#token_cards").remove();
                 }
             },

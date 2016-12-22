@@ -52,7 +52,6 @@ define(
             doPaymentChannel: function(data, event){
                 loader.show;
                 this.dokuDiv = $("[doku-div='form-payment']").html();
-                console.log(this.dokuDiv);
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();
                 $("#cc_number-field input").remove();
@@ -152,7 +151,7 @@ define(
 
                             if(window.isCustomerLoggedIn && self.getIsToken()){
                                 data.req_customer_id = window.customerData.id;
-                                if(self.dokuObj.res_response_token != undefined) data.req_token_payment = self.dokuObj.req_token_payment;
+                                if(self.dokuObj.req_token_payment != undefined) data.req_token_payment = self.dokuObj.req_token_payment;
                             }
 
                             getForm(data);
@@ -360,9 +359,9 @@ define(
                 var token = $.grep(this.dokuObj.tokens, function (token) {
                     return token.id == event.target.value;
                 });
-                console.log(this.dokuDiv);
                 this.dokuObj.req_token_payment = token[0].token;
                 $('[doku-div="form-payment"]').html(this.dokuDiv);
+                $('[doku-div="form-payment"]').closest('<br>').remove();
                 $('[doku-div="form-payment"]').show();
                 $("#form-" + this.dokuObj.req_payment_channel).show();
                 this.getDokuForm();

@@ -353,11 +353,11 @@ define(
                 console.log('doSelectCard');
                 console.log(data);
                 console.log(event);
-                if(id != undefined) {
-                    $.grep(this.dokuObj.tokens, function (token) {
-                        if (token.id = id) console.log(token);
-                    });
-                }
+                //if(id != undefined) {
+                //    $.grep(this.dokuObj.tokens, function (token) {
+                //        if (token.id = id) console.log(token);
+                //    });
+                //}
             }
         });
     }

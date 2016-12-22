@@ -339,23 +339,29 @@ define(
                 }
             },
             selectExisting: function(){
+
+                console.log($('[doku-div="form-payment"]:contains("Save this credit card?")'));
+
                 if($("#existing_card").prop("checked") == true){
 
                     $("#token_cards-div").show();
                     $("#form-" + this.dokuObj.req_payment_channel).hide();
+                    $("#doku-save-cc").hide();
+                    $('[doku-div="form-payment"]:contains("Save this credit card?")').hide();
                 }else{
                     $("#token_cards-div").hide();
                     $("#form-" + this.dokuObj.req_payment_channel).show();
+                    $("#doku-save-cc").show();
+                    $('[doku-div="form-payment"]:contains("Save this credit card?")').show();
                 }
             },
             doSelectCard: function(data, event){
-                console.log('doSelectCard');
-
                 var token = $.grep(this.dokuObj.tokens, function (token) {
                     return token.id == event.target.value;
                 });
 
-                console.log(token);
+                self.dokuObj.req_token_payment = token[0].token;
+                self.getDokuForm();
 
             }
         });

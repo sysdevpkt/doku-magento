@@ -29,7 +29,7 @@
         </fieldset>
         <br>
         <div class="field choice" id="existing_card-div" style="display: none;">
-            <input id="existing_card" name="existing_card" type="checkbox" data-bind="attr: {click: selectExisting, visible: true}">
+            <input id="existing_card" name="existing_card" type="checkbox" data-bind="attr: {visible: true}, event: {change: selectExisting}">
             <label for="existing_card" id="existing_card-label"><span>Use existing card</span></label>
         </div>
         <div class="field" id="token_cards-div" style="display: none;">

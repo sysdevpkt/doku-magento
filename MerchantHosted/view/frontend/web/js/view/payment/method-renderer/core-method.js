@@ -61,8 +61,8 @@ define(
                 if(event.target.value != '') {
                     this.dokuObj.req_email = (window.isCustomerLoggedIn ? window.customerData.email : checkout.getValidatedEmailValue());
                     if(event.target.value == '04' || event.target.value == '15') {
-                        $("#form-" + event.target.value).show();
                         if (event.target.value == '04') {
+                            $("#form-" + event.target.value).show();
                             this.dokuObj.req_custom_form = ['username-field', 'password-field'];
                             this.dokuObj.req_url_payment = 'orderwallet';
                             this.getDokuForm();
@@ -70,7 +70,7 @@ define(
                             this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                             this.dokuObj.req_url_payment = 'ordercc';
                             if(this.getIsToken()) this.checkToken();
-                            else this.getDokuForm();
+                            else this.getDokuForm(); $("#form-" + event.target.value).show();
                         }
 
                     }else if(event.target.value == '02'){

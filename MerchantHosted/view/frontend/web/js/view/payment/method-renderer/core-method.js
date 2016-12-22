@@ -330,13 +330,12 @@ define(
                 }
             },
             selectExisting: function(){
-                console.log('selectExisting');
-                console.log($("#existing_card").attr("checked"));
-                console.log($("#existing_card").prop("checked"));
-                if($("#existing_card").attr("checked") == true){
+                if($("#existing_card").prop("checked") == true){
                     var selectCard = '<select class="select" id="payment_channels" data-bind="event: {change : doSelectCard(this.value)}">';
                     selectCard += '<option value="">&nbsp;</option>';
                     $.each(this.dokuObj, function(key){
+                        console.log('each');
+                        console.log(key);
                         selectCard += '<option value="'+ key.id +'">'+ key.card_no +'</option>';
                     });
                     selectCard += '</select>';
@@ -351,6 +350,7 @@ define(
                 }
             },
             doSelectCard: function(id){
+                console.log('doSelectCard');
                 console.log(id);
                 $.grep(this.dokuObj, function (token) {
                     if(token.id = id) console.log(token);

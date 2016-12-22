@@ -322,7 +322,7 @@ define(
                                 if(obj.res_response_token){
 
                                     self.dokuObj.tokens = obj.res_response_token;
-                                    $.each(this.dokuObj.tokens, function(index, value){
+                                    $.each(self.dokuObj.tokens, function(index, value){
                                         $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
                                     });
                                     $("#existing_card-div").after('<br>');

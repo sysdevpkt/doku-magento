@@ -350,13 +350,13 @@ define(
             },
             doSelectCard: function(data, event){
                 console.log('doSelectCard');
-                console.log(data);
-                console.log(event);
-                //if(id != undefined) {
-                //    $.grep(this.dokuObj.tokens, function (token) {
-                //        if (token.id = id) console.log(token);
-                //    });
-                //}
+
+                var token = $.grep(this.dokuObj.tokens, function (token) {
+                    return token.id == event.target.value;
+                });
+
+                console.log(token);
+
             }
         });
     }

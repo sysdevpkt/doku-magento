@@ -52,6 +52,7 @@ define(
 
             doPaymentChannel: function(data, event){
                 loader.show;
+                delete this.dokuObj.req_token_payment;
                 $("#existing_card-div").hide();
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment']").html(this.dokuDiv);
@@ -360,7 +361,7 @@ define(
                 });
                 this.dokuObj.req_token_payment = token[0].token;
                 $('[doku-div="form-payment"]').html(this.dokuDiv);
-                $('[doku-div="form-payment"]').closest('<br>').remove();
+                $('[doku-div="form-payment"]').closest('br').remove();
                 $('[doku-div="form-payment"]').show();
                 $("#form-" + this.dokuObj.req_payment_channel).show();
                 this.getDokuForm();

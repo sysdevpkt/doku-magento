@@ -335,8 +335,8 @@ define(
                     console.log(this.dokuObj.tokens);
 
                     $.each(this.dokuObj.tokens, function(index, value){
-                        console.log('each');
-                        console.log(index +' - '+ value);
+                        console.log('each = '+ index +' - '+ value);
+                        console.log('id : '+ value.id);
                     });
 
                     $("#token_cards-div").show();

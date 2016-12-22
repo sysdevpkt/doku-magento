@@ -59,9 +59,6 @@ define(
                 $("#token_cards-div").hide();
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment']").html(this.dokuDiv);
-                $("#cc_number-field input").remove();
-                $("#challenge_code_1-field input").remove();
-                $("#response_token-field input").remove();
                 this.dokuObj.req_payment_channel = event.target.value;
 
                 if(event.target.value != '') {
@@ -81,9 +78,6 @@ define(
 
                     }else if(event.target.value == '02'){
                         $("#form-" + event.target.value).show();
-                        $("#cc_number-field").append('<input type="text" id="cc_number" name="cc_number" class="input-text cc-number"/>');
-                        $("#challenge_code_1-field").append('<input type="text" id="challenge_code_1" name="challenge_code_1" readonly="true" class="input-text"/>');
-                        $("#response_token-field").append('<input type="text" id="response_token" name="response_token" class="input-text"/>');
 
                         this.getChallengeCode3();
                         this.dokuObj.req_url_payment = 'ordermandiriclickpay';

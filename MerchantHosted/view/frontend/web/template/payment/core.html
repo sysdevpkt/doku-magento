@@ -78,12 +78,16 @@
                     <label for="cc_number" class="label" id="cc_number-label">
                         <span>Mandiri Debit Card Number</span>
                     </label>
+                    <input type="text" id="cc_number" name="cc_number" class="input-text cc-number"
+                           data-bind="attr: {visible: true}"/>
                 </div>
                 <br>
                 <div id="challenge_code_1-field" class="field">
                     <label for="challenge_code_1" class="label" id="challenge_code_1-label">
                         <span>Challenge Code 1</span>
                     </label>
+                    <input type="text" id="challenge_code_1" name="challenge_code_1" readonly="true" class="input-text"
+                           data-bind="attr: {visible: true}"/>
                 </div>
                 <div id="challenge_code_2-field" class="field">
                     <label for="challenge_code_2" class="label" id="challenge_code_2-label">
@@ -100,6 +104,8 @@
                     <label for="response_token" class="label" id="response_token-label">
                         <span>Response Token</span>
                     </label>
+                    <input type="text" id="response_token" name="response_token" class="input-text"
+                           data-bind="attr: {visible: true}"/>
                 </div>
             </fieldset>
         </div>

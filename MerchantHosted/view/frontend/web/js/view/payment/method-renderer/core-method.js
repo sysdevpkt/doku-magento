@@ -46,12 +46,15 @@ define(
             },
 
             getPaymentChannels: function(){
+                this.dokuDiv = $("[doku-div='form-payment']").html();
+                console.log('doku div');
+                console.log(this.dokuDiv);
                 return $.parseJSON(window.checkoutConfig.payment.core.payment_channels);
             },
 
             doPaymentChannel: function(data, event){
                 loader.show;
-                this.dokuDiv = $("[doku-div='form-payment']").html();
+                $("#existing_card-div").hide();
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();
                 $("#cc_number-field input").remove();
@@ -326,8 +329,6 @@ define(
                                     $.each(self.dokuObj.tokens, function(index, value){
                                         $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
                                     });
-                                    $("#existing_card-div").after('<br>');
-                                    $("#existing_card-div").show();
                                     $("#existing_card-div").show();
                                     $("#form-" + self.dokuObj.req_payment_channel).show();
 

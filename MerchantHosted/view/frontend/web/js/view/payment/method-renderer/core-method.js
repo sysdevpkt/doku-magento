@@ -318,7 +318,6 @@ define(
                                 if(obj.res_response_token){
 
                                     self.dokuObj.tokens = obj.res_response_token;
-                                    //$("#existing_card-div").prepend('<input id="existing_card" name="existing_card" type="checkbox" data-bind="attr: {checked: selectExisting}">');
                                     $("#existing_card-div").after('<br>');
                                     $("#existing_card-div").show();
 

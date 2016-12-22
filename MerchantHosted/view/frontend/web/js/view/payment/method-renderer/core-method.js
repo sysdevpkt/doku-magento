@@ -28,12 +28,8 @@ define(
                     window.getToken = function (response){
                         self.getToken(response);
                     };
-                    this.dokuDiv = $("[doku-div='form-payment']").html();
                     this.setWindow = true;
                 }
-
-                console.log(this.dokuDiv);
-
                 return this;
             },
 
@@ -55,6 +51,8 @@ define(
 
             doPaymentChannel: function(data, event){
                 loader.show;
+                this.dokuDiv = $("[doku-div='form-payment']").html();
+                console.log(this.dokuDiv);
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment'] :input").remove();
                 $("#cc_number-field input").remove();

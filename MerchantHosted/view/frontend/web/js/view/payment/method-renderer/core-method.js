@@ -315,15 +315,15 @@ define(
                         success: function (response) {
                             var obj = $.parseJSON(response);
                             if (obj.err == false) {
-                                if(obj.res_response_token){
-
-                                    self.dokuObj.tokens = obj.res_response_token;
-                                    $("#existing_card-div").after('<br>');
-                                    $("#existing_card-div").show();
-
-                                }else{
+                                //if(obj.res_response_token){
+                                //
+                                //    self.dokuObj.tokens = obj.res_response_token;
+                                //    $("#existing_card-div").after('<br>');
+                                //    $("#existing_card-div").show();
+                                //
+                                //}else{
                                     self.getDokuForm();
-                                }
+                                //}
                             }
                         }
                     });
@@ -333,7 +333,7 @@ define(
                 if($("#existing_card").prop("checked") == true){
                     var selectCard = '<select class="select" id="payment_channels" data-bind="event: {change : doSelectCard(this.value)}">';
                     selectCard += '<option value="">&nbsp;</option>';
-                    $.each(this.dokuObj, function(key){
+                    $.each(this.dokuObj.tokens, function(key){
                         console.log('each');
                         console.log(key);
                         selectCard += '<option value="'+ key.id +'">'+ key.card_no +'</option>';
@@ -341,11 +341,9 @@ define(
                     selectCard += '</select>';
 
                     $("#token_cards-div").prepend(selectCard);
-                    $("#existing_card-div").after('<br>');
                     $("#token_cards-div").show();
                 }else{
                     $("#token_cards-div").hide();
-                    $("#token_cards-div").next('br').remove();
                     $("#token_cards").remove();
                 }
             },

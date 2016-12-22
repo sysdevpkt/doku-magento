@@ -315,15 +315,15 @@ define(
                         success: function (response) {
                             var obj = $.parseJSON(response);
                             if (obj.err == false) {
-                                //if(obj.res_response_token){
-                                //
-                                //    self.dokuObj.tokens = obj.res_response_token;
-                                //    $("#existing_card-div").after('<br>');
-                                //    $("#existing_card-div").show();
-                                //
-                                //}else{
+                                if(obj.res_response_token){
+
+                                    self.dokuObj.tokens = obj.res_response_token;
+                                    $("#existing_card-div").after('<br>');
+                                    $("#existing_card-div").show();
+
+                                }else{
                                     self.getDokuForm();
-                                //}
+                                }
                             }
                         }
                     });
@@ -331,14 +331,11 @@ define(
             },
             selectExisting: function(){
                 if($("#existing_card").prop("checked") == true){
-                    var selectCard = '<select class="select" id="payment_channels" data-bind="event: {change : doSelectCard(this.value)}">';
-                    selectCard += '<option value="">&nbsp;</option>';
-                    $.each(this.dokuObj.tokens, function(key){
+
+                    $.each(this.dokuObj.tokens, function(index, value){
                         console.log('each');
-                        console.log(key);
-                        selectCard += '<option value="'+ key.id +'">'+ key.card_no +'</option>';
+                        console.log(index +' - '+ value);
                     });
-                    selectCard += '</select>';
 
                     $("#token_cards-div").prepend(selectCard);
                     $("#token_cards-div").show();
@@ -350,7 +347,7 @@ define(
             doSelectCard: function(id){
                 console.log('doSelectCard');
                 console.log(id);
-                $.grep(this.dokuObj, function (token) {
+                $.grep(this.dokuObj.tokens, function (token) {
                     if(token.id = id) console.log(token);
                 });
             }

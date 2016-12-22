@@ -47,8 +47,6 @@ define(
 
             getPaymentChannels: function(){
                 this.dokuDiv = $("[doku-div='form-payment']").html();
-                console.log('doku div');
-                console.log(this.dokuDiv);
                 return $.parseJSON(window.checkoutConfig.payment.core.payment_channels);
             },
 
@@ -56,7 +54,7 @@ define(
                 loader.show;
                 $("#existing_card-div").hide();
                 $("fieldset[id^='form-']").hide();
-                $("[doku-div='form-payment'] :input").remove();
+                $("[doku-div='form-payment']").html(this.dokuDiv);
                 $("#cc_number-field input").remove();
                 $("#challenge_code_1-field input").remove();
                 $("#response_token-field input").remove();

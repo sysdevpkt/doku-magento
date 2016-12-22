@@ -32,6 +32,8 @@ define(
                     this.setWindow = true;
                 }
 
+                console.log(this.dokuDiv);
+
                 return this;
             },
 
@@ -360,7 +362,7 @@ define(
                 var token = $.grep(this.dokuObj.tokens, function (token) {
                     return token.id == event.target.value;
                 });
-
+                console.log(this.dokuDiv);
                 this.dokuObj.req_token_payment = token[0].token;
                 $('[doku-div="form-payment"]').html(this.dokuDiv);
                 $('[doku-div="form-payment"]').show();

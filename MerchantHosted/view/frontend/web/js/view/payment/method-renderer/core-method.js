@@ -55,7 +55,7 @@ define(
                 delete this.dokuObj.req_token_payment;
                 $("#existing_card").prop("checked", false);
                 $("#existing_card-div").hide();
-                $("#token_cards").val("");
+                $("#token_cards").html("");
                 $("#token_cards-div").hide();
                 $("fieldset[id^='form-']").hide();
                 $("[doku-div='form-payment']").html(this.dokuDiv);
@@ -328,6 +328,7 @@ define(
                                 if(obj.res_response_token){
 
                                     self.dokuObj.tokens = obj.res_response_token;
+                                    $("#token_cards").append('<option value="" selected="selected" disabled="disabled">&nbsp;</option>');
                                     $.each(self.dokuObj.tokens, function(index, value){
                                         $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
                                     });

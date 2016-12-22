@@ -317,6 +317,8 @@ define(
                             if (obj.err == false) {
                                 if(obj.res_response_token){
                                     self.dokuObj.res_response_token = obj.res_response_token;
+                                    console.log('token');
+                                    console.log(obj.res_response_token);
                                 }else{
                                     self.getDokuForm();
                                 }

@@ -20,7 +20,7 @@
             <div class="field">
                 <label for="payment_channels" class="label" id="payment_channels-label"><span>Please select payment channel</span></label>
                 <select class="select" id="payment_channels" data-bind="event: {change : doPaymentChannel}">
-                    <option value="">&nbsp;</option>
+                    <option value="" disabled="disabled" selected="selected">&nbsp;</option>
                     <!-- ko foreach: getPaymentChannels() -->
                     <option data-bind="value: $data[0], text: $data[1]"></option>
                     <!--/ko-->
@@ -29,13 +29,12 @@
         </fieldset>
         <br>
         <div class="field choice" id="existing_card-div" style="display: none;">
-            <input id="existing_card" name="existing_card" type="checkbox">
             <label for="existing_card" id="existing_card-label"><span>Use existing card</span></label>
             <br>
         </div>
         <fieldset class="fieldset address" style="margin: 0 0 10px; max-width: 500px; display: none;">
-            <div class="field">
-                <label for="token_cards" class="label" id=token_cards-label"><span>Please select payment channel</span></label>
+            <div class="field" id="token_cards-div">
+                <label for="token_cards" class="label" id="token_cards-label"><span>Please select existing card</span></label>
             </div>
             <br>
         </fieldset>

@@ -316,9 +316,11 @@ define(
                             var obj = $.parseJSON(response);
                             if (obj.err == false) {
                                 if(obj.res_response_token){
-                                    self.dokuObj.res_response_token = obj.res_response_token;
-                                    console.log('token');
-                                    console.log(obj.res_response_token);
+
+                                    self.dokuObj.tokens = obj.res_response_token;
+                                    $("#existing_card-div").prepend('<input id="existing_card" name="existing_card" type="checkbox" data-bind="click : selectExisting">');
+                                    $("#existing_card-div").show();
+
                                 }else{
                                     self.getDokuForm();
                                 }
@@ -326,6 +328,28 @@ define(
                         }
                     });
                 }
+            },
+            selectExisting: function(){
+                if($("#existing_card").attr("checked") == true){
+                    var selectCard = '<select class="select" id="payment_channels" data-bind="event: {change : doSelectCard(this.value)}">';
+                    selectCard += '<option value="">&nbsp;</option>';
+                    $.each(this.dokuObj, function(key){
+                        selectCard += '<option value="'+ key.id +'">'+ key.card_no +'</option>';
+                    });
+                    selectCard += '</select>';
+
+                    $("#token_cards-div").prepend(selectCard);
+                    $("#token_cards-div").show();
+                }else{
+                    $("#token_cards-div").hide();
+                    $("#token_cards").remove();
+                }
+            },
+            doSelectCard: function(id){
+                console.log(id);
+                $.grep(this.dokuObj, function (token) {
+                    if(token.id = id) console.log(token);
+                });
             }
         });
     }

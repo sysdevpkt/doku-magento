@@ -360,7 +360,7 @@ define(
 
                 this.dokuObj.req_token_payment = token[0].token;
                 this.getDokuForm();
-
+                $('[doku-div="form-payment"]').show();
             }
         });
     }

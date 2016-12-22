@@ -69,8 +69,12 @@ define(
                         } else if (event.target.value == '15') {
                             this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                             this.dokuObj.req_url_payment = 'ordercc';
+
                             if(this.getIsToken()) this.checkToken();
-                            else this.getDokuForm(); $("#form-" + event.target.value).show();
+                            else {
+                                this.getDokuForm();
+                                $("#form-" + event.target.value).show();
+                            }
                         }
 
                     }else if(event.target.value == '02'){
@@ -320,10 +324,12 @@ define(
                                     self.dokuObj.tokens = obj.res_response_token;
                                     $("#existing_card-div").after('<br>');
                                     $("#existing_card-div").show();
+                                    $("#form-" + self.dokuObj.req_payment_channel).show();
 
-                                }else{
-                                    self.getDokuForm();
                                 }
+
+                                self.getDokuForm();
+
                             }
                         }
                     });
@@ -333,19 +339,20 @@ define(
                 if($("#existing_card").prop("checked") == true){
 
                     $.each(this.dokuObj.tokens, function(index, value){
-                        $("#token_cards").prepend('<option value="'+ value.id +'">'+ value.card_no +'</option>');
+                        $("#token_cards").append('<option value="'+ value.id +'">'+ value.card_no +'</option>');
                     });
 
                     $("#token_cards-div").show();
+                    $("#form-" + self.dokuObj.req_payment_channel).hide();
                 }else{
                     $("#token_cards-div").hide();
-                    $("#token_cards").remove();
+                    $("#form-" + self.dokuObj.req_payment_channel).show();
                 }
             },
             doSelectCard: function(id){
+                console.log('doSelectCard');
+                console.log(id);
                 if(id != undefined) {
-                    console.log('doSelectCard');
-                    console.log(id);
                     $.grep(this.dokuObj.tokens, function (token) {
                         if (token.id = id) console.log(token);
                     });

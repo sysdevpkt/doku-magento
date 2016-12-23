@@ -344,6 +344,8 @@ define(
                     $('[doku-div="form-payment"]').hide();
                 }else{
                     $("#token_cards-div").hide();
+                    console.log('token card = '+ $("#token_cards").val());
+                    console.log($("#token_cards").val() != '');
 
                     if($("#token_cards").val() != ''){
                         $("#token_cards").val("");

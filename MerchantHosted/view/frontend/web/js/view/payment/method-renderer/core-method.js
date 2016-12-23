@@ -350,6 +350,7 @@ define(
                     if($("#token_cards").val() != ''){
                         $("#token_cards").val("");
                         delete this.dokuObj.req_token_payment;
+                        $('[doku-div="form-payment"]').html(this.dokuDiv);
                         this.getDokuForm();
                     }else{
                         $("#form-" + this.dokuObj.req_payment_channel).show();

@@ -341,13 +341,20 @@ define(
 
                     $("#token_cards-div").show();
                     $("#form-" + this.dokuObj.req_payment_channel).hide();
-                    $("#doku-save-cc").hide();
                     $('[doku-div="form-payment"]').hide();
                 }else{
                     $("#token_cards-div").hide();
-                    $("#form-" + this.dokuObj.req_payment_channel).show();
-                    $("#doku-save-cc").show();
+
+                    if($("#token_cards").val() != ''){
+                        $("#token_cards").val("");
+                        delete this.dokuObj.req_token_payment;
+                        this.getDokuForm();
+                    }else{
+                        $("#form-" + this.dokuObj.req_payment_channel).show();
+                    }
+
                     $('[doku-div="form-payment"]').show();
+
                 }
             },
             doSelectCard: function(data, event){

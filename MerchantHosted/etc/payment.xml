@@ -13,5 +13,26 @@
         <method name="alfa">
             <allow_multiple_address>1</allow_multiple_address>
         </method>
+        <method name="cc">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="mandiri_lite">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="mandiri_full">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="permata_lite">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="permata_full">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="sinarmas_lite">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="sinarmas_full">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
     </methods>
 </payment>

@@ -4,7 +4,7 @@
         <payment>
             <core>
                 <active>1</active>
-                <title>Doku Payment Gateway</title>
+                <title>core</title>
                 <mall_id>Mall ID</mall_id>
                 <shared_key>Shared Key</shared_key>
                 <payment_channels>0</payment_channels>
@@ -12,27 +12,35 @@
                 <model>Doku\MerchantHosted\Model\Core</model>
             </core>
             <alfa>
+                <title>alfa</title>
                 <paycode>88888</paycode>
             </alfa>
             <cc>
+                <title>cc</title>
                 <is_token>0</is_token>
             </cc>
             <mandiri_lite>
+                <title>mandiri_lite</title>
                 <paycode></paycode>
             </mandiri_lite>
             <mandiri_full>
+                <title>mandiri_full</title>
                 <paycode></paycode>
             </mandiri_full>
             <permata_lite>
+                <title>permata_lite</title>
                 <paycode></paycode>
             </permata_lite>
             <permata_full>
+                <title>permata_full</title>
                 <paycode></paycode>
             </permata_full>
             <sinarmas_lite>
+                <title>sinarmas_lite</title>
                 <paycode></paycode>
             </sinarmas_lite>
             <sinarmas_full>
+                <title>sinarmas_full</title>
                 <paycode></paycode>
             </sinarmas_full>
         </payment>

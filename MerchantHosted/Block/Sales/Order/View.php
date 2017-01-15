@@ -32,7 +32,7 @@ class View extends \Magento\Framework\View\Element\Template{
 
     public function getOrderData(){
 
-        $this->logger->info('order'. json_encode($this->getOrder(), JSON_PRETTY_PRINT));
+        $this->logger->info('order'. json_encode($this->getOrder()->convertToArray(), JSON_PRETTY_PRINT));
         return true;
 
     }

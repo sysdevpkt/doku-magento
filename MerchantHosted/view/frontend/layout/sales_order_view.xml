@@ -2,9 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <referenceContainer name="payment_additional_info">
-                <block class="Doku\MerchantHosted\Block\Adminhtml\Order\View\View" name="sales_order_view_doku" template="Doku_MerchantHosted::order/view/view.phtml"/>
-            </referenceContainer>
+            <block class="Doku\MerchantHosted\Block\Comment" template="Doku_MerchantHosted::view.phtml"></block>
         </referenceContainer>
     </body>
 </page>

@@ -8,18 +8,21 @@ use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\ResourceConnection;
 use Doku\MerchantHosted\Controller\Payment\Library;
+use Magento\Checkout\CustomerData\Cart;
 
 class Orderva extends Library{
 
     protected $session;
     protected $resourceConnection;
+    protected $cart;
 
     public function __construct(
         LoggerInterface $logger, //log injection
         Context $context,
         DokuConfigProvider $config,
         Session $session,
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        Cart $cart
     ) {
         parent::__construct(
             $logger,
@@ -29,6 +32,7 @@ class Orderva extends Library{
 
         $this->session = $session;
         $this->resourceConnection = $resourceConnection;
+        $this->cart = $cart;
     }
 
     public function execute(){
@@ -56,6 +60,14 @@ class Orderva extends Library{
                 'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
             );
 
+            $getItems = $this->cart->getSectionData()['items'];
+            $basket = '';
+
+            foreach ($getItems as $getItem) {
+                $basket .= $getItem['product_name'] .','. $getItem['product_price_value'] .','. $getItem['qty'] .','.
+                    ($getItem['product_price_value'] * $getItem['qty']) .';';
+            }
+
             $dataPayment = array(
                 'req_mall_id' => $this->config->getMallId(),
                 'req_chain_merchant' => "NA",
@@ -67,7 +79,7 @@ class Orderva extends Library{
                 'req_session_id' => $this->session->getSessionId(),
                 'req_name' => $customer['name'],
                 'req_email' => $customer['data_email'],
-                'req_basket' => 'basket item test,10000.00,1,10000.00;'
+                'req_basket' => $basket
             );
 
             $this->logger->info('data payment : '. json_encode($dataPayment, JSON_PRETTY_PRINT));

@@ -8,16 +8,21 @@ use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\OrderRepository;
 
-class Notify extends Library {
+class Notify extends Library implements OrderRepositoryInterface{
 
     protected $resourceConnection;
+    private $orderRepositoryInterface;
+    private $orderRepository;
 
     public function __construct(
         LoggerInterface $logger,
         Context $context,
         DokuConfigProvider $config,
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        OrderRepositoryInterface $orderRepositoryInterface,
+        OrderRepository $orderRepository
     )
     {
         parent::__construct(
@@ -27,6 +32,28 @@ class Notify extends Library {
         );
 
         $this->resourceConnection = $resourceConnection;
+        $this->orderRepositoryInterface = $orderRepositoryInterface;
+        $this->orderRepository = $orderRepository;
+    }
+
+    public function getList(\Magento\Framework\Api\SearchCriteria $searchCriteria)
+    {
+        $this->orderRepository->getList($searchCriteria);
+    }
+
+    public function get($id)
+    {
+        $this->orderRepository->get($id);
+    }
+
+    public function delete(\Magento\Sales\Api\Data\OrderInterface $entity)
+    {
+        $this->orderRepository->delete($entity);
+    }
+
+    public function save(\Magento\Sales\Api\Data\OrderInterface $entity)
+    {
+        $this->orderRepository->save($entity);
     }
 
     public function execute()
@@ -58,11 +85,11 @@ class Notify extends Library {
                 $this->logger->info('===== Notify Controller ===== Order found');
                 $this->logger->info('===== Notify Controller ===== Updating order...');
 
-                $order = OrderRepositoryInterface::get($findOrder['order_id']);
+                $order = $this->get($findOrder['order_id']);
                 $order->setState(Order::STATE_PROCESSING);
                 $order->setStatus(Order::STATE_PROCESSING);
 
-                if(OrderRepositoryInterface::save()){
+                if($this->save()){
                     $this->resourceConnection->getConnection()->update('doku_orders',
                         ['order_status' => 'SUCCESS'], ['invoice_no=?' => $postData['TRANSIDMERCHANT']]);
 
@@ -91,5 +118,4 @@ class Notify extends Library {
         }
 
     }
-
 }

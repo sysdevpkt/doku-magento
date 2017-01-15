@@ -70,7 +70,7 @@ class Orderva extends Library{
                 'req_basket' => 'basket item test,10000.00,1,10000.00;'
             );
 
-            $this->logger->info('trans_data : '. $dataPayment['req_request_date_time']);
+            $this->logger->info('data payment : '. json_encode($dataPayment, JSON_PRETTY_PRINT));
 
             $result = $this->doGeneratePaycode($dataPayment);
 

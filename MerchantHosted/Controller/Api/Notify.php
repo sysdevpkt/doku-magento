@@ -7,19 +7,19 @@ use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Sales\Model\Order;
-use Magento\Sales\Api\OrderRepositoryInterface;
 
 class Notify extends Library {
 
     protected $resourceConnection;
-    private $orderRepositoryInterface;
+    private $order;
+
 
     public function __construct(
         LoggerInterface $logger,
         Context $context,
         DokuConfigProvider $config,
         ResourceConnection $resourceConnection,
-        OrderRepositoryInterface $orderRepositoryInterface
+        Order $order
     )
     {
         parent::__construct(
@@ -29,7 +29,7 @@ class Notify extends Library {
         );
 
         $this->resourceConnection = $resourceConnection;
-        $this->orderRepositoryInterface = $orderRepositoryInterface;
+        $this->order = $order;
     }
 
     public function execute()
@@ -61,11 +61,12 @@ class Notify extends Library {
                 $this->logger->info('===== Notify Controller ===== Order found');
                 $this->logger->info('===== Notify Controller ===== Updating order...');
 
-                $order = $this->orderRepositoryInterface->get($findOrder['order_id']);
-                $order->setState(Order::STATE_PROCESSING);
-                $order->setStatus(Order::STATE_PROCESSING);
+                $saveOrder = $this->order->load($findOrder['order_id']);
+                $saveOrder->setState(Order::STATE_PROCESSING);
+                $saveOrder->setStatus(Order::STATE_PROCESSING);
 
-                if($this->orderRepositoryInterface->save()){
+
+                if($saveOrder->save()){
                     $this->resourceConnection->getConnection()->update('doku_orders',
                         ['order_status' => 'SUCCESS'], ['invoice_no=?' => $postData['TRANSIDMERCHANT']]);
 

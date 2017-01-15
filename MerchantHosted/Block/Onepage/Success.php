@@ -66,7 +66,7 @@ class Success extends Template
             $order = $this->getOrder();
             $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
-            $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
+            $findOrder = $this->resourceConnection->getConnection()->fetchOne($getOrder);
 
             $this->logger->info('payment channel : '. $findOrder['payment_channel_id']);
             $this->logger->info('===== checkPaymentChannel ===== End');

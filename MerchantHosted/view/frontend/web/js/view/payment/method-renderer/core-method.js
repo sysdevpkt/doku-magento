@@ -72,6 +72,11 @@ define(
                             this.dokuObj.req_custom_form = ['cc-field', 'cvv-field', 'name-field', 'exp-field'];
                             this.dokuObj.req_url_payment = 'ordercc';
 
+                            console.log('customer logged in');
+                            console.log(window.isCustomerLoggedIn);
+                            console.log('is token');
+                            console.log(this.getIsToken());
+
                             if(window.isCustomerLoggedIn && this.getIsToken()) this.checkToken();
                             else this.getDokuForm();
                         }

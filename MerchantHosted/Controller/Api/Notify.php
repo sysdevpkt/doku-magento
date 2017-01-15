@@ -44,6 +44,9 @@ class Notify extends Library{
             $words = sha1($postData['AMOUNT'] . $this->config->getMallId() . $this->config->getSharedKey()
                 . $postData['TRANSIDMERCHANT'] . $postData['RESULTMSG'] . $postData['VERIFYSTATUS']);
 
+            $this->logger->info('words raw : '. $postData['AMOUNT'] . $this->config->getMallId() . $this->config->getSharedKey()
+                . $postData['TRANSIDMERCHANT'] . $postData['RESULTMSG'] . $postData['VERIFYSTATUS']);
+            $this->logger->info('words : '. $words);
             $this->logger->info('===== Notify Controller ===== Checking words...');
 
             if($postData['WORDS'] == $words){

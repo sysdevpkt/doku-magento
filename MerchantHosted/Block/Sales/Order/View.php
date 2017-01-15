@@ -3,31 +3,36 @@
 namespace Doku\MerchantHosted\Block;
 
 use Magento\Framework\View\Element\Template\Context;
-use Magento\Payment\Helper\Data as PaymentData;
+use \Magento\Framework\Registry;
 use Psr\Log\LoggerInterface as Logger;
 
 class View extends \Magento\Framework\View\Element\Template{
 
-    protected $paymentData;
+    private $registry;
     private $logger;
 
     public function __construct(
         Context $context,
         array $data = [],
-        PaymentData $paymentData,
+        Registry $registry,
         Logger $logger
     ){
         parent::__construct(
            $context, $data
         );
 
-        $this->paymentData = $paymentData;
+        $this->registry = $registry;
         $this->logger = $logger;
     }
 
-    public function getOrder(){
+    private function getOrder()
+    {
+        return $this->registry->registry('sales_order');
+    }
 
-        $this->logger->info('order'. json_encode($this->getParentBlock()->getOrder(), JSON_PRETTY_PRINT));
+    public function getOrderData(){
+
+        $this->logger->info('order'. json_encode($this->getOrder(), JSON_PRETTY_PRINT));
         return true;
 
     }

@@ -68,7 +68,7 @@ class Success extends Template
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchOne($getOrder);
 
-            $this->logger->info('payment channel : '. $findOrder['payment_channel_id']);
+            $this->logger->info('order : '. json_encode($findOrder, JSON_PRETTY_PRINT));
             $this->logger->info('===== checkPaymentChannel ===== End');
 
             if($findOrder['payment_channel_id'] != '04' && $findOrder['payment_channel_id'] != '15'

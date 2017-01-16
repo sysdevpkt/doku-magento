@@ -65,7 +65,6 @@ class Notify extends Library {
                 $saveOrder->setState(Order::STATE_PROCESSING);
                 $saveOrder->setStatus(Order::STATE_PROCESSING);
 
-
                 if($saveOrder->save()){
                     $this->resourceConnection->getConnection()->update('doku_orders',
                         ['order_status' => 'SUCCESS'], ['invoice_no=?' => $postData['TRANSIDMERCHANT']]);

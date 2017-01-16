@@ -1,4 +1,3 @@
 <?php /* @var $block \Doku\MerchantHosted\Block\Sales\Order\View */?>
 <br>
-<?php echo "Hii"?>
-<?php $block->getOrderData()?>
+<?php echo __('Using <span>%1 (%2)</span> as payment channel', [$block->getOrderData()['channel_name'], $block->getOrderData()['channel_id']])?>

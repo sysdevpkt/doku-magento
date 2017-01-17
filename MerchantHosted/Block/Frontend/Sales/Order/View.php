@@ -1,6 +1,6 @@
 <?php
 
-namespace Doku\MerchantHosted\Block\Adminhtml\Sales\Order;
+namespace Doku\MerchantHosted\Block\FrontEnd\Sales\Order;
 
 use Magento\Framework\View\Element\Template\Context;
 use \Magento\Framework\Registry;

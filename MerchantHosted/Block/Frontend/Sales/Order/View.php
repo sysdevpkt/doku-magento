@@ -1,6 +1,6 @@
 <?php
 
-namespace Doku\MerchantHosted\Block\Sales\Order;
+namespace Doku\MerchantHosted\Block\Adminhtml\Sales\Order;
 
 use Magento\Framework\View\Element\Template\Context;
 use \Magento\Framework\Registry;
@@ -32,22 +32,18 @@ class View extends \Magento\Framework\View\Element\Template{
 
     private function getOrder()
     {
-        return $this->registry->registry('sales_order');
+        return $this->registry->registry('current_order');
     }
 
     public function getOrderData(){
 
         $this->logger->info('===== Block View ===== Start');
-        $this->logger->info('order'. json_encode($this->getOrder()->convertToArray(), JSON_PRETTY_PRINT));
 
         try{
 
             $findOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
                 ->where('quote_id=?', $this->getOrder()->getQuoteId())->where('store_id=?', $this->getOrder()->getStoreId());
             $rowOrder = $this->resourceConnection->getConnection()->fetchRow($findOrder);
-
-            $this->logger->info('order : '. json_encode($rowOrder, JSON_PRETTY_PRINT));
-
             $orderInfo = ['channel_id' => $rowOrder['payment_channel_id'], 'channel_name' => DokuConfigProvider::pcName[$rowOrder['payment_channel_id']]];
 
         }catch(\Exception $e){

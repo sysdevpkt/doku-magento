@@ -1,5 +1,5 @@
 <?php
-namespace Doku\MerchantHosted\Block\Onepage;
+namespace Doku\MerchantHosted\Block\Frontend\Onepage;
 
 use \Magento\Framework\View\Element\Template;
 use Magento\Sales\Model\Order;

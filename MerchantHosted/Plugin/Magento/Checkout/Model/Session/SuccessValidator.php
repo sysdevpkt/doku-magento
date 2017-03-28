@@ -6,6 +6,7 @@ use Magento\Sales\Model\Order;
 use Psr\Log\LoggerInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\ResourceConnection;
+use \Magento\Framework\Mail\Template\TransportBuilder;
 
 class SuccessValidator
 {
@@ -13,17 +14,20 @@ class SuccessValidator
     protected $order;
     protected $logger;
     protected $resourceConnection;
+    private $transportBuilder;
 
     public function __construct(
         Session $session,
         LoggerInterface $logger,
         Order $order,
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        TransportBuilder $transportBuilder
     ) {
         $this->session = $session;
         $this->logger = $logger;
         $this->order = $order;
         $this->resourceConnection = $resourceConnection;
+        $this->transportBuilder = $transportBuilder;
     }
 
     public function afterIsValid(\Magento\Checkout\Model\Session\SuccessValidator $successValidator, $returnValue)
@@ -58,6 +62,16 @@ class SuccessValidator
             }
 
             $this->logger->info('===== afterIsValid ===== Checking done');
+            $this->logger->info('===== afterIsValid ===== Sending email...');
+
+            $sender = [
+                'name' => 'Doku',
+                'email' => 'no-reply@doku.com',
+            ];
+            $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
+                ->addTo($order->getCustomerEmail(), $order->getCustomerName())->getTransport()->sendMessage();
+
+            $this->logger->info('===== afterIsValid ===== Sending done');
 
         }catch(\Exception $e){
             $this->logger->info('error : '. $e->getMessage());

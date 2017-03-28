@@ -69,7 +69,8 @@ class SuccessValidator
                 'email' => 'no-reply@doku.com',
             ];
             $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
-                ->addTo($order->getCustomerEmail(), $order->getCustomerName())->getTransport()->sendMessage();
+                ->addTo($order->getCustomerEmail(), $order->getCustomerName())->setTemplateVars([])
+                ->getTransport()->sendMessage();
 
             $this->logger->info('===== afterIsValid ===== Sending done');
 

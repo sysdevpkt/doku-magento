@@ -75,7 +75,7 @@ class SuccessValidator
                         'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
                         'store' => $order->getStoreId()
                     ]
-                )
+                )->setTemplateVars([])
                 ->getTransport()->sendMessage();
 
             $this->logger->info('===== afterIsValid ===== Sending done');

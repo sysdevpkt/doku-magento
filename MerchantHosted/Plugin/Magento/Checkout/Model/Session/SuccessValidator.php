@@ -68,7 +68,8 @@ class SuccessValidator
                 'name' => 'Doku',
                 'email' => 'no-reply@doku.com',
             ];
-            $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
+
+            $transport = $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
                 ->addTo($order->getCustomerEmail(), $order->getCustomerName())
                 ->setTemplateOptions(
                     [
@@ -76,7 +77,8 @@ class SuccessValidator
                         'store' => $order->getStoreId()
                     ]
                 )->setTemplateVars([])
-                ->getTransport()->sendMessage();
+                ->getTransport();
+            $transport->sendMessage();
 
             $this->logger->info('===== afterIsValid ===== Sending done');
 

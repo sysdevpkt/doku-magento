@@ -49,6 +49,7 @@
             <sinarmas_full>
                 <title>sinarmas_full</title>
                 <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\SinarmasFull</model>
             </sinarmas_full>
         </payment>
     </default>

@@ -1,5 +1,5 @@
 <?php
-namespace Doku\MerchantHosted\Model;
+namespace Doku\MerchantHosted\Model\Payment;
 
 /**
  * Pay In Store payment method model

@@ -9,39 +9,46 @@
                 <shared_key>Shared Key</shared_key>
                 <payment_channels>0</payment_channels>
                 <payment_action>true</payment_action>
-                <model>Doku\MerchantHosted\Model\Core</model>
+                <model>Doku\MerchantHosted\Model\Payment\Core</model>
             </core>
             <alfa>
                 <title>alfa</title>
                 <paycode>88888</paycode>
+                <model>Doku\MerchantHosted\Model\Payment\Alfa</model>
             </alfa>
             <cc>
                 <title>cc</title>
                 <is_token>0</is_token>
+                <model>Doku\MerchantHosted\Model\Payment\CreditCard</model>
             </cc>
             <mandiri_lite>
                 <title>mandiri_lite</title>
-                <paycode>12345</paycode>
+                <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\MandiriLite</model>
             </mandiri_lite>
             <mandiri_full>
                 <title>mandiri_full</title>
-                <paycode>12345</paycode>
+                <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\MandiriFull</model>
             </mandiri_full>
             <permata_lite>
                 <title>permata_lite</title>
-                <paycode>12345</paycode>
+                <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\PermataLite</model>
             </permata_lite>
             <permata_full>
                 <title>permata_full</title>
-                <paycode>12345</paycode>
+                <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\PermataFull</model>
             </permata_full>
             <sinarmas_lite>
                 <title>sinarmas_lite</title>
-                <paycode>12345</paycode>
+                <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\SinarmasLite</model>
             </sinarmas_lite>
             <sinarmas_full>
                 <title>sinarmas_full</title>
-                <paycode>12345</paycode>
+                <paycode></paycode>
             </sinarmas_full>
         </payment>
     </default>

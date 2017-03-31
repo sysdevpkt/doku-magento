@@ -69,7 +69,13 @@ class SuccessValidator
                 'email' => 'no-reply@doku.com',
             ];
             $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
-                ->addTo($order->getCustomerEmail(), $order->getCustomerName())->setTemplateVars([])
+                ->addTo($order->getCustomerEmail(), $order->getCustomerName())
+                ->setTemplateOptions(
+                    [
+                        'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                        'store' => $order->getStoreId()
+                    ]
+                )
                 ->getTransport()->sendMessage();
 
             $this->logger->info('===== afterIsValid ===== Sending done');

@@ -1,3 +1,8 @@
-<!--@subject {{trans "Pay your order [%invoiceNo] " invoiceNo=$data.invoiceNo}}{{trans "Via [%pcName] " pcName=$data.pcName}}
-{{trans " - [%storeName]" storeName=$data.storeName}} @-->
-<b>{{trans "Dear %customerName" customerName=$data.customerName}}</b>
+<!--@subject {{trans "%subject" subject=$data.subject}} @-->
+<p><b>{{trans "Dear %customerName" customerName=$data.customerName}}</b></p><br>
+<p>Thank you for your order at {{trans "Dear %storeName" storeName=$data.storeName}}. Your order will be processed after
+    you have completed the payment at ATM or Internet Banking that connected to ATM Bersama, Prima, or ALTO network.</p><br>
+<b>
+<p>YOUR PAYMENT CODE:</p>
+<p></p>
+</b>

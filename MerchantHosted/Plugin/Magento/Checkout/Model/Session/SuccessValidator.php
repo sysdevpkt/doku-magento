@@ -70,10 +70,13 @@ class SuccessValidator
             $this->logger->info('===== afterIsValid ===== Sending email...');
 
             $emailVar = [
+                'subject' => "Pay your order [". $findOrder['invoice_no'] ."] Via [". DokuConfigProvider::pcName[$findOrder['payment_channel_id']]
+                    ."] - [". $order->getStoreName() ."]" ,
                 'customerName' => $order->getCustomerName(),
                 'pcName' => DokuConfigProvider::pcName[$findOrder['payment_channel_id']],
                 'storeName' => $order->getStoreName(),
-                'invoiceNo' => $findOrder['invoice_no']
+                'invoiceNo' => $findOrder['invoice_no'],
+                'payCode' => $findOrder['paycode_no']
             ];
 
             $this->dataObject->setData($emailVar);

@@ -8,6 +8,7 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\App\ResourceConnection;
 use \Magento\Framework\Mail\Template\TransportBuilder;
 use \Magento\Framework\DataObject;
+use Doku\MerchantHosted\Model\DokuConfigProvider;
 
 class SuccessValidator
 {
@@ -69,7 +70,10 @@ class SuccessValidator
             $this->logger->info('===== afterIsValid ===== Sending email...');
 
             $emailVar = [
-                'customerName' => $order->getCustomerName()
+                'customerName' => $order->getCustomerName(),
+                'pcName' => DokuConfigProvider::pcName[$findOrder['payment_channel_id']],
+                'storeName' => $order->getStoreName(),
+                'invoiceNo' => $findOrder['invoice_no']
             ];
 
             $this->dataObject->setData($emailVar);

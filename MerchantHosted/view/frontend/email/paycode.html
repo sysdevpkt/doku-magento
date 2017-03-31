@@ -1,2 +1,3 @@
-<!--@subject tes subject : {{trans "%subject" subject=$data.customerName}} @-->
-<b>{{ trans "Dear %customerName" customerName=$data.customerName}}</b>
+<!--@subject {{trans "Pay your order [%invoiceNo] " invoiceNo=$data.invoiceNo}}{{trans "Via [%pcName] " pcName=$data.pcName}}
+{{trans " - [%storeName]" storeName=$data.storeName}} @-->
+<b>{{trans "Dear %customerName" customerName=$data.customerName}}</b>

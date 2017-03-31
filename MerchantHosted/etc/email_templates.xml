@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
-    <template id="paycode_template" label="Paycode Email" file="paycode.phtml" type="phtml" module="Doku_MerchantHosted" area="frontend"/>
+    <template id="paycode_template" label="Paycode Email" file="paycode.html" type="html" module="Doku_MerchantHosted" area="frontend"/>
 </config>

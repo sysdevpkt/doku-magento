@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\ResourceConnection;
 use \Magento\Framework\Mail\Template\TransportBuilder;
+use \Magento\Framework\DataObject;
 
 class SuccessValidator
 {
@@ -15,19 +16,22 @@ class SuccessValidator
     protected $logger;
     protected $resourceConnection;
     private $transportBuilder;
+    private $dataObject;
 
     public function __construct(
         Session $session,
         LoggerInterface $logger,
         Order $order,
         ResourceConnection $resourceConnection,
-        TransportBuilder $transportBuilder
+        TransportBuilder $transportBuilder,
+        DataObject $dataObject
     ) {
         $this->session = $session;
         $this->logger = $logger;
         $this->order = $order;
         $this->resourceConnection = $resourceConnection;
         $this->transportBuilder = $transportBuilder;
+        $this->dataObject = $dataObject;
     }
 
     public function afterIsValid(\Magento\Checkout\Model\Session\SuccessValidator $successValidator, $returnValue)
@@ -64,6 +68,12 @@ class SuccessValidator
             $this->logger->info('===== afterIsValid ===== Checking done');
             $this->logger->info('===== afterIsValid ===== Sending email...');
 
+            $emailVar = [
+                'customerName' => $order->getCustomerName()
+            ];
+
+            $this->dataObject->setData($emailVar);
+
             $sender = [
                 'name' => 'Doku',
                 'email' => 'no-reply@doku.com',
@@ -76,7 +86,7 @@ class SuccessValidator
                         'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
                         'store' => $order->getStoreId()
                     ]
-                )->setTemplateVars([])
+                )->setTemplateVars(['data' => $this->dataObject])
                 ->getTransport();
             $transport->sendMessage();
 

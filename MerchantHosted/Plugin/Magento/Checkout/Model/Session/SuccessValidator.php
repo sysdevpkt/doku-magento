@@ -64,41 +64,44 @@ class SuccessValidator
                 $this->session->getLastRealOrder()->setStatus(Order::STATE_PENDING_PAYMENT);
                 $this->session->getLastRealOrder()->setState(Order::STATE_PENDING_PAYMENT);
                 $order->save();
+
+                $this->logger->info('===== afterIsValid ===== Sending email...');
+
+                $emailVar = [
+                    'subject' => "Pay your order [". $findOrder['paycode_no'] ."] Via [". DokuConfigProvider::pcName[$findOrder['payment_channel_id']]
+                        ."] - [". $order->getStoreName() ."]" ,
+                    'customerName' => $order->getCustomerName(),
+                    'pcName' => DokuConfigProvider::pcName[$findOrder['payment_channel_id']],
+                    'storeName' => $order->getStoreName(),
+                    'invoiceNo' => $findOrder['invoice_no'],
+                    'payCode' => $findOrder['paycode_no'],
+                    'amount' => $order->getGrandTotal()
+                ];
+
+                $this->dataObject->setData($emailVar);
+
+                $sender = [
+                    'name' => 'Doku',
+                    'email' => 'no-reply@doku.com',
+                ];
+
+                $transport = $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
+                    ->addTo($order->getCustomerEmail(), $order->getCustomerName())
+                    ->setTemplateOptions(
+                        [
+                            'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                            'store' => $order->getStoreId()
+                        ]
+                    )->setTemplateVars(['data' => $this->dataObject])
+                    ->getTransport();
+                $transport->sendMessage();
+
+                $this->logger->info('===== afterIsValid ===== Sending done');
+
             }
 
             $this->logger->info('===== afterIsValid ===== Checking done');
-            $this->logger->info('===== afterIsValid ===== Sending email...');
 
-            $emailVar = [
-                'subject' => "Pay your order [". $findOrder['paycode_no'] ."] Via [". DokuConfigProvider::pcName[$findOrder['payment_channel_id']]
-                    ."] - [". $order->getStoreName() ."]" ,
-                'customerName' => $order->getCustomerName(),
-                'pcName' => DokuConfigProvider::pcName[$findOrder['payment_channel_id']],
-                'storeName' => $order->getStoreName(),
-                'invoiceNo' => $findOrder['invoice_no'],
-                'payCode' => $findOrder['paycode_no'],
-                'amount' => $order->getGrandTotal()
-            ];
-
-            $this->dataObject->setData($emailVar);
-
-            $sender = [
-                'name' => 'Doku',
-                'email' => 'no-reply@doku.com',
-            ];
-
-            $transport = $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
-                ->addTo($order->getCustomerEmail(), $order->getCustomerName())
-                ->setTemplateOptions(
-                    [
-                        'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                        'store' => $order->getStoreId()
-                    ]
-                )->setTemplateVars(['data' => $this->dataObject])
-                ->getTransport();
-            $transport->sendMessage();
-
-            $this->logger->info('===== afterIsValid ===== Sending done');
 
         }catch(\Exception $e){
             $this->logger->info('error : '. $e->getMessage());

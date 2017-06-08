@@ -4,7 +4,7 @@ namespace Doku\MerchantHosted\Block\FrontEnd\Sales\Order;
 
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\Registry;
-use Psr\Log\LoggerInterface as Logger;
+use Psr\Log\LoggerInterface;
 use Magento\Framework\App\ResourceConnection;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 
@@ -18,7 +18,7 @@ class View extends \Magento\Framework\View\Element\Template{
         Context $context,
         array $data = [],
         Registry $registry,
-        Logger $logger,
+        LoggerInterface $logger,
         ResourceConnection $resourceConnection
     ){
         parent::__construct(

@@ -1,7 +1,7 @@
 <?php
 namespace Doku\MerchantHosted\Block\Frontend\Onepage;
 
-use \Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template;
 use Magento\Sales\Model\Order;
 use Psr\Log\LoggerInterface;
 use Magento\Checkout\Model\Session;

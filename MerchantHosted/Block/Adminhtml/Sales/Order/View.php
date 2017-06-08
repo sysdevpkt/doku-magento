@@ -3,7 +3,7 @@
 namespace Doku\MerchantHosted\Block\Adminhtml\Sales\Order;
 
 use Magento\Framework\View\Element\Template\Context;
-use \Magento\Framework\Registry;
+use Magento\Framework\Registry;
 use Psr\Log\LoggerInterface as Logger;
 use Magento\Framework\App\ResourceConnection;
 use Doku\MerchantHosted\Model\DokuConfigProvider;

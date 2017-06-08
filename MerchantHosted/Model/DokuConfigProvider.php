@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Doku\MerchantHosted\Model;
 
@@ -72,7 +72,8 @@ class DokuConfigProvider implements ConfigProviderInterface
                     'mall_id' => $this->getMallId(),
                     'shared_key' => $this->getSharedKey(),
                     'payment_channels' => $this->getPaymentChannels(),
-                    'payment_title' => $this->getPaymentTitle()
+                    'payment_title' => $this->getPaymentTitle(),
+                    'environment' => $this->getEnvironment()
                 ],
                 'cc' => [
                     'is_token' => $this->getIsToken()

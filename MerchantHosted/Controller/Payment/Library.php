@@ -10,12 +10,18 @@ use \Magento\Framework\App\Action\Action;
 abstract class Library extends Action{
 
     protected $config;
-    const prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
+    protected $prePaymentUrl;
+    protected $paymentUrl;
+    protected $directPaymentUrl;
+    protected $generateCodeUrl;
+    protected $redirectPaymentUrl;
+    protected $captureUrl;
+/*    const prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
     const paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';
     const directPaymentUrl = 'https://staging.doku.com/api/payment/PaymentMIPDirect';
     const generateCodeUrl = 'https://staging.doku.com/api/payment/doGeneratePaymentCode';
     const redirectPaymentUrl = 'https://staging.doku.com/api/payment/doInitiatePayment';
-    const captureUrl = 'https://staging.doku.com/api/payment/DoCapture';
+    const captureUrl = 'https://staging.doku.com/api/payment/DoCapture'; */
 
     public function __construct(
         LoggerInterface $logger, //log injection
@@ -26,6 +32,21 @@ abstract class Library extends Action{
         $this->logger = $logger;
         parent::__construct($context);
         $this->config = $config;
+        if($config->environment == 'Production') {
+            $this->prePaymentUrl = 'https://pay.doku.com/api/payment/PrePayment';
+            $this->paymentUrl = 'https://pay.doku.com/api/payment/paymentMip';
+            $this->directPaymentUrl = 'https://pay.doku.com/api/payment/PaymentMIPDirect';
+            $this->generateCodeUrl = 'https://pay.doku.com/api/payment/doGeneratePaymentCode';
+            $this->redirectPaymentUrl = 'https://pay.doku.com/api/payment/doInitiatePayment';
+            $this->captureUrl = 'https://pay.doku.com/api/payment/DoCapture';
+        } else {
+            $this->prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
+            $this->paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';
+            $this->directPaymentUrl = 'https://staging.doku.com/api/payment/PaymentMIPDirect';
+            $this->generateCodeUrl = 'https://staging.doku.com/api/payment/doGeneratePaymentCode';
+            $this->redirectPaymentUrl = 'https://staging.doku.com/api/payment/doInitiatePayment';
+            $this->captureUrl = 'https://staging.doku.com/api/payment/DoCapture';
+        }
     }
 
     protected function formatBasket($data){
@@ -58,7 +79,7 @@ abstract class Library extends Action{
     protected function doPrePayment($data){
         $data['req_basket'] = $this->formatBasket($data['req_basket']);
 
-        $ch = curl_init( self::prePaymentUrl );
+        $ch = curl_init( $this->prePaymentUrl );
 
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
@@ -76,7 +97,7 @@ abstract class Library extends Action{
     protected function doPayment($data){
         $data['req_basket'] = $this->formatBasket($data['req_basket']);
 
-        $ch = curl_init( self::paymentUrl );
+        $ch = curl_init( $this->paymentUrl );
 
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
@@ -97,7 +118,7 @@ abstract class Library extends Action{
 
     protected function doGeneratePaycode($data){
 
-        $ch = curl_init( self::generateCodeUrl );
+        $ch = curl_init( $this->generateCodeUrl );
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
         curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -119,7 +140,7 @@ abstract class Library extends Action{
     protected function doDirectPayment($data){
         $data['req_basket'] = $this->formatBasket($data['req_basket']);
 
-        $ch = curl_init( self::directPaymentUrl );
+        $ch = curl_init( $this->directPaymentUrl );
 
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, 'data='. json_encode($data));
@@ -137,5 +158,5 @@ abstract class Library extends Action{
             return $responseJson;
         }
     }
-    
+
 }

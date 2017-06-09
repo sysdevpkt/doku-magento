@@ -48,6 +48,7 @@ class PaymentChannel implements ArrayInterface{
         $catagoryList['07'] = __('Permata VA Full');
         $catagoryList['21'] = __('Sinarmas VA Lite');
         $catagoryList['22'] = __('Sinarmas VA Full');
+        $categoryList['41'] = __('Mandiri VA');
 
         return $catagoryList;
     }

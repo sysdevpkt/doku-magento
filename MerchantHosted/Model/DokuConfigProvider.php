@@ -38,6 +38,11 @@ class DokuConfigProvider implements ConfigProviderInterface
         return $this->scopeConfig->getValue('payment/core/'. self::shared_key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
+    public function getEnvironment()
+    {
+        return $this->scopeConfig->getValue('payment/core/'. self::environment, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
     public function getPaycode($pc){
         return $this->scopeConfig->getValue('payment/'. self::pc[$pc] .'/'. self::paycode, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }

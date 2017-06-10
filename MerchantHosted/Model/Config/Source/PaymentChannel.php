@@ -29,7 +29,7 @@ class PaymentChannel implements ArrayInterface{
                 'label' => $value
             ];
         }
-
+        var_dump($ret);
         return $ret;
     }
 

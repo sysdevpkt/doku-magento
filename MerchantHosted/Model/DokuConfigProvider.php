@@ -14,11 +14,11 @@ class DokuConfigProvider implements ConfigProviderInterface
     const payment_title = 'title';
     const paycode = 'paycode';
     const environment = 'Staging';
-    const pc = ['14' => 'alfa', '08' => 'mandiri_lite', '09' => 'mandiri_full', '05' => 'permata_lite', '07' => 'permata_full',
-        '21' => 'sinarmas_lite', '22' => 'sinarmas_full', '41' => 'mandiri_va'];
+    const pc = ['14' => 'alfa', '08' => 'mandiri_lite', '09' => 'mandiri_full', '41' => 'mandiri_va', '05' => 'permata_lite', '07' => 'permata_full',
+        '21' => 'sinarmas_lite', '22' => 'sinarmas_full'];
     const is_token = 'is_token';
-    const pcName = ['14' => 'Alfa', '08' => 'Mandiri SOA Lite', '09' => 'Mandiri SOA Full', '05' => 'Permata VA Lite', '07' => 'Permata VA Full',
-        '21' => 'Sinarmas VA Lite', '22' => 'Sinarmas VA Full', '15' => 'Credit Card', '04' => 'Doku Wallet', '02' => 'Mandiri Clickpay', '41' => 'Mandiri VA'];
+    const pcName = ['14' => 'Alfa', '08' => 'Mandiri SOA Lite', '09' => 'Mandiri SOA Full', '41' => 'Mandiri VA', '05' => 'Permata VA Lite', '07' => 'Permata VA Full',
+        '21' => 'Sinarmas VA Lite', '22' => 'Sinarmas VA Full', '15' => 'Credit Card', '04' => 'Doku Wallet', '02' => 'Mandiri Clickpay'];
 
     protected $scopeConfig;
     protected $logger;

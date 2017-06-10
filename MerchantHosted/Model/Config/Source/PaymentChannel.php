@@ -19,7 +19,6 @@ class PaymentChannel implements ArrayInterface{
     {
 
         $arr = $this->toArray();
-        var_dump($arr);
         $ret = [];
 
         foreach ($arr as $key => $value)
@@ -30,7 +29,6 @@ class PaymentChannel implements ArrayInterface{
                 'label' => $value
             ];
         }
-        var_dump($ret);
         return $ret;
     }
 
@@ -50,6 +48,8 @@ class PaymentChannel implements ArrayInterface{
         $catagoryList['07'] = __('Permata VA Full');
         $catagoryList['21'] = __('Sinarmas VA Lite');
         $catagoryList['22'] = __('Sinarmas VA Full');
+
+        var_dump($catagoryList);
 
         return $catagoryList;
     }

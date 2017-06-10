@@ -19,6 +19,7 @@ class PaymentChannel implements ArrayInterface{
     {
 
         $arr = $this->toArray();
+        var_dump($arr);
         $ret = [];
 
         foreach ($arr as $key => $value)

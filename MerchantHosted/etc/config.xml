@@ -32,6 +32,11 @@
                 <paycode></paycode>
                 <model>Doku\MerchantHosted\Model\Payment\MandiriFull</model>
             </mandiri_full>
+            <mandiri_va>
+                <title>mandiri_va</title>
+                <paycode></paycode>
+                <model>Doku\MerchantHosted\Model\Payment\MandiriVa</model>
+            </mandiri_full>
             <permata_lite>
                 <title>permata_lite</title>
                 <paycode></paycode>

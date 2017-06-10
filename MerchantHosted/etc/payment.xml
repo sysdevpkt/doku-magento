@@ -22,6 +22,9 @@
         <method name="mandiri_full">
             <allow_multiple_address>1</allow_multiple_address>
         </method>
+        <method name="mandiri_va">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
         <method name="permata_lite">
             <allow_multiple_address>1</allow_multiple_address>
         </method>

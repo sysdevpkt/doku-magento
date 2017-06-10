@@ -67,6 +67,14 @@
                         <config_path>payment/mandiri_full/paycode</config_path>
                     </field>
                 </group>
+                <group id="mandiri_va" translate="label" type="text" sortOrder="127" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Mandiri VA</label>
+                    <field id="paycode" translate="label" type="text" sortOrder="128" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Prefix Paycode</label>
+                        <comment>**Required for Mandiri VA Payment Channel**</comment>
+                        <config_path>payment/mandiri_va/paycode</config_path>
+                    </field>
+                </group>
                 <group id="permata_lite" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Permata VA Lite</label>
                     <field id="paycode" translate="label" type="text" sortOrder="131" showInDefault="1" showInWebsite="1" showInStore="0">

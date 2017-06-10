@@ -41,9 +41,9 @@ class PaymentChannel implements ArrayInterface{
         $catagoryList['15'] = __('Credit Card');
         $catagoryList['04'] = __('Doku Wallet');
         $catagoryList['02'] = __('Mandiri Clickpay');
-        $catagoryList['08'] = __('Mandiri SOA Lite');
+        $catagoryList['08'] = __('Mandiri SOA');
         $catagoryList['09'] = __('Mandiri SOA Full');
-        $categoryList['41'] = 'Mandiri VA';
+        $categoryList['41'] = __('Mandiri VA');
         $catagoryList['05'] = __('Permata VA Lite');
         $catagoryList['07'] = __('Permata VA Full');
         $catagoryList['21'] = __('Sinarmas VA Lite');

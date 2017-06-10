@@ -49,8 +49,6 @@ class PaymentChannel implements ArrayInterface{
         $catagoryList['21'] = __('Sinarmas VA Lite');
         $catagoryList['22'] = __('Sinarmas VA Full');
 
-        var_dump($catagoryList);
-
         return $catagoryList;
     }
 

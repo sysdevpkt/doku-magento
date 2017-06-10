@@ -26,8 +26,7 @@ class Words extends \Doku\MerchantHosted\Controller\Payment\Library
             $context,
             $config
         );
-        
-        $this->logger = $logger;
+
         $this->session = $session;
         $this->cart = $cart;
     }

@@ -32,7 +32,7 @@ abstract class Library extends Action{
         $this->logger = $logger;
         parent::__construct($context);
         $this->config = $config;
-        if($config->environment == 'Production') {
+        if($this->config->getEnvironment() == 'Production') {
             $this->prePaymentUrl = 'https://pay.doku.com/api/payment/PrePayment';
             $this->paymentUrl = 'https://pay.doku.com/api/payment/paymentMip';
             $this->directPaymentUrl = 'https://pay.doku.com/api/payment/PaymentMIPDirect';

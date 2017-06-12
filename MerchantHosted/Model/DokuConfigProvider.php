@@ -13,10 +13,10 @@ class DokuConfigProvider implements ConfigProviderInterface
     const payment_channels = 'payment_channels';
     const payment_title = 'title';
     const paycode = 'paycode';
-    const environment = 'Staging';
-    const expiry = '360';
-    const sender_mail = 'no-reply@doku.com';
-    const sender_name = 'DOKU';
+    const environment = 'environment';
+    const expiry = 'expiry';
+    const sender_mail = 'sender_mail';
+    const sender_name = 'sender_name';
     const pc = ['14' => 'alfa', '08' => 'mandiri_lite', '09' => 'mandiri_full', '41' => 'mandiri_va', '05' => 'permata_lite', '07' => 'permata_full',
         '21' => 'sinarmas_lite', '22' => 'sinarmas_full'];
     const is_token = 'is_token';

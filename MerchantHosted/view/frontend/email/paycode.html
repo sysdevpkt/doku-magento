@@ -8,7 +8,7 @@
 <p>TOTAL ORDER AMOUNT:</p>
 <p>{{trans "%amount" amount=$data.amount}}</p>
 </b>
-<p>We suggest yo do the payment immediately. Your payment code will be expired in ${expiredate} hours, where order will
+<p>We suggest yo do the payment immediately. Your payment code will be expired at {{trans "%expiry" expiry=$data.expiry}}, where order will
     be cancelled beyond that time.</p>
 <p>How to pay at Alfa Group outlets : </p>
 <p>
@@ -23,6 +23,5 @@
     <li>Finish.</li>
 </ol>
 </p><br>
-<p>If you have any questions, feel free to ask us at <a href="mailto:care@doku.com">care@doku.com.</a></p>
 <p>Thank you</p>
-<p>DOKU, The Better Way To Pay</p>
+<p>{{trans "%sender_name" sender_name=$data.sender_name}}</p>

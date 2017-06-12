@@ -16,6 +16,7 @@ class SuccessValidator
     protected $order;
     protected $logger;
     protected $resourceConnection;
+    protected $config;
     private $transportBuilder;
     private $dataObject;
 
@@ -25,7 +26,8 @@ class SuccessValidator
         Order $order,
         ResourceConnection $resourceConnection,
         TransportBuilder $transportBuilder,
-        DataObject $dataObject
+        DataObject $dataObject,
+        DokuConfigProvider $config
     ) {
         $this->session = $session;
         $this->logger = $logger;
@@ -33,6 +35,7 @@ class SuccessValidator
         $this->resourceConnection = $resourceConnection;
         $this->transportBuilder = $transportBuilder;
         $this->dataObject = $dataObject;
+        $this->config = $config;
     }
 
     public function afterIsValid(\Magento\Checkout\Model\Session\SuccessValidator $successValidator, $returnValue)
@@ -75,14 +78,15 @@ class SuccessValidator
                     'storeName' => $order->getStoreName(),
                     'invoiceNo' => $findOrder['invoice_no'],
                     'payCode' => $findOrder['paycode_no'],
-                    'amount' => $order->getGrandTotal()
+                    'amount' => $order->getGrandTotal(),
+                    'expiry' => strtotime('+' . $config->getExpiry() + ' minutes', date('d/m/Y H:i:s'))
                 ];
 
                 $this->dataObject->setData($emailVar);
 
                 $sender = [
-                    'name' => 'Doku',
-                    'email' => 'no-reply@doku.com',
+                    'name' => $config->getSenderName(),
+                    'email' => $config->getSenderMail(),
                 ];
 
                 $transport = $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)

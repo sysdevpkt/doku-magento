@@ -31,7 +31,22 @@
                     <label>Environment</label>
                     <source_model>Doku\MerchantHosted\Model\Config\Source\Environment</source_model>
                 </field>
-                <field id="payment_channels" translate="label" type="multiselect" sortOrder="106" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="expiry" translate="label" type="text" sortOrder="106" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Expiry in minute</label>
+                    <comment>**Required**</comment>
+                    <config_path>payment/core/expiry</config_path>
+                </field>
+                <field id="sender_mail" translate="label" type="text" sortOrder="107" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <comment>**Required**</comment>
+                    <config_path>payment/core/sender_mail</config_path>
+                </field>
+                <field id="sender_name" translate="label" type="text" sortOrder="108" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender Name</label>
+                    <comment>**Required**</comment>
+                    <config_path>payment/core/sender_name</config_path>
+                </field>
+                <field id="payment_channels" translate="label" type="multiselect" sortOrder="109" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select Payment Channel</label>
                     <source_model>Doku\MerchantHosted\Model\Config\Source\PaymentChannel</source_model>
                 </field>

@@ -14,6 +14,9 @@ class DokuConfigProvider implements ConfigProviderInterface
     const payment_title = 'title';
     const paycode = 'paycode';
     const environment = 'Staging';
+    const expiry = '360';
+    const sender_mail = 'no-reply@doku.com';
+    const sender_name = 'DOKU';
     const pc = ['14' => 'alfa', '08' => 'mandiri_lite', '09' => 'mandiri_full', '41' => 'mandiri_va', '05' => 'permata_lite', '07' => 'permata_full',
         '21' => 'sinarmas_lite', '22' => 'sinarmas_full'];
     const is_token = 'is_token';
@@ -42,6 +45,21 @@ class DokuConfigProvider implements ConfigProviderInterface
     public function getEnvironment()
     {
         return $this->scopeConfig->getValue('payment/core/'. self::environment, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    public function getExpiry()
+    {
+        return $this->scopeConfig->getValue('payment/core'. self::expiry, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    public function getSenderMail()
+    {
+        return $this->scopeConfig->getValue('payment/core'. self::sender_mail, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    public function getSenderName()
+    {
+        return $this->scopeConfig->getValue('payment/core'. self::sender_name, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getPaycode($pc){

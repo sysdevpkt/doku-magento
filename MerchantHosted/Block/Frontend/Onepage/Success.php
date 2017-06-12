@@ -17,7 +17,6 @@ class Success extends Template
 
     public function __construct(
         Session $session,
-        LoggerInterface $logger,
         Order $order,
         ResourceConnection $resourceConnection,
         Template\Context $context,
@@ -27,7 +26,7 @@ class Success extends Template
         parent::__construct($context, $data);
 
         $this->session = $session;
-        $this->logger = $logger;
+        $this->logger = $context->getLogger();
         $this->order = $order;
         $this->resourceConnection = $resourceConnection;
     }

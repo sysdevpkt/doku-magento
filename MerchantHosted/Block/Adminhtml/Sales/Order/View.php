@@ -18,7 +18,6 @@ class View extends \Magento\Framework\View\Element\Template{
         Context $context,
         array $data = [],
         Registry $registry,
-        LoggerInterface $logger,
         ResourceConnection $resourceConnection
     ){
         parent::__construct(
@@ -26,7 +25,7 @@ class View extends \Magento\Framework\View\Element\Template{
         );
 
         $this->registry = $registry;
-        $this->logger = $logger;
+        $this->logger = $context->getLogger();
         $this->resourceConnection = $resourceConnection;
     }
 

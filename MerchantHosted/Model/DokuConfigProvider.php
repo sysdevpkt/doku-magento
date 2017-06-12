@@ -97,7 +97,10 @@ class DokuConfigProvider implements ConfigProviderInterface
                     'shared_key' => $this->getSharedKey(),
                     'payment_channels' => $this->getPaymentChannels(),
                     'payment_title' => $this->getPaymentTitle(),
-                    'environment' => $this->getEnvironment()
+                    'environment' => $this->getEnvironment(),
+                    'expiry' => $this->getExpiry(),
+                    'sender_email' => $this->getSenderMail(),
+                    'sender_name' => $this->getSenderName()
                 ],
                 'cc' => [
                     'is_token' => $this->getIsToken()

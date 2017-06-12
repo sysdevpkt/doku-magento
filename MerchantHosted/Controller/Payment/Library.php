@@ -32,6 +32,8 @@ abstract class Library extends Action{
 
     ) {
         parent::__construct($context);
+
+        date_default_timezone_set('Asia/Jakarta');
         $this->logger = $logger;
         $this->config = $config;
         if($this->config->getEnvironment() == 'Production') {

@@ -67,7 +67,7 @@ class Orderva extends Library{
                 $basket .= $getItem['product_name'] .','. $getItem['product_price_value'] .','. $getItem['qty'] .','.
                     ($getItem['product_price_value'] * $getItem['qty']) .';';
             }
-            
+
             $dataPayment = array(
                 'req_mall_id' => $this->config->getMallId(),
                 'req_chain_merchant' => "NA",
@@ -80,7 +80,7 @@ class Orderva extends Library{
                 'req_name' => $customer['name'],
                 'req_email' => $customer['data_email'],
                 'req_basket' => $basket,
-                'req_expiry_time' => $this->config->getExpiry();
+                'req_expiry_time' => $this->config->getExpiry()
             );
 
             $this->logger->info('data payment : '. json_encode($dataPayment, JSON_PRETTY_PRINT));

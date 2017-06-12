@@ -79,7 +79,7 @@ class SuccessValidator
                     'invoiceNo' => $findOrder['invoice_no'],
                     'payCode' => $findOrder['paycode_no'],
                     'amount' => $order->getGrandTotal(),
-                    'expiry' => strtotime('+' . $this->config->getExpiry() + ' minutes', date('d/m/Y H:i:s'))
+                    'expiry' => date('d/m/Y H:i:s', (strtotime('+' . $this->config->getExpiry() . ' minutes', time())))
                 ];
 
                 $this->dataObject->setData($emailVar);

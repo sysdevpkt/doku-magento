@@ -42,6 +42,7 @@ class SuccessValidator
     {
 
         $this->logger->info('===== afterIsValid ===== Start');
+        date_default_timezone_set('Asia/Jakarta');
 
         try{
 

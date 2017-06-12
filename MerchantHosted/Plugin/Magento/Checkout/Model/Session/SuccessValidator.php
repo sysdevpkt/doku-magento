@@ -79,14 +79,14 @@ class SuccessValidator
                     'invoiceNo' => $findOrder['invoice_no'],
                     'payCode' => $findOrder['paycode_no'],
                     'amount' => $order->getGrandTotal(),
-                    'expiry' => strtotime('+' . $config->getExpiry() + ' minutes', date('d/m/Y H:i:s'))
+                    'expiry' => strtotime('+' . $this->config->getExpiry() + ' minutes', date('d/m/Y H:i:s'))
                 ];
 
                 $this->dataObject->setData($emailVar);
 
                 $sender = [
-                    'name' => $config->getSenderName(),
-                    'email' => $config->getSenderMail(),
+                    'name' => $this->config->getSenderName(),
+                    'email' => $this->config->getSenderMail(),
                 ];
 
                 $transport = $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)

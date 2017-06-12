@@ -10,6 +10,9 @@
                 <payment_channels>0</payment_channels>
                 <payment_action>true</payment_action>
                 <environment>Staging</environment>
+                <expiry>360</expiry>
+                <sender_name>DOKU</sender_name>
+                <sender_mail>no-reply@doku.com</sender_mail>
                 <model>Doku\MerchantHosted\Model\Payment\Core</model>
             </core>
             <alfa>

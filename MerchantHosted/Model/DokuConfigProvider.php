@@ -49,17 +49,17 @@ class DokuConfigProvider implements ConfigProviderInterface
 
     public function getExpiry()
     {
-        return $this->scopeConfig->getValue('payment/core'. self::expiry, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/core/'. self::expiry, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getSenderMail()
     {
-        return $this->scopeConfig->getValue('payment/core'. self::sender_mail, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/core/'. self::sender_mail, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getSenderName()
     {
-        return $this->scopeConfig->getValue('payment/core'. self::sender_name, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('payment/core/'. self::sender_name, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
     public function getPaycode($pc){

@@ -16,6 +16,8 @@ abstract class Library extends Action{
     protected $generateCodeUrl;
     protected $redirectPaymentUrl;
     protected $captureUrl;
+    protected $logger;
+
 /*    const prePaymentUrl = 'https://staging.doku.com/api/payment/PrePayment';
     const paymentUrl = 'https://staging.doku.com/api/payment/paymentMip';
     const directPaymentUrl = 'https://staging.doku.com/api/payment/PaymentMIPDirect';
@@ -29,8 +31,8 @@ abstract class Library extends Action{
         DokuConfigProvider $config
 
     ) {
-        $this->logger = $logger;
         parent::__construct($context);
+        $this->logger = $logger;
         $this->config = $config;
         if($this->config->getEnvironment() == 'Production') {
             $this->prePaymentUrl = 'https://pay.doku.com/api/payment/PrePayment';

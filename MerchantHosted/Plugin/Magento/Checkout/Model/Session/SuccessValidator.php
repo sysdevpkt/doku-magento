@@ -61,8 +61,7 @@ class SuccessValidator
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
-            if($findOrder['payment_channel_id'] != '15' && $findOrder['payment_channel_id'] != '04'
-                && $findOrder['payment_channel_id'] != '02'){
+            if($findOrder['payment_channel_id'] == '41' || $findOrder['payment_channel_id'] == '05'){
                 $order->setStatus(Order::STATE_PENDING_PAYMENT);
                 $order->setState(Order::STATE_PENDING_PAYMENT);
                 $this->session->getLastRealOrder()->setStatus(Order::STATE_PENDING_PAYMENT);
@@ -90,7 +89,12 @@ class SuccessValidator
                     'email' => $this->config->getSenderMail(),
                 ];
 
-                $transport = $this->transportBuilder->setTemplateIdentifier('paycode_template')->setFrom($sender)
+                $template = 'paycode_template';
+                if($findOrder['payment_channel_id'] == '41') {
+                    $template = 'paycode_template_mandiri_va';
+                }
+
+                $transport = $this->transportBuilder->setTemplateIdentifier($template)->setFrom($sender)
                     ->addTo($order->getCustomerEmail(), $order->getCustomerName())
                     ->setTemplateOptions(
                         [

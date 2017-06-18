@@ -1,0 +1,32 @@
+<!--@subject {{trans "%subject" subject=$data.subject}} @-->
+<p><b>{{trans "Dear %customerName" customerName=$data.customerName}}</b></p>
+<p>Thank you for your order at {{trans "Dear %storeName" storeName=$data.storeName}}. Your order will be processed after
+    you have completed the payment using Mandiri Virtual Account at Mandiri ATM or Mandiri Online (Internet Banking Personal or Mobile App)
+    or Mandiri Internet Banking Corporate or Other banks ATM that connected to ATM Bersama, Prima, or ALTO network
+    or Other bank Internet Banking that have feature Transfer Online.</p>
+<b>
+<p>YOUR PAYMENT CODE:</p>
+<p>{{trans "%payCode" payCode=$data.payCode}}</p>
+<p>TOTAL ORDER AMOUNT:</p>
+<p>{{trans "%amount" amount=$data.amount}}</p>
+</b>
+<p>We suggest yo do the payment immediately. Your payment code will be expired at {{trans "%expiry" expiry=$data.expiry}}, where order will
+    be cancelled beyond that time.</p>
+<p>How to pay at ATM Mandiri : </p>
+<p>
+    <ol>
+    <li>Insert Mandiri ATM card, then enter ATM PIN.</li>
+    <li>Choose menu ‘Bayar/Beli'.</li>
+    <li>Choose menu 'Lainnya' then another 'Lainnya'.</li>
+    <li>Choose menu 'Ecommerce'.</li>
+    <li>Input the first 5 digits from Mandiri VA number (e.g. 88899).</li>
+    <li>Input the full VA number (e.g. 88899XXXXXXXXXXX).</li>
+    <li>Input the amount.</li>
+    <li>VA number, Name, and Amount will appear on screen.</li>
+    <li>Press 1 and choose 'YA'</li>
+    <li>Confirm payment and choose 'YA'</li>
+    <li>Transaction is done. Please keep your receipt.</li>
+</ol>
+</p><br>
+<p>Thank you</p>
+<p>{{trans "%sender_name" sender_name=$data.sender_name}}</p>

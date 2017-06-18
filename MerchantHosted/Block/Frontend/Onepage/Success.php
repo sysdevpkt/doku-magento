@@ -70,13 +70,13 @@ class Success extends Template
             $this->logger->info('order : '. json_encode($findOrder, JSON_PRETTY_PRINT));
             $this->logger->info('===== checkPaymentChannel ===== End');
 
-            if($findOrder['payment_channel_id'] != '04' && $findOrder['payment_channel_id'] != '15'
-                && $findOrder['payment_channel_id'] != '02') return true;
+            if($findOrder['payment_channel_id'] == '41' || $findOrder['payment_channel_id'] == '05') return true;
             else return false;
 
         }catch(\Exception $e){
             $this->logger->info('error : '. $e->getMessage());
             $this->logger->info('===== checkPaymentChannel ===== End');
+            return false;
         }
 
 

@@ -4,6 +4,9 @@
     <strong>Doku Payment Information</strong>
 </div>
 <div class="block-content">
-    <?php echo __('Using <strong class="box-title"><span>%1 (%2)</span></strong> as payment channel', [$block->getOrderData()['channel_name'], $block->getOrderData()['channel_id']])?>
+    <?php
+      if(array_key_exists('channel_name', $block->getOrderData()) && array_key_exists('channel_id', $block->getOrderData())) {
+          echo __('Using <strong class="box-title"><span>%1 (%2)</span></strong> as payment channel', [$block->getOrderData()['channel_name'], $block->getOrderData()['channel_id']])?>
+      }
 </div>
 </div>

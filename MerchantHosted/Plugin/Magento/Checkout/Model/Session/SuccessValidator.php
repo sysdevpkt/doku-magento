@@ -57,6 +57,8 @@ class SuccessValidator
 
             $this->logger->info('===== afterIsValid ===== Updating complete');
             $this->logger->info('===== afterIsValid ===== Checking status...');
+            $this->logger->info('===== afterIsValid ===== Checking status = ' . $order->getStatus());
+            $this->logger->info('===== afterIsValid ===== Checking state = ' . $order->getState());
 
             $getOrder = $this->resourceConnection->getConnection()->select()->from('doku_orders')
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());

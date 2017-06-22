@@ -46,6 +46,7 @@ class SuccessValidator
 
         try{
 
+            $this->logger->info('===== afterIsValid ===== getLastRealOrder getIncrementId = ' . $this->session->getLastRealOrder()->getIncrementId());
             $order = $this->order->loadByIncrementId($this->session->getLastRealOrder()->getIncrementId());
 
             $this->logger->info('===== afterIsValid ===== Updating order...');

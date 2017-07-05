@@ -8,6 +8,7 @@ use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment\Transaction\BuilderInterface;
+use Magento\Sales\Model\Service\InvoiceService
 
 class Notify extends Library {
 
@@ -21,7 +22,8 @@ class Notify extends Library {
         DokuConfigProvider $config,
         ResourceConnection $resourceConnection,
         Order $order,
-        BuilderInterface $builderInterface
+        BuilderInterface $builderInterface,
+        InvoiceService $invoiceService
     )
     {
         parent::__construct(
@@ -33,6 +35,7 @@ class Notify extends Library {
         $this->resourceConnection = $resourceConnection;
         $this->order = $order;
         $this->builderInterface = $builderInterface;
+        $this->invoiceService = $invoiceService;
     }
 
     public function execute()

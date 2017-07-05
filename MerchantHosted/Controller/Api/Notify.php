@@ -8,7 +8,7 @@ use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment\Transaction\BuilderInterface;
-use Magento\Sales\Model\Service\InvoiceService
+use Magento\Sales\Model\Service\InvoiceService;
 
 class Notify extends Library {
 
@@ -82,7 +82,12 @@ class Notify extends Library {
                   ->setFailSafe(true)
                   ->build(\Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE);
                 $payment->addTransactionCommentsToOrder($transaction, $message);
-                $payment->setParentTransactionId(null);
+
+                $invoice = $this->invoiceService->prepareInvoice($saveOrder);
+                $invoice->setGrantTotal($postData['AMOUNT']);
+                $invoice->setBaseGrantTotal($postData['AMOUNT']);
+                $invoice->register();
+
                 $payment->save();
                 $saveOrder->save();
                 $transaction->save();

@@ -12,6 +12,7 @@ use Magento\Checkout\CustomerData\Cart;
 
 class Orderva extends Library{
 
+    protected $customerSession;
     protected $session;
     protected $resourceConnection;
     protected $cart;
@@ -22,7 +23,8 @@ class Orderva extends Library{
         DokuConfigProvider $config,
         Session $session,
         ResourceConnection $resourceConnection,
-        Cart $cart
+        Cart $cart,
+        \Magento\Customer\Model\Session $customerSession
     ) {
         parent::__construct(
             $logger,
@@ -33,6 +35,7 @@ class Orderva extends Library{
         $this->session = $session;
         $this->resourceConnection = $resourceConnection;
         $this->cart = $cart;
+        $this->customerSession = $customerSession;
     }
 
     public function execute(){
@@ -53,12 +56,18 @@ class Orderva extends Library{
 
             $words = $this->doCreateWords($params);
             $billingAddress = $this->session->getQuote()->getBillingAddress()->convertToArray();
+
             $customer = array(
-                'name' => $billingAddress['firstname'] .' '. $billingAddress['lastname'],
                 'data_phone' => substr($billingAddress['telephone'], 0, 12),
                 'data_email' => $postData->req_email,
                 'data_address' => $billingAddress['street'] .', '. $billingAddress['city'] .', '. $billingAddress['country_id']
             );
+
+            if($this->customerSession->isLoggedIn()) {
+                $customer['name'] = $this->customerSession->getCustomer()->getName();
+            } else {
+                $customer['name'] = $billingAddress['firstname'] . ' ' . $billingAddress['lastname'];
+            }
 
             $getItems = $this->cart->getSectionData()['items'];
             $basket = '';

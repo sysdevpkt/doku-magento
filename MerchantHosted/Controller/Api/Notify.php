@@ -73,7 +73,7 @@ class Notify extends Library {
                 $message = __(json_encode($_POST, JSON_PRETTY_PRINT));
                 $trans = $this->builderInterface;
                 $transaction = $trans->setPayment($payment)
-                  ->setOrder($order)
+                  ->setOrder($saveOrder)
                   ->setTransactionId($postData['TRANSIDMERCHANT'])
                   ->setAdditionalInformation([\Magento\Sales\Model\Order\Payment\Transaction::RAW_DETAILS => (array) $_POST])
                   ->setFailSafe(true)

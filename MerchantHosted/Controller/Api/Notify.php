@@ -7,6 +7,7 @@ use \Magento\Framework\App\Action\Context;
 use Doku\MerchantHosted\Model\DokuConfigProvider;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Payment\Transaction\BuilderInterface;
 
 class Notify extends Library {
 
@@ -19,7 +20,8 @@ class Notify extends Library {
         Context $context,
         DokuConfigProvider $config,
         ResourceConnection $resourceConnection,
-        Order $order
+        Order $order,
+        BuilderInterface $builderInterface
     )
     {
         parent::__construct(
@@ -30,6 +32,7 @@ class Notify extends Library {
 
         $this->resourceConnection = $resourceConnection;
         $this->order = $order;
+        $this->builderInterface = $builderInterface;
     }
 
     public function execute()
@@ -62,7 +65,31 @@ class Notify extends Library {
                 $this->logger->info('===== Notify Controller ===== Updating order...');
 
                 $saveOrder = $this->order->load($findOrder['order_id']);
-                $saveOrder->setState(Order::STATE_PROCESSING);
+
+                $payment = $saveOrder->getPayment();
+                $payment->setLastTransactionId($postData['TRANSIDMERCHANT']);
+                $payment->setTransactionId($postData['TRANSIDMERCHANT']);
+                $payment->setAdditionalInformation([\Magento\Sales\Model\Order\Payment\Transaction::RAW_DETAILS => (array) $_POST]);
+                $message = __(json_encode($_POST, JSON_PRETTY_PRINT));
+                $trans = $this->builderInterface;
+                $transaction = $trans->setPayment($payment)
+                  ->setOrder($order)
+                  ->setTransactionId($postData['TRANSIDMERCHANT'])
+                  ->setAdditionalInformation([\Magento\Sales\Model\Order\Payment\Transaction::RAW_DETAILS => (array) $_POST])
+                  ->setFailSafe(true)
+                  ->build(\Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE);
+                $payment->addTransactionCommentsToOrder($transaction, $message);
+                $payment->setParentTransactionId(null);
+                $payment->save();
+                $saveOrder->save();
+                $transaction->save();
+                $this->resourceConnection->getConnection()->update('doku_orders',
+                    ['order_status' => 'SUCCESS'], ['invoice_no=?' => $postData['TRANSIDMERCHANT']]);
+
+                $this->logger->info('===== Notify Controller ===== Updating success...');
+                echo 'CONTINUE';
+
+                /*$saveOrder->setState(Order::STATE_PROCESSING);
                 $saveOrder->setStatus(Order::STATE_PROCESSING);
 
                 if($saveOrder->save()){
@@ -77,7 +104,7 @@ class Notify extends Library {
                     $this->logger->info('===== Notify Controller ===== Updating failed...');
                     echo 'STOP';
 
-                }
+                } */
 
             }else{
                 $this->logger->info('===== Notify Controller ===== Words not match!');

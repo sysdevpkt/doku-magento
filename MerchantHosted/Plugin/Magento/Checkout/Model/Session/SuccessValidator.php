@@ -64,12 +64,31 @@ class SuccessValidator
                 ->where('quote_id=?', $order->getQuoteId())->where('store_id=?', $order->getStoreId());
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
+	    // get vendor order record from table ves_vendor_sales_order
+            $getVendorOrder = $this->resourceConnection->getConnection()->select()->from('ves_vendor_sales_order')
+                ->where('order_id=?', $this->session->getLastRealOrder()->getId());
+            $findVendorOrder = $this->resourceConnection->getConnection()->fetchRow($getVendorOrder);
+
             if($findOrder['payment_channel_id'] == '41' || $findOrder['payment_channel_id'] == '05'){
                 $order->setStatus(Order::STATE_PENDING_PAYMENT);
                 $order->setState(Order::STATE_PENDING_PAYMENT);
                 $this->session->getLastRealOrder()->setStatus(Order::STATE_PENDING_PAYMENT);
                 $this->session->getLastRealOrder()->setState(Order::STATE_PENDING_PAYMENT);
                 $order->save();
+
+		// check vendor order. if found, set status to PENDING_PAYMENT
+		$this->logger->info('**** check vendor order ****');
+
+                if (!empty($findVendorOrder)) {
+                        $this->logger->info('**** vendor order is found ****');
+
+                        $this->resourceConnection->getConnection()->update('ves_vendor_sales_order', 
+                                        ['status' => Order::STATE_PENDING_PAYMENT], 
+                                        ['order_id', $this->session->getLastRealOrder()->getId()]);
+
+                }
+
+                $this->logger->info('**** end of check vendor order ****');
 
                 $this->logger->info('===== afterIsValid ===== Sending email...');
 

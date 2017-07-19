@@ -84,9 +84,25 @@ class Notify extends Library {
                 $payment->addTransactionCommentsToOrder($transaction, $message);
 
                 $invoice = $this->invoiceService->prepareInvoice($saveOrder);
-                $invoice->setGrantTotal($postData['AMOUNT']);
-                $invoice->setBaseGrantTotal($postData['AMOUNT']);
+                $invoice->setGrandTotal($postData['AMOUNT']);
+                $invoice->setBaseGrandTotal($postData['AMOUNT']);
                 $invoice->register();
+
+		// save invoice
+		$invoice->save();
+		//$saveOrder->addStatusHistoryComment(
+                //      __('Notified customer about invoice #%1.', $invoice->getId())
+                //)
+                //->setIsCustomerNotified(true);
+
+		// change order status
+		$saveOrder->setState(Order::STATE_PROCESSING);
+                $saveOrder->setStatus(Order::STATE_PROCESSING);
+
+		// change order status in vendor table ves_vendor_sales_order
+                $this->resourceConnection->getConnection()->update('ves_vendor_sales_order', 
+                    ['status' => Order::STATE_PROCESSING], 
+                    ['order_id', $findOrder['order_id']]);
 
                 $payment->save();
                 $saveOrder->save();
@@ -96,6 +112,11 @@ class Notify extends Library {
 
                 $this->logger->info('===== Notify Controller ===== Updating success...');
                 echo 'CONTINUE';
+
+		// send invoice
+		//$this->logger->info('****** send invoice ******');
+                //$this->invoiceSender($invoice);
+                //$this->logger->info('****** end send invoice ******');
 
                 /*$saveOrder->setState(Order::STATE_PROCESSING);
                 $saveOrder->setStatus(Order::STATE_PROCESSING);

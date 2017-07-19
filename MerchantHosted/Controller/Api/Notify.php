@@ -14,7 +14,7 @@ class Notify extends Library {
 
     protected $resourceConnection;
     private $order;
-
+    protected $invoiceSender;
 
     public function __construct(
         LoggerInterface $logger,
@@ -23,7 +23,8 @@ class Notify extends Library {
         ResourceConnection $resourceConnection,
         Order $order,
         BuilderInterface $builderInterface,
-        InvoiceService $invoiceService
+        InvoiceService $invoiceService,
+	\Magento\Sales\Model\Order\Email\Sender\InvoiceSender $invoiceSender
     )
     {
         parent::__construct(
@@ -36,6 +37,7 @@ class Notify extends Library {
         $this->order = $order;
         $this->builderInterface = $builderInterface;
         $this->invoiceService = $invoiceService;
+	$this->invoiceSender = $invoiceSender;
     }
 
     public function execute()
@@ -100,9 +102,11 @@ class Notify extends Library {
                 $saveOrder->setStatus(Order::STATE_PROCESSING);
 
 		// change order status in vendor table ves_vendor_sales_order. case di PKT.
+		/*
                 $this->resourceConnection->getConnection()->update('ves_vendor_sales_order', 
                     ['status' => Order::STATE_PROCESSING], 
                     ['order_id', $findOrder['order_id']]);
+		*/
 
                 $payment->save();
                 $saveOrder->save();
@@ -114,9 +118,9 @@ class Notify extends Library {
                 echo 'CONTINUE';
 
 		// send invoice
-		//$this->logger->info('****** send invoice ******');
-                //$this->invoiceSender($invoice);
-                //$this->logger->info('****** end send invoice ******');
+		$this->logger->info('****** send invoice ******');
+                $this->invoiceSender->send($invoice);
+                $this->logger->info('****** end send invoice ******');
 
                 /*$saveOrder->setState(Order::STATE_PROCESSING);
                 $saveOrder->setStatus(Order::STATE_PROCESSING);

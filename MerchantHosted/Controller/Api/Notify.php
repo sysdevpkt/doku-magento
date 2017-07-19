@@ -100,11 +100,9 @@ class Notify extends Library {
                 $saveOrder->setStatus(Order::STATE_PROCESSING);
 
 		// change order status in vendor table ves_vendor_sales_order. case di PKT.
-		/*
                 $this->resourceConnection->getConnection()->update('ves_vendor_sales_order', 
                     ['status' => Order::STATE_PROCESSING], 
                     ['order_id', $findOrder['order_id']]);
-		*/
 
                 $payment->save();
                 $saveOrder->save();

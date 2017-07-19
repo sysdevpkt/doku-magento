@@ -65,11 +65,9 @@ class SuccessValidator
             $findOrder = $this->resourceConnection->getConnection()->fetchRow($getOrder);
 
 	    // get vendor order record from table ves_vendor_sales_order. case di PKT
-	    /*
             $getVendorOrder = $this->resourceConnection->getConnection()->select()->from('ves_vendor_sales_order')
                 ->where('order_id=?', $this->session->getLastRealOrder()->getId());
             $findVendorOrder = $this->resourceConnection->getConnection()->fetchRow($getVendorOrder);
-	    */
 
             if($findOrder['payment_channel_id'] == '41' || $findOrder['payment_channel_id'] == '05'){
                 $order->setStatus(Order::STATE_PENDING_PAYMENT);
@@ -79,7 +77,6 @@ class SuccessValidator
                 $order->save();
 
 		// check vendor order. if found, set status to PENDING_PAYMENT
-		/*
 		$this->logger->info('**** check vendor order ****');
 
                 if (!empty($findVendorOrder)) {
@@ -92,7 +89,6 @@ class SuccessValidator
                 }
 
                 $this->logger->info('**** end of check vendor order ****');
-		*/
 
                 $this->logger->info('===== afterIsValid ===== Sending email...');
 
